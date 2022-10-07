@@ -1,0 +1,45 @@
+.food{
+    overflow: scroll;
+    width: 600px;
+    height: 716px;
+    left: 664px;
+    top: 128px;
+    overflow-x: hidden;
+    
+}
+.border{
+position: relative;
+width: 600px;
+height: 912px;
+left: 2%;
+top: 128px;
+
+/* interface/bg */
+
+
+/* interface/accent */
+
+}
+.foodCard{
+    float: left;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    height: 300px; 
+}
+.foodCard:after{
+    content: "";
+  display: table;
+  clear: both;
+}
+.foodText{
+    text-align: center
+}
+.foodPrice{
+    display: inline-flex;
+    justify-content: center;
+}
+.foodCounter{
+    position:static;
+    margin-left: auto;
+}

@@ -1,0 +1,23 @@
+.IngredientList{
+box-sizing: border-box;
+position: relative;
+
+
+}
+.AnotherScroller{
+    overflow: scroll;
+    width: 600px;
+    height: 670px;
+    top: 128px;
+    overflow-x: hidden;
+}
+.finalIngeredientdiv{
+    position: relative;
+    top: 153px;
+    left: 40%;
+    align-items: center;
+}
+.IngredientField{
+    display: flex;
+    align-items: center;
+}
