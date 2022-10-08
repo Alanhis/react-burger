@@ -2,6 +2,7 @@ import {ConstructorElement,CurrencyIcon,Button,DragIcon} from '@ya.praktikum/rea
 import BurgerConstuctorStyle from "./Butger-constructor.module.css";
 import Modal from './Modal'
 import React from 'react';
+import { OrderDetails } from './OrderDetails';
 
 function BurgerConstuctor(props){
     var FinalPrice = 0
@@ -58,8 +59,9 @@ function BurgerConstuctor(props){
         <div >
    
      {isOpen&&<>
+     
      <Modal isFood='false' onClose={handleCloseModal}> 
-      <div>ball</div>
+     <OrderDetails orderNumber='111111'/>
         
       </Modal></>}
       </div>

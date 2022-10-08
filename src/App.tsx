@@ -3,7 +3,7 @@ import AppStyle from './App.module.css';
 import AppHeader from './components/App-header';
 import BurgerIngredients from './components/Burger-ingredients';
 import BurgerConstuctor from './components/Butger-constructor';
-import ModalStyle from './components/Modal.module.css';
+
 
 function App() {
  

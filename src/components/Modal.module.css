@@ -1,11 +1,17 @@
 .modal{
-    position: fixed;
-    height: 40%;
-    width: 40%;
-    top: 30%;
-    left: 30%;
-    background: black;
+    position: absolute;
+    width: 562px;
+    top: 20%;
+    left: 35%;
+    background: #1C1C21;
+    border-radius: 15px;
     z-index: 2;
+    
+}
+
+.ModalTitle{
+    display: flex;
+    justify-content: space-between;
 }
 .Overlay{
     position: fixed;
@@ -13,4 +19,23 @@
     width: 100%;
     background: rgba(0,0,0,0.6);
     z-index: 1; 
+}
+.OrderDetail{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.IngredientPanel{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.IngredientDetail{
+    display: flex;
+    justify-content: space-evenly;
+}
+.IngredientDetailElement{
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
 }

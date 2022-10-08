@@ -1,9 +1,10 @@
 import {Tab,CurrencyIcon,Counter} from '@ya.praktikum/react-developer-burger-ui-components'
 import React from 'react';
 import BurgerIngredientsStyles from "./Burger-ingredients.module.css";
-
+import Modal from './Modal'
+import { IngredientDetails } from './IngredientDetails ';
 const Ingredients=(props)=>{
-  
+
   return(
     <div className='mt-6 mr-4 mb-10' >{
       props.data.map(element =>{
@@ -16,20 +17,39 @@ const Ingredients=(props)=>{
   )
 }
 const IngredientCard =(props)=>{
+  const [isOpen, setIsOpen] = React.useState(false);
+  const handleOpenModal=() => {
+    setIsOpen(true);
+  }
 
-  return(  
-  <div className={`${BurgerIngredientsStyles.foodCard} `}>
+  const handleCloseModal=() =>{
+    setIsOpen(false);
+  }
+  return( <>
+  <div onClick={handleOpenModal} className={`${BurgerIngredientsStyles.foodCard} `}>
     <Counter extraClass={`${BurgerIngredientsStyles.foodCounter}`}/>
   <img src={props.data.image} ></img> 
   <div className={`${BurgerIngredientsStyles.foodPrice}`}>
   <p className='text text_type_main-default mr-2'>{props.data.price} </p> <CurrencyIcon type="primary" />
   </div>
   <p  className={`text text_type_main-default ${BurgerIngredientsStyles.foodText}`}>{props.data.name}</p>
-</div>)
+</div>
+<div >
+   
+   {isOpen&&<>
+   
+   <Modal isFood='true' onClose={handleCloseModal}> 
+   <IngredientDetails data={props.data}/>
+      
+    </Modal></>}
+    </div>
+</>)
+
 }
 function BurgerIngredients(props){
   
-    const [current, setCurrent] = React.useState('one')
+  
+  const [current, setCurrent] = React.useState('one')
 return(
   <>
   
@@ -55,8 +75,6 @@ return(
       <Ingredients ingredientType="main" data={props.ingredient}/>
       </div>
     </section>
-    
-    
     </>
 )
 }
