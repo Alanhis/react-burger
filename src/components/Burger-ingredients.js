@@ -3,13 +3,15 @@ import React from 'react';
 import BurgerIngredientsStyles from "./Burger-ingredients.module.css";
 import Modal from './Modal'
 import { IngredientDetails } from './IngredientDetails ';
+import PropTypes from 'prop-types';
 const Ingredients=(props)=>{
 
   return(
     <div className='mt-6 mr-4 mb-10' >{
       props.data.map(element =>{
+        
         if(element.type == props.ingredientType){
-          return(<IngredientCard data={element}/>)
+          return(<IngredientCard data={element} key={element._id}/>)
         }
         
       })
@@ -27,7 +29,7 @@ const IngredientCard =(props)=>{
   }
   return( <>
   <div onClick={handleOpenModal} className={`${BurgerIngredientsStyles.foodCard} `}>
-    <Counter extraClass={`${BurgerIngredientsStyles.foodCounter}`}/>
+    <Counter count={1} extraClass={`${BurgerIngredientsStyles.foodCounter}`}/>
   <img src={props.data.image} ></img> 
   <div className={`${BurgerIngredientsStyles.foodPrice}`}>
   <p className='text text_type_main-default mr-2'>{props.data.price} </p> <CurrencyIcon type="primary" />
@@ -77,5 +79,21 @@ return(
     </section>
     </>
 )
+}
+BurgerIngredients.propTypes ={
+  ingredient: PropTypes.arrayOf(PropTypes.shape({
+    calories: PropTypes.number,
+    carbohydrates: PropTypes.number,
+    fat: PropTypes.number,
+    image: PropTypes.string,
+    image_large: PropTypes.string,
+    image_mobile: PropTypes.string,
+    name: PropTypes.string,
+    price: PropTypes.number,
+    proteins: PropTypes.number,
+    type: PropTypes.string,
+    __v: PropTypes.number,
+    _id: PropTypes.string,
+  })).isRequired
 }
 export default BurgerIngredients

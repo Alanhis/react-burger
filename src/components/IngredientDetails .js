@@ -1,6 +1,8 @@
 import ModalStyle from './Modal.module.css';
+import PropTypes from 'prop-types';
 export const IngredientDetails=props =>{
-    console.log(props)
+   
+   
     return(
         <div className= {`${ModalStyle.IngredientPanel}`}>
             <img src={props.data.image_large}/>
@@ -44,4 +46,20 @@ export const IngredientDetails=props =>{
             </div>
         </div>
     )
+}
+IngredientDetails.propTypes ={
+    data: PropTypes.objectOf(PropTypes.shape({
+        calories: PropTypes.number,
+        carbohydrates: PropTypes.number,
+        fat: PropTypes.number,
+        image: PropTypes.string,
+        image_large: PropTypes.string,
+        image_mobile: PropTypes.string,
+        name: PropTypes.string,
+        price: PropTypes.number,
+        proteins: PropTypes.number,
+        type: PropTypes.string,
+        __v: PropTypes.number,
+        _id: PropTypes.string
+      })).isRequired
 }

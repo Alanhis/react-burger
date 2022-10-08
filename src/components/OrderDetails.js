@@ -1,7 +1,9 @@
 import ReadyButton from '../image/done.png'
 import ModalStyle from './Modal.module.css';
+import PropTypes from 'prop-types';
+
 export const OrderDetails = props =>{
-    console.log(props)
+  
     return(
         <div className= {`${ModalStyle.OrderDetail}`}>
         <p className="text text_type_digits-large">
@@ -20,4 +22,7 @@ export const OrderDetails = props =>{
 
     </div>
     )
+}
+OrderDetails.propsTypes ={
+  orderNumber: PropTypes.number
 }

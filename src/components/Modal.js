@@ -3,7 +3,10 @@ import React from 'react';
 import {CloseIcon} from '@ya.praktikum/react-developer-burger-ui-components'
 import { ModalOverlay } from './ModalOverlay';
 import ModalStyle from './Modal.module.css';
+import PropTypes from 'prop-types';
+
 export default function Modal(props){
+  
     const isItFood= props.isFood;
     
     const [domReady, setDomReady] = React.useState(false)
@@ -40,4 +43,9 @@ export default function Modal(props){
       </div></>),
       modalRoot
     ): null;
+  }
+  Modal.propTypes={
+    isFood: PropTypes.string,
+    children: PropTypes.object,
+    onClose: PropTypes.func,
   }

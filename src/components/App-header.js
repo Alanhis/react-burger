@@ -4,7 +4,7 @@ function AppHeader(){
 return (
     
     <header  className={`${HeaderinkStyles.header} pt-4`}>
-        <div style={{display: "flex"}}><Button type="primary" size="small" className={`${HeaderinkStyles.button} pb-4 pt-4 mr-2`} >
+        <div style={{display: "flex"}}><Button type="primary" size="small" className={`${HeaderinkStyles.button} pb-4 pt-4 mb-4 mr-2`} >
         <BurgerIcon type="primary" className="pl-5" /> <p className={`text text_type_main-default pl-2`}>Констуктор</p>
         </Button>
         <Button type="primary" size="small" className={`${HeaderinkStyles.button} pb-4 pt-4`} >

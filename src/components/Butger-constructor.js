@@ -3,8 +3,9 @@ import BurgerConstuctorStyle from "./Butger-constructor.module.css";
 import Modal from './Modal'
 import React from 'react';
 import { OrderDetails } from './OrderDetails';
-
+import PropTypes from 'prop-types';
 function BurgerConstuctor(props){
+    
     var FinalPrice = 0
     const [isOpen, setIsOpen] = React.useState(false);
     const handleOpenModal=() => {
@@ -19,7 +20,7 @@ function BurgerConstuctor(props){
             {props.ingredient.map(element =>{
                 FinalPrice=FinalPrice + element.price;
                if(element._id == props.ingredient[0]._id){
-                    return(<div className={`${BurgerConstuctorStyle.IngredientField} mb-2 ml-8 mr-2`}>
+                    return(<div className={`${BurgerConstuctorStyle.IngredientField} mb-2 ml-8 mr-2`} key={element._id}>
                         <ConstructorElement 
                         text={element.name} 
                         price={element.price}
@@ -29,7 +30,7 @@ function BurgerConstuctor(props){
                         key={element._id}  />
                         </div>)
                } else if (element._id == props.ingredient[props.ingredient.length - 1 ]._id){
-                return(<div className={`${BurgerConstuctorStyle.IngredientField} mb-2 ml-8 mr-2`}>
+                return(<div className={`${BurgerConstuctorStyle.IngredientField} mb-2 ml-8 mr-2`} key={element._id}>
                     <ConstructorElement 
                     text={element.name} 
                     price={element.price}
@@ -38,7 +39,7 @@ function BurgerConstuctor(props){
                     thumbnail={element.image}
                     key={element._id}  />
                     </div>)
-           }else {return(<div className={`${BurgerConstuctorStyle.IngredientField} mb-2 ml-3 mr-2`}>
+           }else {return(<div className={`${BurgerConstuctorStyle.IngredientField} mb-2 ml-3 mr-2`} key={element._id}>
            <DragIcon type="secondary" /><ConstructorElement 
              text={element.name} 
              price={element.price} 
@@ -49,7 +50,7 @@ function BurgerConstuctor(props){
             )}
         </ul>
         <div style={{display:'inline-flex'}} className={`${BurgerConstuctorStyle.finalIngeredientdiv} `}>
-         <p className='text text_type_main-medium mr-2'>{FinalPrice}</p> 
+         <p className='text text_type_digits-medium mr-2'>{FinalPrice}</p> 
          <CurrencyIcon/>
          <div className='ml-10'><Button type="primary" size="large" onClick={handleOpenModal} >
             Оформить заказ
@@ -67,5 +68,21 @@ function BurgerConstuctor(props){
       </div>
         </div>
     )
+}
+BurgerConstuctor.propTypes = {
+  ingredient: PropTypes.arrayOf(PropTypes.shape({
+    calories: PropTypes.number,
+    carbohydrates: PropTypes.number,
+    fat: PropTypes.number,
+    image: PropTypes.string,
+    image_large: PropTypes.string,
+    image_mobile: PropTypes.string,
+    name: PropTypes.string,
+    price: PropTypes.number,
+    proteins: PropTypes.number,
+    type: PropTypes.string,
+    __v: PropTypes.number,
+    _id: PropTypes.string
+  })).isRequired
 }
 export default BurgerConstuctor;

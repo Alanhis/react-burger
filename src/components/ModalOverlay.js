@@ -1,8 +1,10 @@
 import React from 'react';
 import ModalStyle from './Modal.module.css';
+
+
 export const ModalOverlay = props =>{
    
-    console.log(props)
+    
     React.useEffect(()=>{
         const escFunction = event =>{
             if (event.key === "Escape") {
