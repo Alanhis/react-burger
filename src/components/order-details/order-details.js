@@ -1,8 +1,8 @@
-import ReadyButton from '../image/done.png'
-import ModalStyle from './Modal.module.css';
+import ReadyButton from '../../image/done.png'
+import ModalStyle from '../modal/Modal.module.css';
 import PropTypes from 'prop-types';
 
-export const OrderDetails = props =>{
+export default function OrderDetails  (props){
   
     return(
         <div className= {`${ModalStyle.OrderDetail}`}>

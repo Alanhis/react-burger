@@ -1,10 +1,10 @@
 import {ConstructorElement,CurrencyIcon,Button,DragIcon} from '@ya.praktikum/react-developer-burger-ui-components'
 import BurgerConstuctorStyle from "./Butger-constructor.module.css";
-import Modal from './Modal'
+import Modal from '../modal/Modal'
 import React from 'react';
-import { OrderDetails } from './OrderDetails';
+import  OrderDetails  from '../order-details/order-details';
 import PropTypes from 'prop-types';
-function BurgerConstuctor(props){
+export default function BurgerConstuctor(props){
     
     var FinalPrice = 0
     const [isOpen, setIsOpen] = React.useState(false);
@@ -85,4 +85,3 @@ BurgerConstuctor.propTypes = {
     _id: PropTypes.string
   })).isRequired
 }
-export default BurgerConstuctor;

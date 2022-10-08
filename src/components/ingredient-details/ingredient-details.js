@@ -1,4 +1,4 @@
-import ModalStyle from './Modal.module.css';
+import ModalStyle from '../modal/Modal.module.css';
 import PropTypes from 'prop-types';
 export const IngredientDetails=props =>{
    

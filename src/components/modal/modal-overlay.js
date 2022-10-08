@@ -2,7 +2,7 @@ import React from 'react';
 import ModalStyle from './Modal.module.css';
 
 
-export const ModalOverlay = props =>{
+export default  function ModalOverlay (props){
    
     
     React.useEffect(()=>{

@@ -1,8 +1,8 @@
 import {Tab,CurrencyIcon,Counter} from '@ya.praktikum/react-developer-burger-ui-components'
 import React from 'react';
 import BurgerIngredientsStyles from "./Burger-ingredients.module.css";
-import Modal from './Modal'
-import { IngredientDetails } from './IngredientDetails ';
+import Modal from '../modal/Modal'
+import { IngredientDetails } from '../ingredient-details/ingredient-details';
 import PropTypes from 'prop-types';
 const Ingredients=(props)=>{
 
@@ -30,7 +30,7 @@ const IngredientCard =(props)=>{
   return( <>
   <div onClick={handleOpenModal} className={`${BurgerIngredientsStyles.foodCard} `}>
     <Counter count={1} extraClass={`${BurgerIngredientsStyles.foodCounter}`}/>
-  <img src={props.data.image} ></img> 
+  <img className={`${BurgerIngredientsStyles.foodImage}`} src={props.data.image} ></img> 
   <div className={`${BurgerIngredientsStyles.foodPrice}`}>
   <p className='text text_type_main-default mr-2'>{props.data.price} </p> <CurrencyIcon type="primary" />
   </div>
@@ -48,7 +48,7 @@ const IngredientCard =(props)=>{
 </>)
 
 }
-function BurgerIngredients(props){
+export default function  BurgerIngredients(props){
   
   
   const [current, setCurrent] = React.useState('one')
@@ -96,4 +96,3 @@ BurgerIngredients.propTypes ={
     _id: PropTypes.string,
   })).isRequired
 }
-export default BurgerIngredients
