@@ -1,0 +1,16 @@
+.modal{
+    position: fixed;
+    height: 40%;
+    width: 40%;
+    top: 30%;
+    left: 30%;
+    background: black;
+    z-index: 2;
+}
+.Overlay{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background: rgba(0,0,0,0.6);
+    z-index: 1; 
+}

@@ -1,15 +1,23 @@
 import {ConstructorElement,CurrencyIcon,Button,DragIcon} from '@ya.praktikum/react-developer-burger-ui-components'
 import BurgerConstuctorStyle from "./Butger-constructor.module.css";
-import {Data} from "../utils/data"
-function BurgerConstuctor(){
+import Modal from './Modal'
+import React from 'react';
+
+function BurgerConstuctor(props){
     var FinalPrice = 0
-     
+    const [isOpen, setIsOpen] = React.useState(false);
+    const handleOpenModal=() => {
+    setIsOpen(true);
+  }
+
+   const handleCloseModal=() =>{
+    setIsOpen(false);
+  }
     return(<div>
         <ul className={`${BurgerConstuctorStyle.IngredientList} ${BurgerConstuctorStyle.AnotherScroller} custom-scroll mt-25 `}>
-        
-            {Data.map(element =>{
+            {props.ingredient.map(element =>{
                 FinalPrice=FinalPrice + element.price;
-               if(element._id == Data[0]._id){
+               if(element._id == props.ingredient[0]._id){
                     return(<div className={`${BurgerConstuctorStyle.IngredientField} mb-2 ml-8 mr-2`}>
                         <ConstructorElement 
                         text={element.name} 
@@ -19,7 +27,7 @@ function BurgerConstuctor(){
                         thumbnail={element.image}
                         key={element._id}  />
                         </div>)
-               } else if (element._id == Data[Data.length - 1 ]._id){
+               } else if (element._id == props.ingredient[props.ingredient.length - 1 ]._id){
                 return(<div className={`${BurgerConstuctorStyle.IngredientField} mb-2 ml-8 mr-2`}>
                     <ConstructorElement 
                     text={element.name} 
@@ -42,11 +50,19 @@ function BurgerConstuctor(){
         <div style={{display:'inline-flex'}} className={`${BurgerConstuctorStyle.finalIngeredientdiv} `}>
          <p className='text text_type_main-medium mr-2'>{FinalPrice}</p> 
          <CurrencyIcon/>
-         <div className='ml-10'><Button type="primary" size="large">
+         <div className='ml-10'><Button type="primary" size="large" onClick={handleOpenModal} >
             Оформить заказ
         </Button></div>
          
         </div>
+        <div >
+   
+     {isOpen&&<>
+     <Modal isFood='false' onClose={handleCloseModal}> 
+      <div>ball</div>
+        
+      </Modal></>}
+      </div>
         </div>
     )
 }
