@@ -1,0 +1,14 @@
+.IngredientPanel{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.IngredientDetail{
+    display: flex;
+    justify-content: space-evenly;
+}
+.IngredientDetailElement{
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}

@@ -17,25 +17,8 @@
     position: fixed;
     height: 100%;
     width: 100%;
+    top: 0px;
+    left:0px;
     background: rgba(0,0,0,0.6);
     z-index: 1; 
-}
-.OrderDetail{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.IngredientPanel{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.IngredientDetail{
-    display: flex;
-    justify-content: space-evenly;
-}
-.IngredientDetailElement{
-    display: flex;
-    flex-direction: column;
-    align-items: center; 
 }
