@@ -58,7 +58,7 @@ export default function BurgerConstuctor(props) {
 					} else {
 						return (
 							<div
-								className={`${BurgerConstuctorStyle.IngredientField} mb-2 ml-3 mr-2`}
+								className={`${BurgerConstuctorStyle.IngredientField} mb-2 ml-2 mr-2`}
 								key={element._id}>
 								<DragIcon type="secondary" />
 								<ConstructorElement
@@ -75,7 +75,7 @@ export default function BurgerConstuctor(props) {
 			<div
 				style={{ display: 'inline-flex' }}
 				className={`${BurgerConstuctorStyle.finalIngeredientdiv} `}>
-				<p className="text text_type_digits-medium mr-2">0</p>
+				<p className="text text_type_digits-medium mr-2">610</p>
 				<CurrencyIcon />
 				<div className="ml-10">
 					<Button type="primary" size="large" onClick={handleOpenModal}>
