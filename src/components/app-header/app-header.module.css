@@ -1,0 +1,37 @@
+.header{
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0px;
+background: var(--background);
+/* card/x-large */
+box-shadow: 0px 24px 32px rgba(0, 0, 0, 0.04), 0px 16px 24px rgba(0, 0, 0, 0.04), 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 0px 1px rgba(0, 0, 0, 0.04);
+    display: flex;
+    justify-content: space-around
+}
+.button{
+flex-direction: row;
+justify-content: center;
+gap: 8px;
+width: 236px;
+height: 56px;
+/* interface/modal-bg */
+
+border-radius: 40px;
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+ border: none;
+cursor: pointer;
+outline: none;
+transition: var(--common-transition);
+color: #fff;
+background: transparent;
+display: flex;
+align-items: center
+}
+.button:hover{
+    box-shadow: 0px 0px 16px 8px rgba(255, 173, 51, 0.25), 0px 0px 8px 8px rgba(255, 201, 51, 0.25);
+	filter: drop-shadow(0px 4px 32px rgba(255, 190, 51, 0.5));
+}
