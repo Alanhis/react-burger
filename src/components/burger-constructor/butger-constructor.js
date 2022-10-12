@@ -6,10 +6,13 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import BurgerConstuctorStyle from './butger-constructor.module.css';
 import Modal from '../modal/modal';
-import React from 'react';
+import React, { useContext } from 'react';
 import OrderDetails from '../order-details/order-details';
 import PropTypes from 'prop-types';
-export default function BurgerConstuctor(props) {
+import { ConstructorContext } from '../../utils/constructor-context';
+export default function BurgerConstuctor() {
+	const ingredient = useContext(ConstructorContext);
+	console.log(ingredient)
 	const [isOpen, setIsOpen] = React.useState(false);
 	const handleOpenModal = () => {
 		setIsOpen(true);
@@ -22,8 +25,8 @@ export default function BurgerConstuctor(props) {
 		<div>
 			<ul
 				className={`${BurgerConstuctorStyle.IngredientList} ${BurgerConstuctorStyle.AnotherScroller} custom-scroll mt-25 `}>
-				{props.ingredient.map((element) => {
-					if (element._id == props.ingredient[0]._id) {
+				{ingredient.map((element) => {
+					if (element._id == ingredient[0]._id) {
 						return (
 							<div
 								className={`${BurgerConstuctorStyle.IngredientField} mb-2 ml-8 mr-2`}
@@ -39,7 +42,7 @@ export default function BurgerConstuctor(props) {
 							</div>
 						);
 					} else if (
-						element._id == props.ingredient[props.ingredient.length - 1]._id
+						element._id == ingredient[ingredient.length - 1]._id
 					) {
 						return (
 							<div
@@ -95,7 +98,7 @@ export default function BurgerConstuctor(props) {
 		</div>
 	);
 }
-BurgerConstuctor.propTypes = {
+/* BurgerConstuctor.propTypes = {
 	ingredient: PropTypes.arrayOf(
 		PropTypes.shape({
 			calories: PropTypes.number,
@@ -113,3 +116,4 @@ BurgerConstuctor.propTypes = {
 		})
 	).isRequired,
 };
+ */
