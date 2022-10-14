@@ -10,9 +10,10 @@ import React, { useContext } from 'react';
 import OrderDetails from '../order-details/order-details';
 import PropTypes from 'prop-types';
 import { ConstructorContext } from '../../utils/constructor-context';
+import { IngredientConstructor } from './ingredient-constuctor';
 export default function BurgerConstuctor() {
 	const ingredient = useContext(ConstructorContext);
-	console.log(ingredient)
+
 	const [isOpen, setIsOpen] = React.useState(false);
 	const handleOpenModal = () => {
 		setIsOpen(true);
@@ -21,37 +22,23 @@ export default function BurgerConstuctor() {
 	const handleCloseModal = () => {
 		setIsOpen(false);
 	};
+	const ingredientfimal = IngredientConstructor()
+
 	return (
 		<div>
 			<ul
 				className={`${BurgerConstuctorStyle.IngredientList} ${BurgerConstuctorStyle.AnotherScroller} custom-scroll mt-25 `}>
-				{ingredient.map((element) => {
-					if (element._id == ingredient[0]._id) {
+				{ingredientfimal.map((element) => {
+
+					if (ingredientfimal.indexOf(element) == 0) {
 						return (
 							<div
 								className={`${BurgerConstuctorStyle.IngredientField} mb-2 ml-8 mr-2`}
-								key={element._id}>
+								key={ingredientfimal.indexOf(element)}>
 								<ConstructorElement
 									text={element.name}
 									price={element.price}
 									type="top"
-									isLocked={true}
-									thumbnail={element.image}
-									key={element._id}
-								/>
-							</div>
-						);
-					} else if (
-						element._id == ingredient[ingredient.length - 1]._id
-					) {
-						return (
-							<div
-								className={`${BurgerConstuctorStyle.IngredientField} mb-2 ml-8 mr-2`}
-								key={element._id}>
-								<ConstructorElement
-									text={element.name}
-									price={element.price}
-									type="bottom"
 									isLocked={true}
 									thumbnail={element.image}
 									key={element._id}
@@ -72,8 +59,23 @@ export default function BurgerConstuctor() {
 								/>
 							</div>
 						);
+
 					}
 				})}
+
+				<div
+					className={`${BurgerConstuctorStyle.IngredientField} mb-2 ml-8 mr-2`}
+					key={ingredientfimal[0]._id}>
+					<ConstructorElement
+						text={ingredientfimal[0].name}
+						price={ingredientfimal[0].price}
+						type="bottom"
+						isLocked={true}
+						thumbnail={ingredientfimal[0].image}
+						key={ingredientfimal[0]._id}
+					/>
+				</div>
+
 			</ul>
 			<div
 				style={{ display: 'inline-flex' }}
