@@ -9,10 +9,11 @@ import Modal from '../modal/modal';
 import React, { useContext } from 'react';
 import OrderDetails from '../order-details/order-details';
 import PropTypes from 'prop-types';
-import { ConstructorContext } from '../../utils/constructor-context';
+import { PostLogic } from '../../utils/post-logic';
 import { IngredientConstructor } from './ingredient-constuctor';
+export const postUrl = `https://norma.nomoreparties.space/api/orders`;
 export default function BurgerConstuctor() {
-	const ingredient = useContext(ConstructorContext);
+
 
 	const [isOpen, setIsOpen] = React.useState(false);
 	const handleOpenModal = () => {
@@ -23,7 +24,7 @@ export default function BurgerConstuctor() {
 		setIsOpen(false);
 	};
 	const ingredientfimal = IngredientConstructor()
-
+	const finalPrice = ingredientfimal.reduce((previousValue, currentValue) => previousValue + currentValue.price, 0) + ingredientfimal[0].price
 	return (
 		<div>
 			<ul
@@ -80,10 +81,14 @@ export default function BurgerConstuctor() {
 			<div
 				style={{ display: 'inline-flex' }}
 				className={`${BurgerConstuctorStyle.finalIngeredientdiv} `}>
-				<p className="text text_type_digits-medium mr-2">610</p>
+				<p className="text text_type_digits-medium mr-2">{finalPrice}</p>
 				<CurrencyIcon />
 				<div className="ml-10">
-					<Button type="primary" size="large" onClick={handleOpenModal}>
+					<Button type="primary" size="large" onClick={() => {
+						handleOpenModal();
+						const response = PostLogic(ingredientfimal, postUrl)
+						console.log(response)
+					}}>
 						Оформить заказ
 					</Button>
 				</div>
