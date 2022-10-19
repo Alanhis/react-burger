@@ -9,7 +9,7 @@ import HeaderinkStyles from './app-header.module.css';
 function AppHeader() {
 	return (
 		<header className={`${HeaderinkStyles.header} pt-4`}>
-			<div style={{ display: 'flex' }}>
+			<div className={`${HeaderinkStyles.button_panel}`}>
 				<Button
 					type="primary"
 					size="small"

@@ -26,7 +26,7 @@ export default function IngredientCard(props) {
 			</div> <p className={`text text_type_main-default ${IngredntCardStyle.foodText}`} > {props.data.name}
 			</p>
 		</div>
-		<div > {isOpen && (<><Modal isFood="true" onClose={handleCloseModal} >
+		<div > {isOpen && (<><Modal title={"Детали ингредиента"} onClose={handleCloseModal} >
 			<IngredientDetails data={props.data} />
 		</Modal>
 		</>)}
@@ -35,5 +35,5 @@ export default function IngredientCard(props) {
 	);
 }
 IngredientCard.propTypes = {
-	data: PropTypes.object.isRequired,
+	data: PropTypes.object,
 };

@@ -59,6 +59,7 @@ IngredientDetails.propTypes = {
 			proteins: PropTypes.number,
 			type: PropTypes.string,
 			__v: PropTypes.number,
+			_id: PropTypes.string
 		})
 	).isRequired,
 };

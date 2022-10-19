@@ -9,9 +9,9 @@ import Modal from '../modal/modal';
 import React, { useContext } from 'react';
 import OrderDetails from '../order-details/order-details';
 import PropTypes from 'prop-types';
-import { PostLogic } from '../../utils/post-logic';
+import { sendOrder } from '../../utils/post-logic';
 import { IngredientConstructor } from './ingredient-constuctor';
-export const postUrl = `https://norma.nomoreparties.space/api/orders`;
+import { url } from '../app/app'
 export default function BurgerConstuctor() {
 
 
@@ -26,30 +26,27 @@ export default function BurgerConstuctor() {
 	const ingredientfimal = IngredientConstructor()
 	const finalPrice = ingredientfimal.reduce((previousValue, currentValue) => previousValue + currentValue.price, 0) + ingredientfimal[0].price
 	return (
-		<div>
-			<ul
-				className={`${BurgerConstuctorStyle.IngredientList} ${BurgerConstuctorStyle.AnotherScroller} custom-scroll mt-25 `}>
-				{ingredientfimal.map((element) => {
+		<div className={`${BurgerConstuctorStyle.IngredientList}  mb-2  mt-25 `}>
+			<div
+				className={`${BurgerConstuctorStyle.IngredientField}  ml-15 mr-2`}
+				key={ingredientfimal[0]._id}>
+				<ConstructorElement
+					text={ingredientfimal[0].name + ' (верх)'}
+					price={ingredientfimal[0].price}
+					type="top"
+					isLocked={true}
+					thumbnail={ingredientfimal[0].image}
+					key={ingredientfimal[0]._id}
+				/>
+			</div>
+			<ul className={`${BurgerConstuctorStyle.AnotherScroller} custom-scroll`}
+			>
+				{ingredientfimal.map((element, index) => {
 
-					if (ingredientfimal.indexOf(element) == 0) {
+					if (index != 0) {
 						return (
 							<div
-								className={`${BurgerConstuctorStyle.IngredientField} mb-2 ml-8 mr-2`}
-								key={ingredientfimal.indexOf(element)}>
-								<ConstructorElement
-									text={element.name}
-									price={element.price}
-									type="top"
-									isLocked={true}
-									thumbnail={element.image}
-									key={element._id}
-								/>
-							</div>
-						);
-					} else {
-						return (
-							<div
-								className={`${BurgerConstuctorStyle.IngredientField} mb-2 ml-2 mr-2`}
+								className={`${BurgerConstuctorStyle.IngredientField} mb-4  mr-2`}
 								key={element._id}>
 								<DragIcon type="secondary" />
 								<ConstructorElement
@@ -64,29 +61,30 @@ export default function BurgerConstuctor() {
 					}
 				})}
 
-				<div
-					className={`${BurgerConstuctorStyle.IngredientField} mb-2 ml-8 mr-2`}
-					key={ingredientfimal[0]._id}>
-					<ConstructorElement
-						text={ingredientfimal[0].name}
-						price={ingredientfimal[0].price}
-						type="bottom"
-						isLocked={true}
-						thumbnail={ingredientfimal[0].image}
-						key={ingredientfimal[0]._id}
-					/>
-				</div>
+
 
 			</ul>
 			<div
-				style={{ display: 'inline-flex' }}
-				className={`${BurgerConstuctorStyle.finalIngeredientdiv} `}>
+				className={`${BurgerConstuctorStyle.IngredientField}  ml-15 mr-2`}
+				key={ingredientfimal[0]._id}>
+				<ConstructorElement
+					text={ingredientfimal[0].name + ' (низ)'}
+					price={ingredientfimal[0].price}
+					type="bottom"
+					isLocked={true}
+					thumbnail={ingredientfimal[0].image}
+					key={ingredientfimal[0]._id}
+				/>
+			</div>
+			<div
+
+				className={`${BurgerConstuctorStyle.finalIngeredientdiv}  mt-10`}>
 				<p className="text text_type_digits-medium mr-2">{finalPrice}</p>
 				<CurrencyIcon />
-				<div className="ml-10">
+				<div className=" ml-10">
 					<Button type="primary" size="large" onClick={() => {
 						handleOpenModal();
-						const response = PostLogic(ingredientfimal, postUrl)
+						const response = sendOrder(ingredientfimal, url)
 						console.log(response)
 					}}>
 						Оформить заказ
@@ -96,7 +94,7 @@ export default function BurgerConstuctor() {
 			<>
 				{isOpen && (
 					<>
-						<Modal isFood="false" onClose={handleCloseModal}>
+						<Modal title={""} onClose={handleCloseModal}>
 							<OrderDetails orderNumber="111111" />
 						</Modal>
 					</>
