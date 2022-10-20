@@ -34,7 +34,7 @@ export default function BurgerIngredients(props) {
 					</Tab>
 				</div>
 				<div className={`${BurgerIngredientsStyles.food} mt-10 custom-scroll`}>
-					<p ref={bunRef} className="text text_type_main-medium mb-6">Булки</p>
+					<p className="text text_type_main-medium mb-6">Булки</p>
 					<Ingredients ingredientType="bun" data={props.ingredient} />
 					<p className="text text_type_main-medium mb-6">Соусы</p>
 					<Ingredients ingredientType="sauce" data={props.ingredient} />
