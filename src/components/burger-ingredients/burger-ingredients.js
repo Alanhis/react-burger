@@ -1,9 +1,10 @@
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import BurgerIngredientsStyles from './burger-ingredients.module.css';
 
 import PropTypes from 'prop-types';
 import Ingredients from '../ingredients/ingredients';
+import { useInView } from 'react-intersection-observer';
 
 export default function BurgerIngredients(props) {
 	const [current, setCurrent] = React.useState('one');
@@ -12,18 +13,28 @@ export default function BurgerIngredients(props) {
 			<section className={`${BurgerIngredientsStyles.border} mr-10`}>
 				<p className="text text_type_main-large mt-10 mb-5">Соберите бургер</p>
 				<div className={`${BurgerIngredientsStyles.tab_panel}`}>
-					<Tab value="one" active={current === 'one'} onClick={setCurrent}>
+					<Tab value="one" active={current === 'one'} onClick={() => {
+
+						setCurrent('one');
+
+					}}>
 						Булки
 					</Tab>
-					<Tab value="two" active={current === 'two'} onClick={setCurrent}>
+					<Tab value="two" active={current === 'two'} onClick={() => {
+						setCurrent('two');
+
+					}}>
 						Соусы
 					</Tab>
-					<Tab value="three" active={current === 'three'} onClick={setCurrent}>
+					<Tab value="three" active={current === 'three'} onClick={() => {
+						setCurrent('three');
+
+					}}>
 						Начинка
 					</Tab>
 				</div>
 				<div className={`${BurgerIngredientsStyles.food} mt-10 custom-scroll`}>
-					<p className="text text_type_main-medium mb-6">Булки</p>
+					<p ref={bunRef} className="text text_type_main-medium mb-6">Булки</p>
 					<Ingredients ingredientType="bun" data={props.ingredient} />
 					<p className="text text_type_main-medium mb-6">Соусы</p>
 					<Ingredients ingredientType="sauce" data={props.ingredient} />
