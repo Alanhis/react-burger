@@ -13,10 +13,7 @@ width: 600px;
 height: 912px;
 left: 2%;
 top: 128px;
-
-/* interface/bg */
-
-
-/* interface/accent */
-
+}
+.tab_panel{
+    display: flex;
 }

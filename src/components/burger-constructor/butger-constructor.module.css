@@ -1,20 +1,19 @@
 .IngredientList{
 box-sizing: border-box;
 position: relative;
-
+width: 633px;
+ top: 128px
 
 }
 .AnotherScroller{
     overflow: scroll;
-    width: 633px;
-    height: 670px;
-    top: 128px;
+    height: 475px;
     overflow-x: hidden;
 }
 .finalIngeredientdiv{
+    display: inline-flex;
     position: relative;
-    top: 153px;
-    left: 50%;
+    left: 35%;
     align-items: center;
 }
 .IngredientField{
