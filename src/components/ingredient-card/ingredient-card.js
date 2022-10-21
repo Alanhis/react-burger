@@ -7,14 +7,22 @@ import Modal from '../modal/modal';
 import React from 'react';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import { CLEAN_SELECTED_INGREDIENT, SET_SELECTED_INGREDIENT } from '../../services/actions/ingredients';
 export default function IngredientCard(props) {
+	const data = useSelector(store => store)
+	const dispatch = useDispatch()
 	const [isOpen, setIsOpen] = React.useState(false);
+	const usedData = props.data;
+
 	const handleOpenModal = () => {
-		setIsOpen(true);
+		setIsOpen(true)
+		dispatch({ type: SET_SELECTED_INGREDIENT, usedData })
 	};
 
 	const handleCloseModal = () => {
-		setIsOpen(false);
+		setIsOpen(false)
+		dispatch({ type: CLEAN_SELECTED_INGREDIENT })
 	};
 	return (<>
 		<div onClick={handleOpenModal} className={`${IngredntCardStyle.foodCard} `} >
@@ -27,7 +35,7 @@ export default function IngredientCard(props) {
 			</p>
 		</div>
 		<div > {isOpen && (<><Modal title={"Детали ингредиента"} onClose={handleCloseModal} >
-			<IngredientDetails data={props.data} />
+			<IngredientDetails data={data.ingredients.selectredIngredient} />
 		</Modal>
 		</>)}
 		</div>

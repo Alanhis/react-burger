@@ -6,27 +6,27 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import BurgerConstuctorStyle from './butger-constructor.module.css';
 import Modal from '../modal/modal';
-import React, { useContext } from 'react';
+import React, { useMemo } from 'react';
 import OrderDetails from '../order-details/order-details';
 import PropTypes from 'prop-types';
 import { sendOrder } from '../../utils/post-logic';
 import { IngredientConstructor } from './ingredient-constuctor';
 import { url } from '../app/app'
-
+import { useDispatch, useSelector } from 'react-redux';
+import { MODAL_OPEN, MODAL_CLOSE, ORDER_NUMBER_REQUEST } from '../../services/actions/order';
 export default function BurgerConstuctor() {
+	const data = useSelector(store => store);
 
-	const [orderNumber, setOrderNumber] = React.useState()
-	const [isOpen, setIsOpen] = React.useState(false);
+	const dispatch = useDispatch()
 	const handleOpenModal = () => {
-		setIsOpen(true);
+		dispatch({ type: MODAL_OPEN })
 	};
-
 	const handleCloseModal = () => {
-		setIsOpen(false);
+		dispatch({ type: MODAL_CLOSE })
 	};
-	const ingredientfimal = IngredientConstructor()
+	const ingredientfimal = IngredientConstructor(data.order.orderDetails)
 
-	const finalPrice = ingredientfimal.reduce((previousValue, currentValue) => previousValue + currentValue.price, 0) + ingredientfimal[0].price
+	const finalPrice = useMemo(() => (ingredientfimal.reduce((previousValue, currentValue) => previousValue + currentValue.price, 0) + ingredientfimal[0].price))
 	return (
 		<div className={`${BurgerConstuctorStyle.IngredientList}  mb-2  mt-25 `}>
 			<div
@@ -43,7 +43,7 @@ export default function BurgerConstuctor() {
 			</div>
 			<ul className={`${BurgerConstuctorStyle.AnotherScroller} custom-scroll`}
 			>
-				{ingredientfimal.map((element, index) => {
+				{useMemo(() => (ingredientfimal.map((element, index) => {
 
 					if (index != 0) {
 
@@ -62,10 +62,7 @@ export default function BurgerConstuctor() {
 						);
 
 					}
-				})}
-
-
-
+				})))}
 			</ul>
 			<div
 				className={`${BurgerConstuctorStyle.IngredientField}  ml-15 mr-2`}
@@ -86,24 +83,24 @@ export default function BurgerConstuctor() {
 				<CurrencyIcon />
 				<div className=" ml-10">
 					<Button type="primary" size="large" onClick={() => {
-						handleOpenModal();
+
 						const response = sendOrder(ingredientfimal, url)
-						const data = response.then((data) => {
+						response.then((data) => {
 							const order_number = data.order.number
-							setOrderNumber(order_number)
 
+							dispatch({ type: ORDER_NUMBER_REQUEST, order_number })
 						})
-
+						handleOpenModal();
 					}}>
 						Оформить заказ
 					</Button>
 				</div>
 			</div>
 			<>
-				{isOpen && (
+				{data.order.isOpenModal && (
 					<>
 						<Modal title={""} onClose={handleCloseModal}>
-							<OrderDetails orderNumber={orderNumber} />
+							<OrderDetails orderNumber={data.order.orderNumber} />
 						</Modal>
 					</>
 				)}

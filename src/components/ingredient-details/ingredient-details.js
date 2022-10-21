@@ -2,6 +2,7 @@ import IngredientDetailStyle from './ingredient-details.module.css';
 import PropTypes from 'prop-types';
 import { ingredientType } from '../../utils/types';
 export default function IngredientDetails(props) {
+
 	return (
 		<div className={`${IngredientDetailStyle.IngredientPanel}`}>
 			<img src={props.data.image_large} />

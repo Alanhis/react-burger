@@ -1,4 +1,4 @@
-export const TestData = [
+export const orderDetails = [
 
 	{
 		"_id": "60d3b41abdacab0026a733c6",

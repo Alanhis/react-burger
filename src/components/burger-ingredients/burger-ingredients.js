@@ -5,8 +5,16 @@ import BurgerIngredientsStyles from './burger-ingredients.module.css';
 import PropTypes from 'prop-types';
 import Ingredients from '../ingredients/ingredients';
 import { useInView } from 'react-intersection-observer';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchData } from '../../services/actions/ingredients';
 export default function BurgerIngredients(props) {
+	const dispatch = useDispatch();
+	useEffect(() => {
+		dispatch(fetchData())
+
+	}, [])
+	const data = useSelector(store => store)
+	console.log(data)
 	const [current, setCurrent] = React.useState('one');
 	return (
 		<>
@@ -35,31 +43,31 @@ export default function BurgerIngredients(props) {
 				</div>
 				<div className={`${BurgerIngredientsStyles.food} mt-10 custom-scroll`}>
 					<p className="text text_type_main-medium mb-6">Булки</p>
-					<Ingredients ingredientType="bun" data={props.ingredient} />
+					<Ingredients ingredientType="bun" data={data.ingredients.ingredient} />
 					<p className="text text_type_main-medium mb-6">Соусы</p>
-					<Ingredients ingredientType="sauce" data={props.ingredient} />
+					<Ingredients ingredientType="sauce" data={data.ingredients.ingredient} />
 					<p className="text text_type_main-medium mb-6">Начинка</p>
-					<Ingredients ingredientType="main" data={props.ingredient} />
+					<Ingredients ingredientType="main" data={data.ingredients.ingredient} />
 				</div>
 			</section>
 		</>
 	);
 }
-BurgerIngredients.propTypes = {
-	ingredient: PropTypes.arrayOf(
-		PropTypes.shape({
-			calories: PropTypes.number,
-			carbohydrates: PropTypes.number,
-			fat: PropTypes.number,
-			image: PropTypes.string,
-			image_large: PropTypes.string,
-			image_mobile: PropTypes.string,
-			name: PropTypes.string,
-			price: PropTypes.number,
-			proteins: PropTypes.number,
-			type: PropTypes.string,
-			__v: PropTypes.number,
-			_id: PropTypes.string,
-		})
-	).isRequired,
-};
+// BurgerIngredients.propTypes = {
+// 	ingredient: PropTypes.arrayOf(
+// 		PropTypes.shape({
+// 			calories: PropTypes.number,
+// 			carbohydrates: PropTypes.number,
+// 			fat: PropTypes.number,
+// 			image: PropTypes.string,
+// 			image_large: PropTypes.string,
+// 			image_mobile: PropTypes.string,
+// 			name: PropTypes.string,
+// 			price: PropTypes.number,
+// 			proteins: PropTypes.number,
+// 			type: PropTypes.string,
+// 			__v: PropTypes.number,
+// 			_id: PropTypes.string,
+// 		})
+// 	).isRequired,
+// };

@@ -1,11 +1,11 @@
 import { ConstructorContext } from '../../utils/constructor-context';
-import { useContext } from 'react';
-export const IngredientConstructor = () => {
-    const ingredient = useContext(ConstructorContext);
+import { useMemo } from 'react';
+export const IngredientConstructor = (props) => {
+
     const burgerBun = []
     const otherIngredint = []
 
-    ingredient.map(element => {
+    useMemo(() => (props.map(element => {
         if (element.type == 'bun') {
 
             burgerBun.shift()
@@ -13,6 +13,6 @@ export const IngredientConstructor = () => {
         } else {
             otherIngredint.push(element)
         }
-    })
+    })))
     return ([...burgerBun, ...otherIngredint])
 }
