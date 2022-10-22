@@ -1,9 +1,9 @@
-import { ORDER_DATA_REQUEST, ORDER_DATA_FAILED, ORDER_DATA_SUCCESS, MODAL_OPEN, MODAL_CLOSE, ORDER_NUMBER_REQUEST } from "../actions/order";
-import { orderDetails } from '../../utils/data';
+import { ORDER_DATA_REQUEST, ORDER_DATA_FAILED, ORDER_DATA_SUCCESS, MODAL_OPEN, MODAL_CLOSE, ORDER_NUMBER_REQUEST, ADD_COMPONENT, DELETE_COMPONENT, UPDATE_CONSTRUCTOR_LIST, DELETE_BUN } from "../actions/order";
+
 const initialState = {
     isRequired: false,
     isRequiredError: false,
-    orderDetails,
+    orderDetails: [],
     orderNumber: 0,
     isOpenModal: false,
 }
@@ -48,6 +48,35 @@ export const orderReducer = (state = initialState, action) => {
                 ...state,
                 orderNumber: action.order_number
             };
+        }
+        case ADD_COMPONENT: {
+            return {
+                ...state,
+                orderDetails: [
+                    ...state.orderDetails,
+                    action.item
+                ]
+            }
+        }
+        case DELETE_COMPONENT: {
+            // 
+            return {
+                ...state,
+                orderDetails: [...state.orderDetails].filter(item => item.dragId !== action.action.dragId)
+            }
+        }
+        case UPDATE_CONSTRUCTOR_LIST: {
+            return {
+                ...state,
+                orderDetails: action.item
+            }
+        }
+        case DELETE_BUN: {
+            console.log(state)
+            return {
+                ...state,
+                orderDetails: [...state.orderDetails]
+            }
         }
         default: {
             return state;

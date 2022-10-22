@@ -7,7 +7,8 @@ import useFetch from '../../utils/fetch-logic';
 import { ConstructorContext } from '../../utils/constructor-context';
 import { compose, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 import { rootReducer } from '../../services/reducers';
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 export const url = 'https://norma.nomoreparties.space/api';
@@ -30,8 +31,10 @@ export default function App() {
 
       <div className={`${AppStyle.MainBody} `}>
         <Provider store={store}>
-          <BurgerIngredients />
-          <BurgerConstuctor />
+          <DndProvider backend={HTML5Backend}>
+            <BurgerIngredients />
+            <BurgerConstuctor />
+          </DndProvider>
         </Provider>
       </div>
     </div>

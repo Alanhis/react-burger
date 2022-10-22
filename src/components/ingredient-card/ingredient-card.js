@@ -9,12 +9,19 @@ import IngredientDetails from '../ingredient-details/ingredient-details';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { CLEAN_SELECTED_INGREDIENT, SET_SELECTED_INGREDIENT } from '../../services/actions/ingredients';
+import { useDrag } from 'react-dnd'
 export default function IngredientCard(props) {
 	const data = useSelector(store => store)
 	const dispatch = useDispatch()
 	const [isOpen, setIsOpen] = React.useState(false);
 	const usedData = props.data;
-
+	const [{ opacity }, dragRef] = useDrag({
+		type: 'ingredient',
+		item: { ...usedData },
+		collect: monitor => ({
+			opacity: monitor.isDragging() ? 0.5 : 1
+		})
+	})
 	const handleOpenModal = () => {
 		setIsOpen(true)
 		dispatch({ type: SET_SELECTED_INGREDIENT, usedData })
@@ -25,7 +32,7 @@ export default function IngredientCard(props) {
 		dispatch({ type: CLEAN_SELECTED_INGREDIENT })
 	};
 	return (<>
-		<div onClick={handleOpenModal} className={`${IngredntCardStyle.foodCard} `} >
+		<div ref={dragRef} onClick={handleOpenModal} className={`${IngredntCardStyle.foodCard} `} >
 			<Counter count={1} extraClass={`${IngredntCardStyle.foodCounter}`} />
 			<img src={props.data.image} className={`${IngredntCardStyle.foodImage}`} />
 			<div className={`${IngredntCardStyle.foodPrice}`} >
