@@ -8,14 +8,36 @@ import { useInView } from 'react-intersection-observer';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchData } from '../../services/actions/ingredients';
 export default function BurgerIngredients(props) {
+	const [current, setCurrent] = React.useState('one');
+	const handleIntersectionObserver = () => {
+		let options = {
+			root: null,
+
+			threshold: 0.7
+		}
+		const targets = document.getElementById('scroller').querySelectorAll('section.food_type')
+		const activeDiv = (target) => {
+			const divObserver = new IntersectionObserver((entries, observer) => {
+				entries.forEach(entry => {
+					if (entry.isIntersecting) {
+						setCurrent(entry.target.getAttribute("id"))
+					}
+
+				})
+			}, options)
+
+			divObserver.observe(target)
+		}
+		targets.forEach(activeDiv)
+	}
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(fetchData())
-
+		handleIntersectionObserver()
 	}, [])
 	const data = useSelector(store => store)
-	console.log(data)
-	const [current, setCurrent] = React.useState('one');
+
+
 	return (
 		<>
 			<section className={`${BurgerIngredientsStyles.border} mr-10`}>
@@ -41,13 +63,14 @@ export default function BurgerIngredients(props) {
 						Начинка
 					</Tab>
 				</div>
-				<div className={`${BurgerIngredientsStyles.food} mt-10 custom-scroll`}>
-					<p className="text text_type_main-medium mb-6">Булки</p>
-					<Ingredients ingredientType="bun" data={data.ingredients.ingredient} />
-					<p className="text text_type_main-medium mb-6">Соусы</p>
-					<Ingredients ingredientType="sauce" data={data.ingredients.ingredient} />
-					<p className="text text_type_main-medium mb-6">Начинка</p>
-					<Ingredients ingredientType="main" data={data.ingredients.ingredient} />
+				<div id='scroller' className={`${BurgerIngredientsStyles.food} mt-10 custom-scroll`}>
+					<section id="one" className={`${BurgerIngredientsStyles.fist_category} food_type`}><p className=" text text_type_main-medium mb-6">Булки</p>
+						<Ingredients ingredientType="bun" data={data.ingredients.ingredient} /></section>
+					<section id="two" className={`${BurgerIngredientsStyles.second_category} food_type`}><p id={'two'} className=" text text_type_main-medium mb-6">Соусы</p>
+						<Ingredients ingredientType="sauce" data={data.ingredients.ingredient} /></section>
+					<section id="three" className={`${BurgerIngredientsStyles.third_category} food_type`}><p id={'three'} className=" text text_type_main-medium mb-6">Начинка</p>
+						<Ingredients ingredientType="main" data={data.ingredients.ingredient} /></section>
+
 				</div>
 			</section>
 		</>
