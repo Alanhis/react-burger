@@ -13,6 +13,7 @@ import { useDrag } from 'react-dnd'
 export default function IngredientCard(props) {
 	const data = useSelector(store => store)
 	const dispatch = useDispatch()
+	const CountIngredient = data.order.orderDetails.filter(item => item._id === props.data._id).length;
 	const [isOpen, setIsOpen] = React.useState(false);
 	const usedData = props.data;
 	const [{ opacity }, dragRef] = useDrag({
@@ -33,7 +34,9 @@ export default function IngredientCard(props) {
 	};
 	return (<>
 		<div ref={dragRef} onClick={handleOpenModal} className={`${IngredntCardStyle.foodCard} `} >
-			<Counter count={1} extraClass={`${IngredntCardStyle.foodCounter}`} />
+			<div className={`${IngredntCardStyle.CounterDiv}`}>
+				{CountIngredient > 0 && <Counter count={CountIngredient} extraClass={`${IngredntCardStyle.foodCounter}`} />}
+			</div>
 			<img src={props.data.image} className={`${IngredntCardStyle.foodImage}`} />
 			<div className={`${IngredntCardStyle.foodPrice}`} >
 				<p className="text text_type_main-default mr-2" > {props.data.price}  </p>
@@ -41,11 +44,11 @@ export default function IngredientCard(props) {
 			</div> <p className={`text text_type_main-default ${IngredntCardStyle.foodText}`} > {props.data.name}
 			</p>
 		</div>
-		<div > {isOpen && (<><Modal title={"Детали ингредиента"} onClose={handleCloseModal} >
+		{isOpen && (<div><Modal title={"Детали ингредиента"} onClose={handleCloseModal} >
 			<IngredientDetails data={data.ingredients.selectredIngredient} />
 		</Modal>
-		</>)}
-		</div>
+		</div>)}
+
 	</>
 	);
 }
