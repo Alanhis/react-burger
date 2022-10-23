@@ -7,17 +7,17 @@ import Modal from '../modal/modal';
 import React from 'react';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import { useDispatch, useSelector } from 'react-redux';
-import { CLEAN_SELECTED_INGREDIENT, SET_SELECTED_INGREDIENT } from '../../services/actions/ingredients';
+import { CLEAN_SELECTED_INGREDIENT, SET_SELECTED_INGREDIENT } from '../../services/actions/modal-ingredient';
 import { useDrag } from 'react-dnd'
 import { ingredientType } from '../../utils/types';
 export default function IngredientCard(props) {
 	let countIngredient = 0;
 	const data = useSelector(store => store)
 	const dispatch = useDispatch()
-	if (data.order.orderDetails.filter(item => item._id === props.data._id && item.type === 'bun').length > 0) {
-		countIngredient = data.order.orderDetails.filter(item => item._id === props.data._id).length + 1;
+	if (data.conductor.orderDetails.filter(item => item._id === props.data._id && item.type === 'bun').length > 0) {
+		countIngredient = data.conductor.orderDetails.filter(item => item._id === props.data._id).length + 1;
 	} else {
-		countIngredient = data.order.orderDetails.filter(item => item._id === props.data._id).length;
+		countIngredient = data.conductor.orderDetails.filter(item => item._id === props.data._id).length;
 	}
 
 
@@ -53,7 +53,7 @@ export default function IngredientCard(props) {
 			</p>
 		</div>
 		{isOpen && (<div><Modal title={"Детали ингредиента"} onClose={handleCloseModal} >
-			<IngredientDetails data={data.ingredients.selectredIngredient} />
+			<IngredientDetails data={data.modalingredient.selectredIngredient} />
 		</Modal>
 		</div>)}
 

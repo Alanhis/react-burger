@@ -16,10 +16,10 @@ import {
 	MODAL_OPEN,
 	MODAL_CLOSE,
 	ORDER_NUMBER_REQUEST,
-	UPDATE_CONSTRUCTOR_LIST,
+
 	ORDER_NUMBER_DELETE
 } from '../../services/actions/order';
-
+import { UPDATE_CONSTRUCTOR_LIST } from '../../services/actions/order';
 
 export default function BurgerConstuctorList(props) {
 
@@ -101,7 +101,7 @@ export default function BurgerConstuctorList(props) {
 			<p className="text text_type_digits-medium mr-2">{finalPrice}</p>
 			<CurrencyIcon />
 			<div className=" ml-10">
-				{data.order.orderDetails.filter(item => item.type === 'bun').length == 1 &&
+				{data.conductor.orderDetails.filter(item => item.type === 'bun').length == 1 &&
 					<Button
 						htmlType='button'
 						type="primary"
@@ -112,7 +112,7 @@ export default function BurgerConstuctorList(props) {
 							response.then((data) => {
 								const order_number = data.order.number
 
-								dispatch({ type: ORDER_NUMBER_REQUEST, order_number })
+								dispatch({ type: ORDER_NUMBER_REQUEST, payload: order_number })
 							})
 							handleOpenModal();
 						}}>

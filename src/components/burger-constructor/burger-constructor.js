@@ -2,7 +2,7 @@
 import BurgerConstuctorStyle from './burger-constructor.module.css';
 import { getIngredientsForConstructor } from './ingredient-constuctor';
 import { useDispatch, useSelector } from 'react-redux';
-import { ADD_COMPONENT, DELETE_BUN } from '../../services/actions/order';
+import { ADD_COMPONENT, DELETE_BUN } from '../../services/actions/conductor';
 import { useDrop } from 'react-dnd'
 import { v4 as uuidv4 } from 'uuid';
 import BurgerConstuctorList from '../burger-cunstructor-list/burger-constructor-list.js'
@@ -40,7 +40,7 @@ export default function BurgerConstuctor() {
 		}
 	})
 
-	const ingredientfimal = getIngredientsForConstructor(data.order.orderDetails)
+	const ingredientfimal = getIngredientsForConstructor(data.conductor.orderDetails)
 
 
 
