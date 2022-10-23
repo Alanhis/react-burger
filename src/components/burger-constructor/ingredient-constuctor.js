@@ -1,5 +1,6 @@
-import { ConstructorContext } from '../../utils/constructor-context';
+import PropTypes from 'prop-types';
 import { useMemo } from 'react';
+
 export const IngredientConstructor = (props) => {
 
     const burgerBun = []
@@ -16,3 +17,6 @@ export const IngredientConstructor = (props) => {
     })))
     return ([...burgerBun, ...otherIngredint])
 }
+IngredientConstructor.propTypes = {
+    data: PropTypes.object,
+};

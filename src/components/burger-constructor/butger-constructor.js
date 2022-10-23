@@ -37,11 +37,6 @@ export default function BurgerConstuctor() {
 					}
 				})
 			}
-
-
-
-			console.log(data.order.orderDetails)
-
 		}
 	})
 

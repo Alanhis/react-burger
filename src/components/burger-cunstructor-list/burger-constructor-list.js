@@ -2,18 +2,17 @@ import {
 	ConstructorElement,
 	CurrencyIcon,
 	Button,
-	DragIcon,
+
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import BurgerConstuctorStyle from '../burger-constructor/butger-constructor.module.css';
 import Modal from '../modal/modal';
-import React, { useMemo, useCallback } from 'react';
+import { useMemo, useCallback } from 'react';
 import OrderDetails from '../order-details/order-details';
-import PropTypes from 'prop-types';
 import { sendOrder } from '../../utils/post-logic';
 import OrderedIngredient from '../ordered-ingredient/ordered-ingredient'
 import { url } from '../app/app'
 import { useDispatch, useSelector } from 'react-redux';
-import { MODAL_OPEN, MODAL_CLOSE, ORDER_NUMBER_REQUEST, UPDATE_CONSTRUCTOR_LIST } from '../../services/actions/order';
+import { MODAL_OPEN, MODAL_CLOSE, ORDER_NUMBER_REQUEST, UPDATE_CONSTRUCTOR_LIST, ORDER_NUMBER_DELETE } from '../../services/actions/order';
 
 
 export default function BurgerConstuctorList(props) {
@@ -42,6 +41,7 @@ export default function BurgerConstuctorList(props) {
 	};
 	const handleCloseModal = () => {
 		dispatch({ type: MODAL_CLOSE })
+		dispatch({ type: ORDER_NUMBER_DELETE })
 	};
 
 	const finalPrice = useMemo(() => (props.data.reduce((previousValue, currentValue) => previousValue + currentValue.price, 0) + props.data[0].price))
@@ -89,7 +89,7 @@ export default function BurgerConstuctorList(props) {
 			<p className="text text_type_digits-medium mr-2">{finalPrice}</p>
 			<CurrencyIcon />
 			<div className=" ml-10">
-				<Button type="primary" size="large" onClick={() => {
+				<Button htmlType='button' type="primary" size="large" onClick={() => {
 
 					const response = sendOrder(props.data, url)
 					response.then((data) => {

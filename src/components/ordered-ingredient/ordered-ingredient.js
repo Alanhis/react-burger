@@ -3,13 +3,12 @@ import {
     DragIcon
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import BurgerConstuctorStyle from '../burger-constructor/butger-constructor.module.css';
-import React, { useRef, useEffect } from 'react';
+import { useRef } from 'react';
 import { useDrop, useDrag } from 'react-dnd'
-import { MODAL_OPEN, MODAL_CLOSE, ORDER_NUMBER_REQUEST, DELETE_COMPONENT } from '../../services/actions/order';
+import { DELETE_COMPONENT } from '../../services/actions/order';
 import { useDispatch } from 'react-redux';
 export default function OrderedIngredient({ item, index, moveCard }) {
-    // console.log(item)
-    // console.log(index)
+
     const dispatch = useDispatch()
     const ref = useRef(null);
     const [{ handlerId }, drop] = useDrop({
@@ -85,6 +84,7 @@ export default function OrderedIngredient({ item, index, moveCard }) {
     return (
         <div
             ref={ref}
+            style={{ opacity }}
             className={`${BurgerConstuctorStyle.IngredientField} mb-4  mr-2`}
             onDrop={preventDefault}
             data-handler-id={handlerId}

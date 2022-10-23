@@ -1,13 +1,10 @@
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
-import React, { useRef, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import BurgerIngredientsStyles from './burger-ingredients.module.css';
-
-import PropTypes from 'prop-types';
 import Ingredients from '../ingredients/ingredients';
-import { useInView } from 'react-intersection-observer';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchData } from '../../services/actions/ingredients';
-export default function BurgerIngredients(props) {
+export default function BurgerIngredients() {
 	const [current, setCurrent] = React.useState('one');
 	const handleIntersectionObserver = () => {
 		let options = {
@@ -76,21 +73,3 @@ export default function BurgerIngredients(props) {
 		</>
 	);
 }
-// BurgerIngredients.propTypes = {
-// 	ingredient: PropTypes.arrayOf(
-// 		PropTypes.shape({
-// 			calories: PropTypes.number,
-// 			carbohydrates: PropTypes.number,
-// 			fat: PropTypes.number,
-// 			image: PropTypes.string,
-// 			image_large: PropTypes.string,
-// 			image_mobile: PropTypes.string,
-// 			name: PropTypes.string,
-// 			price: PropTypes.number,
-// 			proteins: PropTypes.number,
-// 			type: PropTypes.string,
-// 			__v: PropTypes.number,
-// 			_id: PropTypes.string,
-// 		})
-// 	).isRequired,
-// };

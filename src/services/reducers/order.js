@@ -1,4 +1,4 @@
-import { MODAL_OPEN, MODAL_CLOSE, ORDER_NUMBER_REQUEST, ADD_COMPONENT, DELETE_COMPONENT, UPDATE_CONSTRUCTOR_LIST, DELETE_BUN } from "../actions/order";
+import { MODAL_OPEN, MODAL_CLOSE, ORDER_NUMBER_REQUEST, ADD_COMPONENT, DELETE_COMPONENT, UPDATE_CONSTRUCTOR_LIST, DELETE_BUN, ORDER_NUMBER_DELETE } from "../actions/order";
 
 const initialState = {
     isRequired: false,
@@ -29,6 +29,12 @@ export const orderReducer = (state = initialState, action) => {
                 orderNumber: action.order_number
             };
         }
+        case ORDER_NUMBER_DELETE: {
+            return {
+                ...state,
+                orderNumber: 0
+            }
+        }
         case ADD_COMPONENT: {
             return {
                 ...state,
@@ -54,8 +60,6 @@ export const orderReducer = (state = initialState, action) => {
             }
         }
         case DELETE_BUN: {
-            console.log(state)
-            console.log(action)
             return {
                 ...state,
                 orderDetails: [...state.orderDetails].filter(item => item.type !== 'bun')
