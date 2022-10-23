@@ -32,12 +32,12 @@ export default function IngredientCard(props) {
 		})
 	})
 	const handleOpenModal = () => {
-		setIsOpen(true)
+
 		dispatch({ type: SET_SELECTED_INGREDIENT, usedData })
 	};
 
 	const handleCloseModal = () => {
-		setIsOpen(false)
+
 		dispatch({ type: CLEAN_SELECTED_INGREDIENT })
 	};
 	return (<>
@@ -52,7 +52,7 @@ export default function IngredientCard(props) {
 			</div> <p className={`text text_type_main-default ${IngredntCardStyle.foodText}`} > {props.data.name}
 			</p>
 		</div>
-		{isOpen && (<div><Modal title={"Детали ингредиента"} onClose={handleCloseModal} >
+		{data.modalingredient.selectredIngredient != null && (<div><Modal title={"Детали ингредиента"} onClose={handleCloseModal} >
 			<IngredientDetails data={data.modalingredient.selectredIngredient} />
 		</Modal>
 		</div>)}
@@ -60,6 +60,3 @@ export default function IngredientCard(props) {
 	</>
 	);
 }
-IngredientCard.propTypes = {
-	data: ingredientType
-};

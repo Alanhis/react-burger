@@ -7,12 +7,12 @@ export const ORDER_DATA_ERROR = 'ORDER_DATA__ERROR';
 export const MODAL_CLOSE = 'MODAL_CLOSE';
 
 export const sendOrder = (ingredient) => (dispatch, getState) => {
-    console.log(ingredient)
+
     dispatch({
         type: ORDER_DATA_REQUEST
     });
     ingredient.push(ingredient[0])
-    console.log(ingredient)
+
     const returnedData = { "ingredients": (ingredient.map(data => data._id)) }
 
     fetch(url + '/orders', {

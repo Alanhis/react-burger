@@ -7,7 +7,7 @@ export const getIngredientsForConstructor = (props) => {
     const otherIngredint = []
 
 
-    props.map(element => {
+    props.forEach(element => {
         if (element.type == 'bun') {
 
             burgerBun.shift()

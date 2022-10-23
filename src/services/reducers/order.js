@@ -16,7 +16,7 @@ export const orderReducer = (state = initialState, action) => {
             }
         }
         case ORDER_DATA_SUCCESS: {
-            console.log(action)
+
             return {
                 ...state,
                 isRequired: false,
