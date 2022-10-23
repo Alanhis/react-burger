@@ -8,7 +8,6 @@ import BurgerConstuctorStyle from '../burger-constructor/burger-constructor.modu
 import Modal from '../modal/modal';
 import { useMemo, useCallback } from 'react';
 import OrderDetails from '../order-details/order-details';
-import { sendOrder } from '../../utils/post-logic';
 import OrderedIngredient from '../ordered-ingredient/ordered-ingredient'
 import { url } from '../app/app'
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,10 +15,10 @@ import {
 	MODAL_OPEN,
 	MODAL_CLOSE,
 	ORDER_NUMBER_REQUEST,
-
 	ORDER_NUMBER_DELETE
 } from '../../services/actions/order';
-import { UPDATE_CONSTRUCTOR_LIST } from '../../services/actions/order';
+import { sendOrder } from '../../services/actions/order';
+import { UPDATE_CONSTRUCTOR_LIST, DELETE_COMPONENT } from '../../services/actions/conductor';
 
 export default function BurgerConstuctorList(props) {
 
@@ -43,16 +42,13 @@ export default function BurgerConstuctorList(props) {
 	}, [props.data, dispatch]);
 
 
-	const handleOpenModal = () => {
-		dispatch({ type: MODAL_OPEN })
-	};
+
 	const handleCloseModal = () => {
 		dispatch({ type: MODAL_CLOSE })
-		dispatch({ type: ORDER_NUMBER_DELETE })
+
 	};
 
-	const finalPrice = useMemo(() =>
-		(props.data.reduce((previousValue, currentValue) => previousValue + currentValue.price, 0) + props.data[0].price))
+	const finalPrice = props.data.reduce((previousValue, currentValue) => previousValue + currentValue.price, 0) + props.data[0].price;
 	return (<>
 		{props.data[0].type === 'bun' && <div
 			className={`${BurgerConstuctorStyle.IngredientField}  ml-15 mr-2`}
@@ -108,13 +104,7 @@ export default function BurgerConstuctorList(props) {
 						size="large"
 						onClick={() => {
 
-							const response = sendOrder(props.data, url)
-							response.then((data) => {
-								const order_number = data.order.number
-
-								dispatch({ type: ORDER_NUMBER_REQUEST, payload: order_number })
-							})
-							handleOpenModal();
+							dispatch(sendOrder(props.data))
 						}}>
 						Оформить заказ
 					</Button>}

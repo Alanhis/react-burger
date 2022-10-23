@@ -7,7 +7,7 @@ import { useDrop } from 'react-dnd'
 import { v4 as uuidv4 } from 'uuid';
 import BurgerConstuctorList from '../burger-cunstructor-list/burger-constructor-list.js'
 export default function BurgerConstuctor() {
-	const data = useSelector(store => store);
+	const data = useSelector(store => store.conductor.orderDetails);
 
 	const dispatch = useDispatch()
 	const [{ isHover }, dropTargetRef] = useDrop({
@@ -40,7 +40,7 @@ export default function BurgerConstuctor() {
 		}
 	})
 
-	const ingredientfimal = getIngredientsForConstructor(data.conductor.orderDetails)
+	const ingredientfimal = getIngredientsForConstructor(data)
 
 
 

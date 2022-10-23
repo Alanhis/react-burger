@@ -1,4 +1,4 @@
-import { FETCH_DATA_REQUEST, FETCH_DATA_SUCCESS, FETCH_DATA_FAILED, } from "../actions/ingredients";
+import { GET_DATA_REQUEST, GET_DATA_SUCCESS, GET_DATA_FAILED, } from "../actions/ingredients";
 
 const initialState = {
     ingredient: [],
@@ -9,13 +9,13 @@ const initialState = {
 
 export const ingredientsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case FETCH_DATA_REQUEST: {
+        case GET_DATA_REQUEST: {
             return {
                 ...state,
                 isRequired: true
             }
         }
-        case FETCH_DATA_SUCCESS: {
+        case GET_DATA_SUCCESS: {
             return {
                 ...state,
                 ingredient: action.data.data,
@@ -23,7 +23,7 @@ export const ingredientsReducer = (state = initialState, action) => {
                 isRequiredError: false
             }
         }
-        case FETCH_DATA_FAILED: {
+        case GET_DATA_FAILED: {
             return {
                 ...state,
                 isRequired: false,

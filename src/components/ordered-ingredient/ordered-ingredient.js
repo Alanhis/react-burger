@@ -5,7 +5,7 @@ import {
 import BurgerConstuctorStyle from '../burger-constructor/burger-constructor.module.css';
 import { useRef } from 'react';
 import { useDrop, useDrag } from 'react-dnd'
-import { DELETE_COMPONENT } from '../../services/actions/order';
+import { DELETE_COMPONENT } from '../../services/actions/conductor';
 import { useDispatch } from 'react-redux';
 export default function OrderedIngredient({ item, index, moveCard }) {
 
