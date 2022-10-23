@@ -1,25 +1,3 @@
-.food{
-    overflow: scroll;
-    width: 600px;
-    height: 716px;
-    left: 664px;
-    top: 128px;
-    overflow-x: hidden;
-    
-}
-.border{
-position: relative;
-width: 600px;
-height: 912px;
-left: 2%;
-top: 128px;
-
-/* interface/bg */
-
-
-/* interface/accent */
-
-}
 .foodCard{
     float: left;
     width: 50%;
@@ -42,4 +20,11 @@ top: 128px;
 .foodCounter{
     position:static;
     margin-left: auto;
+}
+.foodImage{
+    cursor: pointer;
+}
+.foodImage:hover{
+    
+	filter: drop-shadow(0px 4px 32px rgba(156, 51, 255, 0.5)); 
 }

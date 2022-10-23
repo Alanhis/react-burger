@@ -6,7 +6,7 @@ position: relative;
 }
 .AnotherScroller{
     overflow: scroll;
-    width: 600px;
+    width: 633px;
     height: 670px;
     top: 128px;
     overflow-x: hidden;
@@ -14,7 +14,7 @@ position: relative;
 .finalIngeredientdiv{
     position: relative;
     top: 153px;
-    left: 40%;
+    left: 50%;
     align-items: center;
 }
 .IngredientField{
