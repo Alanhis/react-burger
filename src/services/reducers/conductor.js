@@ -16,7 +16,7 @@ export const conductorReducer = (state = initialState, action) => {
             }
         }
         case DELETE_COMPONENT: {
-            // 
+
             return {
                 ...state,
                 orderDetails: [...state.orderDetails].filter(item => item.dragId !== action.action.dragId)
