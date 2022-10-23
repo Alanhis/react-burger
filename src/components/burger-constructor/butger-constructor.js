@@ -1,19 +1,8 @@
-import {
-	ConstructorElement,
-	CurrencyIcon,
-	Button,
-	DragIcon,
-} from '@ya.praktikum/react-developer-burger-ui-components';
+
 import BurgerConstuctorStyle from './butger-constructor.module.css';
-import Modal from '../modal/modal';
-import React, { useMemo } from 'react';
-import OrderDetails from '../order-details/order-details';
-import PropTypes from 'prop-types';
-import { sendOrder } from '../../utils/post-logic';
 import { IngredientConstructor } from './ingredient-constuctor';
-import { url } from '../app/app'
 import { useDispatch, useSelector } from 'react-redux';
-import { ADD_COMPONENT } from '../../services/actions/order';
+import { ADD_COMPONENT, DELETE_BUN } from '../../services/actions/order';
 import { useDrop } from 'react-dnd'
 import { v4 as uuidv4 } from 'uuid';
 import BurgerConstuctorList from '../burger-cunstructor-list/burger-constructor-list.js'
@@ -27,16 +16,37 @@ export default function BurgerConstuctor() {
 			isHover: monitor.isOver()
 		}),
 		drop(item) {
-			dispatch({
-				type: ADD_COMPONENT,
-				item: {
-					...item,
-					dragId: uuidv4()
-				}
-			})
+			if (item.type === 'bun') {
+				dispatch({
+					type: DELETE_BUN,
+					item: item
+				})
+				dispatch({
+					type: ADD_COMPONENT,
+					item: {
+						...item,
+						dragId: uuidv4()
+					}
+				})
+			} else {
+				dispatch({
+					type: ADD_COMPONENT,
+					item: {
+						...item,
+						dragId: uuidv4()
+					}
+				})
+			}
+
+
+
+			console.log(data.order.orderDetails)
+
 		}
 	})
+
 	const ingredientfimal = IngredientConstructor(data.order.orderDetails)
+
 
 
 	return (
