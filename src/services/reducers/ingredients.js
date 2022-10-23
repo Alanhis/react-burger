@@ -1,17 +1,17 @@
-import { FETCH_DATA, FETCH_DATA_SUCCESS, FETCH_DATA_FAILED, INGREDIENT_MODAL_OPEN, INGREDIENT_MODAL_CLOSE, CLEAN_SELECTED_INGREDIENT, SET_SELECTED_INGREDIENT } from "../actions/ingredients";
+import { FETCH_DATA_REQUEST, FETCH_DATA_SUCCESS, FETCH_DATA_FAILED, INGREDIENT_MODAL_OPEN, INGREDIENT_MODAL_CLOSE, CLEAN_SELECTED_INGREDIENT, SET_SELECTED_INGREDIENT } from "../actions/ingredients";
 
 const initialState = {
     ingredient: [],
     isRequired: false,
     isRequiredError: false,
     isModalIngredientOpen: false,
-    selectredIngredient: []
+    selectredIngredient: [null]
 }
 
 
 export const ingredientsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case FETCH_DATA: {
+        case FETCH_DATA_REQUEST: {
             return {
                 ...state,
                 isRequired: true

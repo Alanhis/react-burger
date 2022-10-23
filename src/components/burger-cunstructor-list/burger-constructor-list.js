@@ -4,7 +4,7 @@ import {
 	Button,
 
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import BurgerConstuctorStyle from '../burger-constructor/butger-constructor.module.css';
+import BurgerConstuctorStyle from '../burger-constructor/burger-constructor.module.css';
 import Modal from '../modal/modal';
 import { useMemo, useCallback } from 'react';
 import OrderDetails from '../order-details/order-details';
@@ -12,13 +12,20 @@ import { sendOrder } from '../../utils/post-logic';
 import OrderedIngredient from '../ordered-ingredient/ordered-ingredient'
 import { url } from '../app/app'
 import { useDispatch, useSelector } from 'react-redux';
-import { MODAL_OPEN, MODAL_CLOSE, ORDER_NUMBER_REQUEST, UPDATE_CONSTRUCTOR_LIST, ORDER_NUMBER_DELETE } from '../../services/actions/order';
+import {
+	MODAL_OPEN,
+	MODAL_CLOSE,
+	ORDER_NUMBER_REQUEST,
+	UPDATE_CONSTRUCTOR_LIST,
+	ORDER_NUMBER_DELETE
+} from '../../services/actions/order';
 
 
 export default function BurgerConstuctorList(props) {
 
 	const dispatch = useDispatch()
 	const data = useSelector(store => store);
+
 	const moveCard = useCallback((dragIndex, hoverIndex) => {
 
 		const dragCard = props.data[dragIndex];
@@ -44,11 +51,12 @@ export default function BurgerConstuctorList(props) {
 		dispatch({ type: ORDER_NUMBER_DELETE })
 	};
 
-	const finalPrice = useMemo(() => (props.data.reduce((previousValue, currentValue) => previousValue + currentValue.price, 0) + props.data[0].price))
+	const finalPrice = useMemo(() =>
+		(props.data.reduce((previousValue, currentValue) => previousValue + currentValue.price, 0) + props.data[0].price))
 	return (<>
 		{props.data[0].type === 'bun' && <div
 			className={`${BurgerConstuctorStyle.IngredientField}  ml-15 mr-2`}
-			key={0}>
+		>
 			<ConstructorElement
 				text={props.data[0].name + ' (верх)'}
 				price={props.data[0].price}
@@ -60,20 +68,24 @@ export default function BurgerConstuctorList(props) {
 		</div>}
 		<ul className={`${BurgerConstuctorStyle.AnotherScroller} custom-scroll`}
 		>
-			{useMemo(() => (props.data.map((element, index) => {
+			{props.data.map((element, index) => {
 
 				if (element.type !== 'bun') {
 
 					return (
-						<OrderedIngredient key={element.dragId} index={index} item={element} moveCard={moveCard} />
+						<OrderedIngredient
+							key={element.dragId}
+							index={index}
+							item={element}
+							moveCard={moveCard} />
 					);
 
 				}
-			})))}
+			})}
 		</ul>
 		{props.data[0].type === 'bun' && <div
 			className={`${BurgerConstuctorStyle.IngredientField}  ml-15 mr-2`}
-			key={props.data.length}>
+		>
 			<ConstructorElement
 				text={props.data[0].name + ' (низ)'}
 				price={props.data[0].price}
@@ -89,25 +101,33 @@ export default function BurgerConstuctorList(props) {
 			<p className="text text_type_digits-medium mr-2">{finalPrice}</p>
 			<CurrencyIcon />
 			<div className=" ml-10">
-				<Button htmlType='button' type="primary" size="large" onClick={() => {
+				{data.order.orderDetails.filter(item => item.type === 'bun').length == 1 &&
+					<Button
+						htmlType='button'
+						type="primary"
+						size="large"
+						onClick={() => {
 
-					const response = sendOrder(props.data, url)
-					response.then((data) => {
-						const order_number = data.order.number
+							const response = sendOrder(props.data, url)
+							response.then((data) => {
+								const order_number = data.order.number
 
-						dispatch({ type: ORDER_NUMBER_REQUEST, order_number })
-					})
-					handleOpenModal();
-				}}>
-					Оформить заказ
-				</Button>
+								dispatch({ type: ORDER_NUMBER_REQUEST, order_number })
+							})
+							handleOpenModal();
+						}}>
+						Оформить заказ
+					</Button>}
 			</div>
 		</div>
 		<>
 			{data.order.isOpenModal && (
 				<>
-					<Modal title={""} onClose={handleCloseModal}>
-						<OrderDetails orderNumber={data.order.orderNumber} />
+					<Modal
+						title={""}
+						onClose={handleCloseModal}>
+						<OrderDetails
+							orderNumber={data.order.orderNumber} />
 					</Modal>
 				</>
 			)}

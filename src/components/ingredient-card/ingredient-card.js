@@ -11,10 +11,17 @@ import { CLEAN_SELECTED_INGREDIENT, SET_SELECTED_INGREDIENT } from '../../servic
 import { useDrag } from 'react-dnd'
 import { ingredientType } from '../../utils/types';
 export default function IngredientCard(props) {
-
+	let countIngredient = 0;
 	const data = useSelector(store => store)
 	const dispatch = useDispatch()
-	const CountIngredient = data.order.orderDetails.filter(item => item._id === props.data._id).length;
+	if (data.order.orderDetails.filter(item => item._id === props.data._id && item.type === 'bun').length > 0) {
+		countIngredient = data.order.orderDetails.filter(item => item._id === props.data._id).length + 1;
+	} else {
+		countIngredient = data.order.orderDetails.filter(item => item._id === props.data._id).length;
+	}
+
+
+
 	const [isOpen, setIsOpen] = React.useState(false);
 	const usedData = props.data;
 	const [{ opacity }, dragRef] = useDrag({
@@ -36,7 +43,7 @@ export default function IngredientCard(props) {
 	return (<>
 		<div ref={dragRef} onClick={handleOpenModal} style={{ opacity }} className={`${IngredntCardStyle.foodCard} `} >
 			<div className={`${IngredntCardStyle.CounterDiv}`}>
-				{CountIngredient > 0 && <Counter count={CountIngredient} extraClass={`${IngredntCardStyle.foodCounter}`} />}
+				{countIngredient > 0 && <Counter count={countIngredient} extraClass={`${IngredntCardStyle.foodCounter}`} />}
 			</div>
 			<img src={props.data.image} className={`${IngredntCardStyle.foodImage}`} />
 			<div className={`${IngredntCardStyle.foodPrice}`} >

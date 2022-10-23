@@ -61,12 +61,33 @@ export default function BurgerIngredients() {
 					</Tab>
 				</div>
 				<div id='scroller' className={`${BurgerIngredientsStyles.food} mt-10 custom-scroll`}>
-					<section id="one" className={`${BurgerIngredientsStyles.fist_category} food_type`}><p className=" text text_type_main-medium mb-6">Булки</p>
-						<Ingredients ingredientType="bun" data={data.ingredients.ingredient} /></section>
-					<section id="two" className={`${BurgerIngredientsStyles.second_category} food_type`}><p id={'two'} className=" text text_type_main-medium mb-6">Соусы</p>
-						<Ingredients ingredientType="sauce" data={data.ingredients.ingredient} /></section>
-					<section id="three" className={`${BurgerIngredientsStyles.third_category} food_type`}><p id={'three'} className=" text text_type_main-medium mb-6">Начинка</p>
-						<Ingredients ingredientType="main" data={data.ingredients.ingredient} /></section>
+					<section id="one"
+						className={`${BurgerIngredientsStyles.fist_category} food_type`}>
+						<p className=" text text_type_main-medium mb-6">
+							Булки
+						</p>
+						<Ingredients
+							ingredientType="bun"
+							data={data.ingredients.ingredient} />
+					</section>
+					<section id="two"
+						className={`${BurgerIngredientsStyles.second_category} food_type`}>
+						<p id={'two'}
+							className=" text text_type_main-medium mb-6">
+							Соусы
+						</p>
+						<Ingredients ingredientType="sauce"
+							data={data.ingredients.ingredient} />
+					</section>
+					<section id="three"
+						className={`${BurgerIngredientsStyles.third_category} food_type`}>
+						<p id={'three'}
+							className=" text text_type_main-medium mb-6">
+							Начинка
+						</p>
+						<Ingredients ingredientType="main"
+							data={data.ingredients.ingredient} />
+					</section>
 
 				</div>
 			</section>

@@ -2,7 +2,7 @@ import {
     ConstructorElement,
     DragIcon
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import BurgerConstuctorStyle from '../burger-constructor/butger-constructor.module.css';
+import BurgerConstuctorStyle from '../burger-constructor/burger-constructor.module.css';
 import { useRef } from 'react';
 import { useDrop, useDrag } from 'react-dnd'
 import { DELETE_COMPONENT } from '../../services/actions/order';
@@ -95,7 +95,7 @@ export default function OrderedIngredient({ item, index, moveCard }) {
                 price={item.price}
                 thumbnail={item.image}
                 handleClose={() => dispatch({ type: DELETE_COMPONENT, action: item })}
-                key={index}
+                key={item._id}
             />
         </div>
     )

@@ -1,12 +1,13 @@
 import PropTypes from 'prop-types';
-import { useMemo } from 'react';
+import { useEffect } from 'react';
 
-export const IngredientConstructor = (props) => {
+export const getIngredientsForConstructor = (props) => {
 
     const burgerBun = []
     const otherIngredint = []
 
-    useMemo(() => (props.map(element => {
+
+    props.map(element => {
         if (element.type == 'bun') {
 
             burgerBun.shift()
@@ -14,9 +15,10 @@ export const IngredientConstructor = (props) => {
         } else {
             otherIngredint.push(element)
         }
-    })))
+    })
+
     return ([...burgerBun, ...otherIngredint])
 }
-IngredientConstructor.propTypes = {
+getIngredientsForConstructor.propTypes = {
     data: PropTypes.object,
 };

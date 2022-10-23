@@ -1,4 +1,4 @@
-import { MODAL_OPEN, MODAL_CLOSE, ORDER_NUMBER_REQUEST, ADD_COMPONENT, DELETE_COMPONENT, UPDATE_CONSTRUCTOR_LIST, DELETE_BUN, ORDER_NUMBER_DELETE } from "../actions/order";
+import { ORDER_DATA_REQUEST, ORDER_DATA_SUCCESS, ORDER_DATA_FAILED, MODAL_OPEN, MODAL_CLOSE, ORDER_NUMBER_REQUEST, ADD_COMPONENT, DELETE_COMPONENT, UPDATE_CONSTRUCTOR_LIST, DELETE_BUN, ORDER_NUMBER_DELETE } from "../actions/order";
 
 const initialState = {
     isRequired: false,
@@ -10,7 +10,28 @@ const initialState = {
 
 export const orderReducer = (state = initialState, action) => {
     switch (action.type) {
+        case ORDER_DATA_REQUEST: {
+            return {
+                ...state,
+                isRequired: true
+            }
+        }
+        case ORDER_DATA_SUCCESS: {
 
+            return {
+                ...state,
+                ingredient: action.data.data,
+                isRequired: false,
+                isRequiredError: false
+            }
+        }
+        case ORDER_DATA_FAILED: {
+            return {
+                ...state,
+                isRequired: false,
+                isRequiredError: true
+            }
+        }
         case MODAL_OPEN: {
             return {
                 ...state,
