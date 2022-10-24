@@ -1,6 +1,8 @@
 import IngredientDetailStyle from './ingredient-details.module.css';
-import PropTypes from 'prop-types';
+
+import { ingredientType } from '../../utils/types';
 export default function IngredientDetails(props) {
+
 	return (
 		<div className={`${IngredientDetailStyle.IngredientPanel}`}>
 			<img src={props.data.image_large} />
@@ -46,20 +48,5 @@ export default function IngredientDetails(props) {
 	);
 }
 IngredientDetails.propTypes = {
-	data: PropTypes.objectOf(
-		PropTypes.shape({
-			calories: PropTypes.number,
-			carbohydrates: PropTypes.number,
-			fat: PropTypes.number,
-			image: PropTypes.string,
-			image_large: PropTypes.string,
-			image_mobile: PropTypes.string,
-			name: PropTypes.string,
-			price: PropTypes.number,
-			proteins: PropTypes.number,
-			type: PropTypes.string,
-			__v: PropTypes.number,
-			_id: PropTypes.string
-		})
-	).isRequired,
+	data: ingredientType.isRequired,
 };

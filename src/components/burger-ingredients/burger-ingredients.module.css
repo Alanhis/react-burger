@@ -17,3 +17,15 @@ top: 128px;
 .tab_panel{
     display: flex;
 }
+.fist_category{
+    width: 100%;
+    height: 50%;
+}
+.second_category{
+    width: 100%;
+    height: 85%;
+}
+.third_category{
+    width: 100%;
+    height: 100%;
+}

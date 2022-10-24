@@ -2,7 +2,8 @@
 box-sizing: border-box;
 position: relative;
 width: 633px;
- top: 128px
+ top: 128px;
+ opacity :1;
 
 }
 .AnotherScroller{

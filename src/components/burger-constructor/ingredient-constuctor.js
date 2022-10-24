@@ -1,11 +1,13 @@
-import { ConstructorContext } from '../../utils/constructor-context';
-import { useContext } from 'react';
-export const IngredientConstructor = () => {
-    const ingredient = useContext(ConstructorContext);
+import PropTypes from 'prop-types';
+import { useEffect } from 'react';
+
+export const getIngredientsForConstructor = (props) => {
+
     const burgerBun = []
     const otherIngredint = []
 
-    ingredient.map(element => {
+
+    props.forEach(element => {
         if (element.type == 'bun') {
 
             burgerBun.shift()
@@ -14,5 +16,9 @@ export const IngredientConstructor = () => {
             otherIngredint.push(element)
         }
     })
+
     return ([...burgerBun, ...otherIngredint])
 }
+getIngredientsForConstructor.propTypes = {
+    data: PropTypes.object,
+};
