@@ -1,10 +1,30 @@
 import React from 'react'
 import PagesStyle from './pages.module.css'
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useHistory } from 'react-router-dom'
+import { url } from '../app/app'
+import { checkResponce } from '../../utils/checkResponse'
 export function ForgotPasswordPage() {
     const [email, setEmail] = React.useState('')
-    const [password, setPassword] = React.useState('')
+    const history = useHistory()
+    const functinoOnClick = (email) => {
+        console.log(email)
+        const data = { email: email }
+        fetch(url + `/password-reset`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data)
+        }).then(checkResponce).then(data => {
+            console.log(data)
+            alert("Код проверки отправлен на почту")
+            history.push("/reset-password")
+        }).catch(err => {
+            console.log(err)
+        })
+
+    }
     return (
         <div className={`${PagesStyle.MainDiv} pb-6`}>
             <p className='text text_type_main-medium pb-6'>Восстановление пароля</p>
@@ -21,7 +41,7 @@ export function ForgotPasswordPage() {
 
                 />
             </div>
-            <Button type="primary" size="medium">
+            <Button type="primary" size="medium" onClick={(() => functinoOnClick(email))}>
                 Восстановить
             </Button>
             <div className='pt-15'>
