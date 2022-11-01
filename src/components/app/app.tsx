@@ -1,23 +1,38 @@
-import AppStyle from './app.module.css';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { MainPage } from '../pages/main-page';
 import AppHeader from '../app-header/app-header';
-import BurgerIngredients from '../burger-ingredients/burger-ingredients';
-import BurgerConstuctor from '../burger-constructor/burger-constructor';
-
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
-
+import { LoginPage } from '../pages/login-page';
+import { RegistrationPage } from '../pages/registration-page';
+import { ForgotPasswordPage } from '../pages/forgot-password-page';
+import { ResetPasswordPage } from '../pages/reset-password-page';
+import React from 'react';
 export const url = 'https://norma.nomoreparties.space/api';
 
 export default function App() {
   return (
-    <div className="App">
-      <AppHeader />
-      <div className={`${AppStyle.MainBody} `}>
-        <DndProvider backend={HTML5Backend}>
-          <BurgerIngredients />
-          <BurgerConstuctor />
-        </DndProvider>
-      </div>
-    </div>
+    <Router>
+      <React.StrictMode>
+        <div className="App">
+          <AppHeader />
+          <Switch>
+            <Route path="/" exact={true}>
+              <MainPage />
+            </Route>
+            <Route path="/login" exact={true}>
+              <LoginPage />
+            </Route>
+            <Route path="/register" exact={true}>
+              <RegistrationPage />
+            </Route>
+            <Route path="/forgot-password" exact={true}>
+              <ForgotPasswordPage />
+            </Route>
+            <Route path="/reset-password" exact={true}>
+              <ResetPasswordPage />
+            </Route>
+          </Switch>
+        </div>
+      </React.StrictMode>
+    </Router>
   );
 }
