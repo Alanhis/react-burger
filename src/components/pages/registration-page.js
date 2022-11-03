@@ -1,34 +1,24 @@
 import React from 'react'
 import PagesStyle from './pages.module.css'
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components'
-import { Link, useHistory } from 'react-router-dom'
-import { url } from '../app/app'
-import { checkResponce } from '../../utils/checkResponse'
+import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { registerFetch } from '../../services/actions/auth';
 export function RegistrationPage() {
+    const dispatch = useDispatch()
     const history = useHistory()
+    const data = useSelector(store => store)
     const [name, setName] = React.useState('')
     const [email, setEmail] = React.useState('test@gmail.com')
     const [password, setPassword] = React.useState('')
+
     const functinoOnClick = (name, email, password) => {
         if (name && email && password) {
-            const dataForm = {
-                email: email,
-                password: password,
-                name: name
+            dispatch(registerFetch(email, password, name))
+            if (!data.auth.isRequiredError) {
+                history.push('/login')
             }
-            fetch(url + `/auth/register`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(dataForm)
-            }).then(checkResponce).then(data => {
-                console.log(data)
-                alert("Регистрация прошла успешно")
-                history.push("/login")
-            }).catch(err => {
-                console.log(err)
-            })
         } else {
             alert("Вы не заполнили все данные, попробуйте еще раз")
         }

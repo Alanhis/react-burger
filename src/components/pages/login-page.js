@@ -2,9 +2,15 @@ import React from 'react'
 import PagesStyle from './pages.module.css'
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { NavLink } from 'react-router-dom'
+import { fetchLogin } from '../../services/actions/auth'
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 export function LoginPage() {
     const [email, setEmail] = React.useState('test@gmail.com')
     const [password, setPassword] = React.useState('')
+    const dispatch = useDispatch()
+    const history = useHistory()
+    const data = useSelector(store => store)
     return (
         <div className={`${PagesStyle.MainDiv} pb-6`}>
             <p className='text text_type_main-medium pb-6'>Вход</p>
@@ -31,7 +37,13 @@ export function LoginPage() {
 
                 />
             </div>
-            <Button type="primary" size="medium">
+            <Button type="primary" size="medium" onClick={() => {
+                dispatch(fetchLogin(email, password))
+                if (!data.auth.isRequiredError) {
+                    console.log(data)
+                    history.push('/')
+                }
+            }}>
                 Войти
             </Button>
             <div className='pt-15'>
