@@ -8,7 +8,7 @@ export function ForgotPasswordPage() {
     const [email, setEmail] = React.useState('')
     const history = useHistory()
     const functinoOnClick = (email) => {
-        console.log(email)
+
         const data = { email: email }
         fetch(url + `/password-reset`, {
             method: "POST",
@@ -17,7 +17,7 @@ export function ForgotPasswordPage() {
             },
             body: JSON.stringify(data)
         }).then(checkResponce).then(data => {
-            console.log(data)
+
             alert("Код проверки отправлен на почту")
             history.push("/reset-password")
         }).catch(err => {

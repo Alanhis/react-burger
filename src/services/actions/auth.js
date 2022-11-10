@@ -1,7 +1,6 @@
 import { checkResponce } from "../../utils/checkResponse";
 import { url } from "../../components/app/app"
-import { useHistory } from "react-router-dom";
-import { Redirect } from "react-router-dom";
+import { getUserData } from "./user";
 export const LOGIN_REGUEST = 'LOGIN_REGUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_ERROR = 'LOGIN_ERROR';
@@ -18,7 +17,7 @@ export const TOKEN_REGUEST = 'TOKEN_REGUEST';
 export const TOKEN_SUCCESS = 'TOKEN_SUCCESS';
 export const TOKEN_ERROR = 'TOKEN_ERROR';
 
-export const fetchLogin = (email, password) => (dispatch) => {
+export const fetchLogin = (email, password, history) => (dispatch) => {
 
     dispatch({
         type: LOGIN_REGUEST
@@ -27,7 +26,7 @@ export const fetchLogin = (email, password) => (dispatch) => {
         email: email,
         password: password
     }
-    console.log(usedData)
+
     fetch(url + '/auth/login', {
         method: "POST",
         headers: {
@@ -35,12 +34,13 @@ export const fetchLogin = (email, password) => (dispatch) => {
         },
         body: JSON.stringify(usedData)
     }).then(checkResponce).then(data => {
-        console.log(data.accessToken)
+
         localStorage.setItem('refreshToken', data.refreshToken)
         dispatch({
             type: LOGIN_SUCCESS,
             payload: data.accessToken
         });
+        history.push('/')
     }).catch(err => {
         console.log(err)
         dispatch({
@@ -49,7 +49,7 @@ export const fetchLogin = (email, password) => (dispatch) => {
     })
 }
 
-export const updateToken = () => (dispatch) => {
+export const updateToken = (setName, setEmail) => (dispatch) => {
     dispatch({
         type: TOKEN_REGUEST
     })
@@ -62,12 +62,13 @@ export const updateToken = () => (dispatch) => {
             token: localStorage.getItem('refreshToken')
         })
     }).then(checkResponce).then(data => {
-        console.log(data.accessToken)
+        console.log(data)
 
         dispatch({
             type: TOKEN_SUCCESS,
             payload: data.accessToken
         });
+        dispatch(getUserData(data.accessToken, setName, setEmail))
     }).catch(err => {
         console.log(err)
         dispatch({
@@ -76,8 +77,7 @@ export const updateToken = () => (dispatch) => {
     })
 }
 
-export const registerFetch = (email, password, name) => (dispatch) => {
-    const history = useHistory()
+export const registerFetch = (email, password, name, history) => (dispatch) => {
     dispatch({
         type: REGISTER_REGUEST
     })
@@ -99,7 +99,7 @@ export const registerFetch = (email, password, name) => (dispatch) => {
             payload: data.accessToken
         });
         alert("Регистрация прошла успешно")
-
+        history.push('/login')
     }).catch(err => {
         console.log(err)
         dispatch({
@@ -108,7 +108,7 @@ export const registerFetch = (email, password, name) => (dispatch) => {
     })
 }
 
-export const logOutFetch = () => (dispatch) => {
+export const logOutFetch = (history) => (dispatch) => {
 
     dispatch({
         type: LOGOUT_REGUEST
@@ -122,16 +122,19 @@ export const logOutFetch = () => (dispatch) => {
             token: localStorage.getItem('refreshToken')
         })
     }).then(checkResponce).then(data => {
-        console.log(data)
 
         dispatch({
             type: LOGOUT_SUCCESS,
         });
         localStorage.removeItem('refreshToken');
+        history.push('/')
+
     }).catch(err => {
         console.log(err)
         dispatch({
             type: LOGOUT_ERROR,
         });
+
     })
+
 }

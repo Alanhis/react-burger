@@ -15,10 +15,8 @@ export function RegistrationPage() {
 
     const functinoOnClick = (name, email, password) => {
         if (name && email && password) {
-            dispatch(registerFetch(email, password, name))
-            if (!data.auth.isRequiredError) {
-                history.push('/login')
-            }
+            dispatch(registerFetch(email, password, name, history))
+
         } else {
             alert("Вы не заполнили все данные, попробуйте еще раз")
         }

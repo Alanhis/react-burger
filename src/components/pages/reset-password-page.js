@@ -21,7 +21,7 @@ export function ResetPasswordPage() {
             },
             body: JSON.stringify(data)
         }).then(checkResponce).then(data => {
-            console.log(data)
+
             alert("Пароль обновлен")
             history.push("/")
         }).catch(err => {

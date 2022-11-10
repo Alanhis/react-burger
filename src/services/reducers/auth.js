@@ -19,7 +19,7 @@ export const authReducer = (state = initialState, action) => {
             }
         }
         case LOGIN_SUCCESS: {
-            console.log(action)
+
             return {
                 ...state,
                 isRequired: false,
@@ -42,7 +42,7 @@ export const authReducer = (state = initialState, action) => {
             }
         }
         case TOKEN_SUCCESS: {
-            console.log(action)
+
             return {
                 ...state,
                 isRequired: false,
@@ -64,7 +64,7 @@ export const authReducer = (state = initialState, action) => {
             }
         }
         case REGISTER_SUCCESS: {
-            console.log(action)
+
             return {
                 ...state,
                 isRequired: false,
@@ -86,12 +86,12 @@ export const authReducer = (state = initialState, action) => {
             }
         }
         case LOGOUT_SUCCESS: {
-            console.log(action)
+
             return {
                 ...state,
                 isRequired: false,
                 isRequiredError: false,
-
+                authorization: ''
             }
         }
         case LOGOUT_ERROR: {

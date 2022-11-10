@@ -38,11 +38,8 @@ export function LoginPage() {
                 />
             </div>
             <Button type="primary" size="medium" onClick={() => {
-                dispatch(fetchLogin(email, password))
-                if (!data.auth.isRequiredError) {
-                    console.log(data)
-                    history.push('/')
-                }
+                dispatch(fetchLogin(email, password, history))
+
             }}>
                 Войти
             </Button>
