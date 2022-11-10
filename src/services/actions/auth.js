@@ -62,7 +62,7 @@ export const updateToken = (setName, setEmail) => (dispatch) => {
             token: localStorage.getItem('refreshToken')
         })
     }).then(checkResponce).then(data => {
-        console.log(data)
+
 
         dispatch({
             type: TOKEN_SUCCESS,
