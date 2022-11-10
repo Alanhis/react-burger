@@ -30,8 +30,8 @@ export const getUserData = (authorization, setName, setEmail) => (dispatch) => {
         console.log(err)
         if (err.message === 'jwt expired') {
 
-            dispatch(updateToken())
-            dispatch(getUserData())
+            dispatch(updateToken(setName, setEmail))
+
         } else {
             dispatch({
                 type: USER_DATA_ERROR,
