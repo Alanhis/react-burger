@@ -7,7 +7,7 @@ import { ForgotPasswordPage } from '../pages/forgot-password-page';
 import { ResetPasswordPage } from '../pages/reset-password-page';
 import { ProfilePage } from '../pages/profile-page';
 import React from 'react';
-import { ProtectedRoute } from '../protected-route/protected-route';
+import { ProtectedRoute } from '../component-routes/protected-route';
 export const url = 'https://norma.nomoreparties.space/api';
 
 export default function App() {
