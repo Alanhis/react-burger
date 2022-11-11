@@ -2,33 +2,13 @@ import React from 'react'
 import PagesStyle from './pages.module.css'
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { NavLink, useHistory } from 'react-router-dom'
-import { url } from '../app/app'
-import { checkResponce } from '../../utils/checkResponse'
+import { useDispatch } from 'react-redux'
+import { resetPasswordLogic } from '../../services/actions/auth'
 export function ResetPasswordPage() {
     const [code, setcode] = React.useState('')
     const [password, setPassword] = React.useState('')
     const history = useHistory()
-    const functinoOnClick = (code, password) => {
-
-        const data = {
-            password: password,
-            token: code
-        }
-        fetch(url + `/password-reset/reset`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data)
-        }).then(checkResponce).then(data => {
-
-            alert("Пароль обновлен")
-            history.push("/")
-        }).catch(err => {
-            console.log(err)
-        })
-
-    }
+    const dispatch = useDispatch()
     return (
         <div className={`${PagesStyle.MainDiv} pb-6`}>
             <p className='text text_type_main-medium pb-6'>Восстановление пароля</p>
@@ -54,7 +34,7 @@ export function ResetPasswordPage() {
 
                 />
             </div>
-            <Button type="primary" size="medium" onClick={() => functinoOnClick(code, password)}>
+            <Button type="primary" size="medium" onClick={() => dispatch(resetPasswordLogic(code, password, history))}>
                 Сохранить
             </Button>
             <div className='pt-15'>

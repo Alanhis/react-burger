@@ -8,6 +8,7 @@ import { ResetPasswordPage } from '../pages/reset-password-page';
 import { ProfilePage } from '../pages/profile-page';
 import React from 'react';
 import { ProtectedRoute } from '../component-routes/protected-route';
+import { UnauthorizationRoute } from '../component-routes/unauthorization-route';
 export const url = 'https://norma.nomoreparties.space/api';
 
 export default function App() {
@@ -20,18 +21,18 @@ export default function App() {
             <Route path="/" exact={true}>
               <MainPage />
             </Route>
-            <Route path="/login" exact={true}>
+            <UnauthorizationRoute path="/login" exact={true}>
               <LoginPage />
-            </Route>
-            <Route path="/register" exact={true}>
+            </UnauthorizationRoute>
+            <UnauthorizationRoute path="/register" exact={true}>
               <RegistrationPage />
-            </Route>
-            <Route path="/forgot-password" exact={true}>
+            </UnauthorizationRoute>
+            <UnauthorizationRoute path="/forgot-password" exact={true}>
               <ForgotPasswordPage />
-            </Route>
-            <Route path="/reset-password" exact={true}>
+            </UnauthorizationRoute>
+            <UnauthorizationRoute path="/reset-password" exact={true}>
               <ResetPasswordPage />
-            </Route>
+            </UnauthorizationRoute>
             <ProtectedRoute path="/profile">
               <ProfilePage />
             </ProtectedRoute>

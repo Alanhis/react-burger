@@ -17,6 +17,13 @@ export const TOKEN_REGUEST = 'TOKEN_REGUEST';
 export const TOKEN_SUCCESS = 'TOKEN_SUCCESS';
 export const TOKEN_ERROR = 'TOKEN_ERROR';
 
+export const FORGOT_PASSWORD_REQUEST = 'FORGOT_PASSWORD_REQUEST';
+export const FORGOT_PASSWORD_SUCCESS = 'FORGOT_PASSWORD_SUCCESS';
+export const FORGOT_PASSWORD_ERROR = 'FORGOT_PASSWORD_ERROR';
+
+export const RESET_PASSWORD_REQUEST = 'RESET_PASSWORD_REQUEST';
+export const RESET_PASSWORD_SUCCESS = 'RESET_PASSWORD_SUCCESS';
+export const RESET_PASSWORD_ERROR = 'RESET_PASSWORD_ERROR';
 export const fetchLogin = (email, password, history) => (dispatch) => {
 
     dispatch({
@@ -135,6 +142,64 @@ export const logOutFetch = (history) => (dispatch) => {
             type: LOGOUT_ERROR,
         });
 
+    })
+
+}
+
+export const forgotPasswordLogic = (history, email) => (dispatch) => {
+    if (email !== '') {
+        dispatch({
+            type: FORGOT_PASSWORD_REQUEST
+        })
+        const data = { email: email }
+        fetch(url + `/password-reset`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data)
+        }).then(checkResponce).then(data => {
+            dispatch({
+                type: FORGOT_PASSWORD_SUCCESS
+            })
+            alert("Код проверки отправлен на почту")
+            history.push("/reset-password")
+        }).catch(err => {
+            dispatch({
+                type: FORGOT_PASSWORD_ERROR
+            })
+            console.log(err)
+        })
+    } else {
+        alert('Введите данные в почту')
+    }
+}
+
+export const resetPasswordLogic = (code, password, history) => (dispatch) => {
+    dispatch({
+        type: RESET_PASSWORD_REQUEST
+    })
+    const data = {
+        password: password,
+        token: code
+    }
+    fetch(url + `/password-reset/reset`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data)
+    }).then(checkResponce).then(data => {
+        dispatch({
+            type: RESET_PASSWORD_SUCCESS
+        })
+        alert("Пароль обновлен")
+        history.push("/")
+    }).catch(err => {
+        console.log(err)
+        dispatch({
+            type: RESET_PASSWORD_ERROR
+        })
     })
 
 }
