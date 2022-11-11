@@ -7,6 +7,7 @@ import { ForgotPasswordPage } from '../pages/forgot-password-page';
 import { ResetPasswordPage } from '../pages/reset-password-page';
 import { ProfilePage } from '../pages/profile-page';
 import React from 'react';
+import { ProtectedRoute } from '../protected-route/protected-route';
 export const url = 'https://norma.nomoreparties.space/api';
 
 export default function App() {
@@ -31,9 +32,9 @@ export default function App() {
             <Route path="/reset-password" exact={true}>
               <ResetPasswordPage />
             </Route>
-            <Route path="/profile" exact={true}>
+            <ProtectedRoute path="/profile">
               <ProfilePage />
-            </Route>
+            </ProtectedRoute>
           </Switch>
         </div>
       </React.StrictMode>
