@@ -49,6 +49,7 @@ export default function BurgerConstuctorList(props) {
 	};
 	const bunAmount = data.conductor.orderDetails.filter(item => item.type === 'bun').length == 1;
 	const finalPrice = props.data.reduce((previousValue, currentValue) => previousValue + currentValue.price, 0) + props.data[0].price;
+	console.log(props.data)
 	return (<>
 		{props.data[0].type === 'bun' && <div
 			className={`${BurgerConstuctorStyle.IngredientField}  ml-15 mr-2`}
@@ -97,7 +98,7 @@ export default function BurgerConstuctorList(props) {
 			<p className="text text_type_digits-medium mr-2">{finalPrice}</p>
 			<CurrencyIcon />
 			<div className=" ml-10">
-				{bunAmount &&
+				{bunAmount && data.auth.authorization &&
 					<Button
 						htmlType='button'
 						type="primary"

@@ -1,4 +1,10 @@
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  useLocation,
+  useHistory,
+} from 'react-router-dom';
 import { MainPage } from '../pages/main-page';
 import AppHeader from '../app-header/app-header';
 import { LoginPage } from '../pages/login-page';
@@ -9,15 +15,27 @@ import { ProfilePage } from '../pages/profile-page';
 import React from 'react';
 import { ProtectedRoute } from '../component-routes/protected-route';
 import { UnauthorizationRoute } from '../component-routes/unauthorization-route';
+import { Location } from 'history';
+import IngredientDetails from '../ingredient-details/ingredient-details';
+import Modal from '../modal/modal';
 export const url = 'https://norma.nomoreparties.space/api';
 
 export default function App() {
-  return (
-    <Router>
+  const ModalSwitch = () => {
+    const location = useLocation<{
+      background?: Location<{} | null | undefined>;
+    }>();
+    let background = location.state && location.state.background;
+    console.log(background);
+    const history = useHistory();
+    const handleModalClose = () => {
+      history.goBack(); // для react-router 5
+    };
+    return (
       <React.StrictMode>
         <div className="App">
           <AppHeader />
-          <Switch>
+          <Switch location={background || location}>
             <Route path="/" exact={true}>
               <MainPage />
             </Route>
@@ -36,9 +54,27 @@ export default function App() {
             <ProtectedRoute path="/profile">
               <ProfilePage />
             </ProtectedRoute>
+            <Route path="/ingredients/:ingredientId" exact={true}>
+              <IngredientDetails />
+            </Route>
           </Switch>
+          {background && (
+            <Route
+              path="/ingredients/:ingredientId"
+              children={
+                <Modal onClose={handleModalClose}>
+                  <IngredientDetails />
+                </Modal>
+              }
+            />
+          )}
         </div>
       </React.StrictMode>
+    );
+  };
+  return (
+    <Router>
+      <ModalSwitch />
     </Router>
   );
 }

@@ -10,6 +10,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { CLEAN_SELECTED_INGREDIENT, SET_SELECTED_INGREDIENT } from '../../services/actions/modal-ingredient';
 import { useDrag } from 'react-dnd'
 import { ingredientType } from '../../utils/types';
+import { NavLink, useLocation } from 'react-router-dom';
+
 export default function IngredientCard(props) {
 	let countIngredient = 0;
 	const data = useSelector(store => store)
@@ -21,7 +23,7 @@ export default function IngredientCard(props) {
 	}
 
 
-
+	const location = useLocation();
 	const [isOpen, setIsOpen] = React.useState(false);
 	const usedData = props.data;
 	const [{ opacity }, dragRef] = useDrag({
@@ -31,32 +33,33 @@ export default function IngredientCard(props) {
 			opacity: monitor.isDragging() ? 0.5 : 1
 		})
 	})
-	const handleOpenModal = () => {
+	// const handleOpenModal = () => {
 
-		dispatch({ type: SET_SELECTED_INGREDIENT, usedData })
-	};
+	// 	dispatch({ type: SET_SELECTED_INGREDIENT, usedData })
+	// };
 
-	const handleCloseModal = () => {
+	// const handleCloseModal = () => {
 
-		dispatch({ type: CLEAN_SELECTED_INGREDIENT })
-	};
-	return (<>
-		<div ref={dragRef} onClick={handleOpenModal} style={{ opacity }} className={`${IngredntCardStyle.foodCard} `} >
+	// 	dispatch({ type: CLEAN_SELECTED_INGREDIENT })
+	// };
+	return (
+		<div ref={dragRef} style={{ opacity }} className={`${IngredntCardStyle.foodCard} `} >
 			<div className={`${IngredntCardStyle.CounterDiv}`}>
 				{countIngredient > 0 && <Counter count={countIngredient} extraClass={`${IngredntCardStyle.foodCounter}`} />}
 			</div>
-			<img src={props.data.image} className={`${IngredntCardStyle.foodImage}`} />
+			<div className={`${IngredntCardStyle.foodImage}`}>
+				<NavLink to={{ pathname: `/ingredients/${props.data._id}`, state: { background: location } }} >
+					<img src={props.data.image} />
+				</NavLink>
+			</div>
 			<div className={`${IngredntCardStyle.foodPrice}`} >
 				<p className="text text_type_main-default mr-2" > {props.data.price}  </p>
 				<CurrencyIcon type="primary" />
 			</div> <p className={`text text_type_main-default ${IngredntCardStyle.foodText}`} > {props.data.name}
 			</p>
 		</div>
-		{data.modalingredient.selectredIngredient != null && (<div><Modal title={"Детали ингредиента"} onClose={handleCloseModal} >
-			<IngredientDetails data={data.modalingredient.selectredIngredient} />
-		</Modal>
-		</div>)}
 
-	</>
+
+
 	);
 }
