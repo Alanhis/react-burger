@@ -16,7 +16,9 @@ function AppHeader() {
 					type="primary"
 					size="small"
 					className={`${HeaderinkStyles.button} pb-4 pt-4 mb-4 mr-2`}
+					onClick={() => { history.push("/") }}
 					htmlType='button'>
+
 					<BurgerIcon type="primary" className="pl-5" />{' '}
 					<p className={`text text_type_main-default pl-2`}>Констуктор</p>
 				</Button>

@@ -7,7 +7,7 @@ export function ProtectedRoute({ children, ...rest }) {
         <Route
             {...rest}
             render={() => (
-                localStorage.getItem('refreshToken') ? (children) : (<Redirect to='/login' />)
+                localStorage.getItem('accessToken') ? (children) : (<Redirect to='/login' />)
             )
             }
         />
