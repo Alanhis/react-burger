@@ -40,7 +40,7 @@ export function LoginPage() {
             <Button type="primary" size="medium" onClick={() => {
                 dispatch(fetchLogin(email, password, history))
 
-            }}>
+            }} >
                 Войти
             </Button>
             <div className='pt-15'>

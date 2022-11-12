@@ -12,7 +12,7 @@
     color: var(--text-inactive-color);
     text-decoration: none;
 }
-.buttomText:focus{
+.activebuttomText{
     color:var(--text-active-color)
 }
 .profileDiv{

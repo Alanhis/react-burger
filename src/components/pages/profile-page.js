@@ -26,11 +26,19 @@ export function ProfilePage() {
     return (
         <div className={`${PagesStyle.profileDiv} `}>
             <div className={`${PagesStyle.Navigation} pb-6`}>
-                <NavLink className={`${PagesStyle.buttomText} text text_type_main-default pb-6`} to='/profile'>Профиль</NavLink>
-                <NavLink className={`${PagesStyle.buttomText} text text_type_main-default pb-6`} to='/profile'>История заказов</NavLink>
-                <button onClick={async () => {
-                    dispatch(logOutFetch(history))
-                }}>Выход </button>
+                <NavLink className={`${PagesStyle.buttomText} text text_type_main-default pb-6`}
+                    activeClassName={`${PagesStyle.activebuttomText} `}
+                    to='/profile'
+                    exact>Профиль</NavLink>
+                <NavLink className={`${PagesStyle.buttomText} text text_type_main-default pb-6`}
+                    activeClassName={`${PagesStyle.activebuttomText} `}
+                    to='/profile/order'
+                    exact>История заказов</NavLink>
+                <NavLink className={`${PagesStyle.buttomText} text text_type_main-default pb-6`}
+                    activeClassName={`${PagesStyle.activebuttomText} `}
+                    to='/' onClick={async () => {
+                        dispatch(logOutFetch())
+                    }} exact>Выход</NavLink>
                 <p className='text text_type_main-small text_color_inactive'>В этом разделе вы можете изменить свои персональные данные</p>
             </div>
             <div className={`${PagesStyle.ButtonDiv} ml-15`}>

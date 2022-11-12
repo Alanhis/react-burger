@@ -12,7 +12,7 @@ export default function IngredientDetails() {
 		dispatch(fetchData())
 	}, [])
 	const data = useSelector(data => data).ingredients.ingredient.filter(data => data._id === ingredientId)
-	console.log(data)
+
 	return (
 		<div className={`${IngredientDetailStyle.IngredientPanel}`}>
 			{data.length > 0 && (<><img src={data[0].image_large} /><p className="text text_type_main-medium mt-4 mb-8">{data[0].name}</p><div className={`${IngredientDetailStyle.IngredientDetail} mb-15`}>

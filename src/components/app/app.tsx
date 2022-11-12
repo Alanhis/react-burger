@@ -26,7 +26,7 @@ export default function App() {
       background?: Location<{} | null | undefined>;
     }>();
     let background = location.state && location.state.background;
-    console.log(background);
+
     const history = useHistory();
     const handleModalClose = () => {
       history.goBack(); // для react-router 5

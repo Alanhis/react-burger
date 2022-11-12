@@ -115,7 +115,7 @@ export const registerFetch = (email, password, name, history) => (dispatch) => {
     })
 }
 
-export const logOutFetch = (history) => (dispatch) => {
+export const logOutFetch = () => (dispatch) => {
 
     dispatch({
         type: LOGOUT_REGUEST
@@ -134,7 +134,7 @@ export const logOutFetch = (history) => (dispatch) => {
             type: LOGOUT_SUCCESS,
         });
         localStorage.removeItem('refreshToken');
-        history.push('/')
+
 
     }).catch(err => {
         console.log(err)
