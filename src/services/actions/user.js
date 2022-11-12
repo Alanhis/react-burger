@@ -41,7 +41,7 @@ export const getUserData = (authorization, setName, setEmail) => (dispatch) => {
 
 }
 
-export const updateUserData = (authorization, email, name, history) => (dispatch) => {
+export const updateUserData = (authorization, email, name, setName, setEmail, history) => (dispatch) => {
     dispatch({
         type: UPDATE_DATA_REGUEST
     })
@@ -65,11 +65,15 @@ export const updateUserData = (authorization, email, name, history) => (dispatch
         history.push('/')
     }).catch(err => {
         console.log(err)
+        if (err.message === 'jwt expired') {
 
-        dispatch({
-            type: UPDATE_DATA_ERROR,
-        });
+            dispatch(updateToken(setName, setEmail))
 
+        } else {
+            dispatch({
+                type: UPDATE_DATA_ERROR,
+            });
+        }
 
 
     })

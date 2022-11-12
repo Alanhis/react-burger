@@ -18,8 +18,8 @@ import { UnauthorizationRoute } from '../component-routes/unauthorization-route'
 import { Location } from 'history';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import Modal from '../modal/modal';
+import PageStyle from '../pages/pages.module.css';
 export const url = 'https://norma.nomoreparties.space/api';
-
 export default function App() {
   const ModalSwitch = () => {
     const location = useLocation<{
@@ -55,7 +55,12 @@ export default function App() {
               <ProfilePage />
             </ProtectedRoute>
             <Route path="/ingredients/:ingredientId" exact={true}>
-              <IngredientDetails />
+              <div className={`${PageStyle.ModalPage}`}>
+                <p className="text text_type_main-medium pb-6">
+                  Детали ингредиента
+                </p>
+                <IngredientDetails />
+              </div>
             </Route>
           </Switch>
           {background && (

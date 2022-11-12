@@ -98,7 +98,7 @@ export function ProfilePage() {
                         setEmail(data.user.email);
                         setPassword('Password')
                     }}>Отмена</Button>
-                    <Button type="primary" size="medium" onClick={() => { dispatch(updateUserData(data.auth.authorization, email, name, history)) }}>Сохранить</Button>
+                    <Button type="primary" size="medium" onClick={() => { dispatch(updateUserData(data.auth.authorization, email, name, setName, setEmail, history)) }}>Сохранить</Button>
                 </div>)}
             </div>
         </div>
