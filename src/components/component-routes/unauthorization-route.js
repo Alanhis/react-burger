@@ -8,7 +8,7 @@ export function UnauthorizationRoute({ children, ...rest }) {
         <Route
             {...rest}
             render={() => (
-                !data.auth.autorization ?
+                !localStorage.getItem('refreshToken') ?
                     (
                         (location === '/reset-password'
                             ? (data.auth.isPasswordReguest ? (children) : (<Redirect to='/' />))

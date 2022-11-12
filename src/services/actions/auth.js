@@ -43,9 +43,9 @@ export const fetchLogin = (email, password, history) => (dispatch) => {
     }).then(checkResponce).then(data => {
 
         localStorage.setItem('refreshToken', data.refreshToken)
+        localStorage.setItem('accessToken', data.accessToken)
         dispatch({
             type: LOGIN_SUCCESS,
-            payload: data.accessToken
         });
         history.push('/')
     }).catch(err => {
@@ -73,8 +73,8 @@ export const updateToken = (setName, setEmail) => (dispatch) => {
 
         dispatch({
             type: TOKEN_SUCCESS,
-            payload: data.accessToken
         });
+        localStorage.setItem('accessToken', data.accessToken)
         dispatch(getUserData(data.accessToken, setName, setEmail))
     }).catch(err => {
         console.log(err)
@@ -101,9 +101,9 @@ export const registerFetch = (email, password, name, history) => (dispatch) => {
         body: JSON.stringify(dataForm)
     }).then(checkResponce).then(data => {
         localStorage.setItem('refreshToken', data.refreshToken)
+        localStorage.setItem('accessToken', data.accessToken)
         dispatch({
             type: REGISTER_SUCCESS,
-            payload: data.accessToken
         });
         alert("Регистрация прошла успешно")
         history.push('/login')
@@ -134,7 +134,7 @@ export const logOutFetch = () => (dispatch) => {
             type: LOGOUT_SUCCESS,
         });
         localStorage.removeItem('refreshToken');
-
+        localStorage.removeItem('accessToken');
 
     }).catch(err => {
         console.log(err)

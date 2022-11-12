@@ -10,7 +10,6 @@ import {
 const initialState = {
     isRequired: false,
     isRequiredError: false,
-    authorization: '',
     isPasswordReguest: false
 }
 export const authReducer = (state = initialState, action) => {
@@ -27,7 +26,6 @@ export const authReducer = (state = initialState, action) => {
                 ...state,
                 isRequired: false,
                 isRequiredError: false,
-                authorization: action.payload
             }
         }
         case LOGIN_ERROR: {
@@ -50,7 +48,6 @@ export const authReducer = (state = initialState, action) => {
                 ...state,
                 isRequired: false,
                 isRequiredError: false,
-                authorization: action.payload
             }
         }
         case TOKEN_ERROR: {
@@ -72,7 +69,6 @@ export const authReducer = (state = initialState, action) => {
                 ...state,
                 isRequired: false,
                 isRequiredError: false,
-                authorization: action.payload
             }
         }
         case REGISTER_ERROR: {
@@ -94,7 +90,6 @@ export const authReducer = (state = initialState, action) => {
                 ...state,
                 isRequired: false,
                 isRequiredError: false,
-                authorization: ''
             }
         }
         case LOGOUT_ERROR: {

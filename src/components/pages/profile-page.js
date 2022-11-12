@@ -20,7 +20,7 @@ export function ProfilePage() {
     const [password, setPassword] = React.useState('Password')
     const [passwordType, setPassowrdType] = React.useState('password')
     useEffect(() => {
-        dispatch(getUserData(data.auth.authorization, setName, setEmail))
+        dispatch(getUserData(setName, setEmail))
 
     }, [])
     return (
@@ -98,7 +98,7 @@ export function ProfilePage() {
                         setEmail(data.user.email);
                         setPassword('Password')
                     }}>Отмена</Button>
-                    <Button type="primary" size="medium" onClick={() => { dispatch(updateUserData(data.auth.authorization, email, name, setName, setEmail, history)) }}>Сохранить</Button>
+                    <Button type="primary" size="medium" onClick={() => { dispatch(updateUserData(email, name, setName, setEmail, history)) }}>Сохранить</Button>
                 </div>)}
             </div>
         </div>

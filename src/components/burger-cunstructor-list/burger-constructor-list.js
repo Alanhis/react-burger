@@ -98,7 +98,7 @@ export default function BurgerConstuctorList(props) {
 			<p className="text text_type_digits-medium mr-2">{finalPrice}</p>
 			<CurrencyIcon />
 			<div className=" ml-10">
-				{bunAmount && data.auth.authorization &&
+				{bunAmount && localStorage.getItem('accessToken') &&
 					<Button
 						htmlType='button'
 						type="primary"
