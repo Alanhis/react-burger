@@ -1,0 +1,42 @@
+.MainDiv{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    display: flex;
+    transform: translate(-50%, -50%);
+    flex-direction: column;
+    align-items: center;
+}
+.buttomText {
+    display: flex;
+    color: var(--text-inactive-color);
+    text-decoration: none;
+}
+.activebuttomText{
+    color:var(--text-active-color)
+}
+.profileDiv{
+    display: flex;
+    position: absolute;
+    left: 10%;
+    top: 160px;
+}
+.Active{
+    display: flex;
+    color:white
+}
+.Navigation{
+    width: 320px;
+}
+.ButtonDiv{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.ModalPage{
+    position: relative;
+    top: 230px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

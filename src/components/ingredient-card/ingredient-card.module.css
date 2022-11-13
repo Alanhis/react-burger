@@ -24,6 +24,8 @@
 }
 .foodImage{
     cursor: pointer;
+    display: flex;
+    justify-content: center;
 }
 .foodImage:hover{
     
