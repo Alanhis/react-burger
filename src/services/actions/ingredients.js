@@ -6,7 +6,7 @@ export const GET_DATA_FAILED = 'GET_DATA_FAILED'
 
 
 
-export const fetchData = () => (dispatch, getState) => {
+export const fetchData = () => (dispatch) => {
     const usedURL = url + '/ingredients'
     dispatch({
         type: GET_DATA_REQUEST
