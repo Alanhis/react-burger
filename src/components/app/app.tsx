@@ -67,7 +67,7 @@ export default function App() {
             <Route
               path="/ingredients/:ingredientId"
               children={
-                <Modal onClose={handleModalClose}>
+                <Modal title="" onClose={handleModalClose}>
                   <IngredientDetails />
                 </Modal>
               }

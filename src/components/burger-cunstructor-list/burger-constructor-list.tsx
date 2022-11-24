@@ -44,7 +44,7 @@ export default function BurgerConstuctorList(props: any) {
     ).length == 1;
   const finalPrice =
     props.data.reduce(
-      (previousValue: any, currentValue: { price: any }) =>
+      (previousValue: number, currentValue: { price: number }) =>
         previousValue + currentValue.price,
       0
     ) + props.data[0].price;
@@ -66,10 +66,26 @@ export default function BurgerConstuctorList(props: any) {
       <ul className={`${BurgerConstuctorStyle.AnotherScroller} custom-scroll`}>
         {props.data.map(
           (
-            element: { type: string; dragId: Key | null | undefined },
-            index: any
+            element: {
+              calories: number;
+              carbohydrates: number;
+              fat: number;
+              image: string;
+              image_large: string;
+              image_mobile: string;
+              name: string;
+              price: number;
+              proteins: number;
+              type: string;
+              __v: number;
+              _id: string;
+              dragId: string;
+              index: number;
+            },
+            index: number
           ) => {
             if (element.type !== 'bun') {
+              console.log(element.index);
               return (
                 <OrderedIngredient
                   key={element.dragId}
@@ -115,7 +131,7 @@ export default function BurgerConstuctorList(props: any) {
       <>
         {data.order.isOpenModal && (
           <>
-            <Modal onClose={handleCloseModal}>
+            <Modal title="" onClose={handleCloseModal}>
               <OrderDetails orderNumber={data.order.orderNumber} />
             </Modal>
           </>
