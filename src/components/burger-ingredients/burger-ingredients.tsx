@@ -2,10 +2,9 @@ import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import React, { useEffect } from 'react';
 import BurgerIngredientsStyles from './burger-ingredients.module.css';
 import Ingredients from '../ingredients/ingredients';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchData } from '../../services/actions/ingredients';
+import { useSelector } from 'react-redux';
 import { RootState } from '../../services/store';
-import { useAppDispatch } from '../../services/store';
+
 export default function BurgerIngredients() {
   const [current, setCurrent] = React.useState('one');
   const handleIntersectionObserver = () => {
@@ -30,7 +29,7 @@ export default function BurgerIngredients() {
     };
     targets.forEach(activeDiv);
   };
-  const dispatch = useAppDispatch();
+
   useEffect(() => {
     handleIntersectionObserver();
   }, []);

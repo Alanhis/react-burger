@@ -1,16 +1,14 @@
-import { Route, Redirect, useLocation } from 'react-router-dom';
+import { Route, Redirect, useLocation, RouteProps } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { ReactNode } from 'react';
 import { RootState } from '../../services/store';
-interface Props {
-  children?: ReactNode;
-  path: string;
-  exact?: boolean;
-}
-export function UnauthorizationRoute({ children, ...rest }: Props) {
+
+export function UnauthorizationRoute({
+  children,
+  ...rest
+}: RouteProps & { children?: React.ReactNode }) {
   const data = useSelector((store: RootState) => store);
   const location = useLocation().pathname;
-  console.log('unprotected');
+
   return (
     <Route
       {...rest}

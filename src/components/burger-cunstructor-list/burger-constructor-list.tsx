@@ -23,7 +23,6 @@ interface IingredientFromConstructor extends Iingredient {
 export default function BurgerConstuctorList(props: {
   data: IingredientFromConstructor[];
 }) {
-  console.log(props);
   const dispatch = useAppDispatch();
   const [finalPrice, setFinalPrice] = useState<number>();
   const data = useSelector((store: RootState) => store);
