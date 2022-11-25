@@ -50,8 +50,9 @@ export function ProfilePage() {
           className={`${PagesStyle.buttomText} text text_type_main-default pb-6`}
           activeClassName={`${PagesStyle.activebuttomText} `}
           to="/"
-          onClick={async () => {
-            dispatch(logOutFetch());
+          onClick={e => {
+            e.preventDefault();
+            dispatch(logOutFetch(history));
           }}
           exact
         >
@@ -63,12 +64,14 @@ export function ProfilePage() {
       </div>
       <div className={`${PagesStyle.ButtonDiv} ml-15`}>
         <form
-          onReset={() => {
+          onReset={e => {
+            e.preventDefault();
             setName(data.user.name);
             setEmail(data.user.email);
             setPassword('Password');
           }}
-          onSubmit={() => {
+          onSubmit={e => {
+            e.preventDefault();
             dispatch(updateUserData(email, name, setName, setEmail, history));
           }}
         >

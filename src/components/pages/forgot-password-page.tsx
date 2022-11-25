@@ -15,7 +15,12 @@ export function ForgotPasswordPage() {
   return (
     <div className={`${PagesStyle.MainDiv} pb-6`}>
       <p className="text text_type_main-medium pb-6">Восстановление пароля</p>
-      <form onSubmit={() => dispatch(forgotPasswordLogic(history, email))}>
+      <form
+        onSubmit={e => {
+          e.preventDefault();
+          dispatch(forgotPasswordLogic(history, email));
+        }}
+      >
         <div className="pt-6 pb-6">
           <Input
             type={'email'}

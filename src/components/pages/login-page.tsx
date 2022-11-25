@@ -16,7 +16,8 @@ export function LoginPage() {
   return (
     <div className={`${PagesStyle.MainDiv} pb-6`}>
       <form
-        onSubmit={() => {
+        onSubmit={e => {
+          e.preventDefault();
           dispatch(fetchLogin(email, password, history));
         }}
       >

@@ -1,4 +1,4 @@
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Redirect, useLocation } from 'react-router-dom';
 
 import { ReactNode } from 'react';
 interface Props {
@@ -6,6 +6,8 @@ interface Props {
   path: string;
 }
 export function ProtectedRoute({ children, ...rest }: Props) {
+  const location = useLocation().pathname;
+  console.log('protected');
   return (
     <Route
       {...rest}
@@ -13,7 +15,7 @@ export function ProtectedRoute({ children, ...rest }: Props) {
         localStorage.getItem('accessToken') ? (
           children
         ) : (
-          <Redirect to="/login" />
+          <Redirect to={{ pathname: '/login', state: { from: location } }} />
         )
       }
     />

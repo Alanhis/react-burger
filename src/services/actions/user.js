@@ -8,6 +8,7 @@ export const UPDATE_DATA_REGUEST = 'UPDATE_DATA_REGUEST';
 export const UPDATE_DATA_ERROR = 'UPDATE_DATA_ERROR';
 export const UPDATE_DATA_SUCCESS = 'UPDATE_DATA_SUCCESS';
 export const getUserData = (setName, setEmail) => (dispatch) => {
+
     localStorage.getItem('accessToken')
     dispatch({
         type: USER_DATA_REGUEST

@@ -10,7 +10,7 @@ interface Props {
 export function UnauthorizationRoute({ children, ...rest }: Props) {
   const data = useSelector((store: RootState) => store);
   const location = useLocation().pathname;
-
+  console.log('unprotected');
   return (
     <Route
       {...rest}
