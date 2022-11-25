@@ -32,7 +32,6 @@ export default function BurgerIngredients() {
   };
   const dispatch = useAppDispatch();
   useEffect(() => {
-    dispatch(fetchData());
     handleIntersectionObserver();
   }, []);
   const data = useSelector((store: RootState) => store);

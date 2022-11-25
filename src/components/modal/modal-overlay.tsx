@@ -3,7 +3,7 @@ import ModalStyle from './modal.module.css';
 
 export default function ModalOverlay(props: { onClick: () => void }) {
   React.useEffect(() => {
-    const escFunction = (event: { key: string }) => {
+    const escFunction = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         props.onClick(); //Do whatever when esc is pressed
       }

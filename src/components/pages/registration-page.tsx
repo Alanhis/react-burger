@@ -5,18 +5,15 @@ import {
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { registerFetch } from '../../services/actions/auth';
 import { useAppDispatch } from '../../services/store';
 export function RegistrationPage() {
   const dispatch = useAppDispatch();
   const history = useHistory();
-  const data = useSelector(store => store);
   const [name, setName] = React.useState('');
   const [email, setEmail] = React.useState('test@gmail.com');
   const [password, setPassword] = React.useState('');
-
   const functinoOnClick = (name: string, email: string, password: string) => {
     if (name && email && password) {
       dispatch(registerFetch(email, password, name, history));

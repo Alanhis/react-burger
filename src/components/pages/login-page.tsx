@@ -6,7 +6,6 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { NavLink } from 'react-router-dom';
 import { fetchLogin } from '../../services/actions/auth';
-import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useAppDispatch } from '../../services/store';
 export function LoginPage() {
@@ -14,7 +13,6 @@ export function LoginPage() {
   const [password, setPassword] = React.useState('');
   const dispatch = useAppDispatch();
   const history = useHistory();
-  const data = useSelector(store => store);
   return (
     <div className={`${PagesStyle.MainDiv} pb-6`}>
       <form

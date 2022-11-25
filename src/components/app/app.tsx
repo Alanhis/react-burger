@@ -12,13 +12,15 @@ import { RegistrationPage } from '../pages/registration-page';
 import { ForgotPasswordPage } from '../pages/forgot-password-page';
 import { ResetPasswordPage } from '../pages/reset-password-page';
 import { ProfilePage } from '../pages/profile-page';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ProtectedRoute } from '../component-routes/protected-route';
 import { UnauthorizationRoute } from '../component-routes/unauthorization-route';
 import { Location } from 'history';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import Modal from '../modal/modal';
 import PageStyle from '../pages/pages.module.css';
+import { useAppDispatch } from '../../services/store';
+import { fetchData } from '../../services/actions/ingredients';
 export const url = 'https://norma.nomoreparties.space/api';
 
 export default function App() {
@@ -27,7 +29,10 @@ export default function App() {
       background?: Location<{} | null | undefined>;
     }>();
     let background = location.state && location.state.background;
-
+    const dispatch = useAppDispatch();
+    useEffect(() => {
+      dispatch(fetchData());
+    }, []);
     const history = useHistory<History>();
     console.log(history);
     const handleModalClose = () => {
