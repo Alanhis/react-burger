@@ -1,17 +1,10 @@
 import IngredientDetailStyle from './ingredient-details.module.css';
 import { useParams } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { useAppDispatch } from '../../services/store';
+import { useSelector } from 'react-redux';
 import { RootState } from '../../services/store';
-import { fetchData } from '../../services/actions/ingredients';
-import { useEffect } from 'react';
 import { Iingredient } from '../../utils/types';
 export default function IngredientDetails() {
   const { ingredientId } = useParams<{ ingredientId?: string }>();
-  const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(fetchData());
-  }, []);
   const data = useSelector(
     (data: RootState) => data
   ).ingredients.ingredient.filter(

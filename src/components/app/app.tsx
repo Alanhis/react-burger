@@ -34,7 +34,6 @@ export default function App() {
       dispatch(fetchData());
     }, []);
     const history = useHistory<History>();
-    console.log(history);
     const handleModalClose = () => {
       history.goBack(); // для react-router 5
     };
@@ -74,7 +73,7 @@ export default function App() {
             <Route
               path="/ingredients/:ingredientId"
               children={
-                <Modal title="" onClose={handleModalClose}>
+                <Modal title="Детали ингредиента" onClose={handleModalClose}>
                   <IngredientDetails />
                 </Modal>
               }

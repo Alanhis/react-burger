@@ -15,11 +15,14 @@ import { UPDATE_CONSTRUCTOR_LIST } from '../../services/actions/conductor';
 import { RootState } from '../../services/store';
 import { useAppDispatch } from '../../services/store';
 import { Iingredient } from '../../utils/types';
-export default function BurgerConstuctorList(props: any) {
-  interface IingredientFromConstructor extends Iingredient {
-    dragId: string;
-    index: number;
-  }
+interface IingredientFromConstructor extends Iingredient {
+  dragId: string;
+  index: number;
+}
+export default function BurgerConstuctorList(props: {
+  data: IingredientFromConstructor[];
+}) {
+  console.log(props);
   const dispatch = useAppDispatch();
   const data = useSelector((store: RootState) => store);
 
