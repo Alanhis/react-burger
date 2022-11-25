@@ -14,13 +14,13 @@ export function LoginPage() {
   const dispatch = useAppDispatch();
   const history = useHistory();
   return (
-    <div className={`${PagesStyle.MainDiv} pb-6`}>
-      <form
-        onSubmit={e => {
-          e.preventDefault();
-          dispatch(fetchLogin(email, password, history));
-        }}
-      >
+    <form
+      onSubmit={e => {
+        e.preventDefault();
+        dispatch(fetchLogin(email, password, history));
+      }}
+    >
+      <div className={`${PagesStyle.MainDiv} pb-6`}>
         <p className="text text_type_main-medium pb-6">Вход</p>
         <Input
           type={'email'}
@@ -46,24 +46,25 @@ export function LoginPage() {
         <Button htmlType="submit" type="primary" size="medium">
           Войти
         </Button>
-      </form>
-      <div className="pt-15">
-        <div className={`${PagesStyle.buttomText} pb-4`}>
-          <p className="text text_type_main-small">
-            Вы — новый пользователь ?{' '}
-          </p>
-          <NavLink className="text text_type_main-small" to="/register">
-            Зарегистрироваться
-          </NavLink>
-        </div>
-        <div className={`${PagesStyle.buttomText}`}>
-          <p className="text text_type_main-small">Забыли пароль ? </p>
-          <NavLink className="text text_type_main-small" to="forgot-password">
-            {' '}
-            Восстановить пароль
-          </NavLink>
+
+        <div className="pt-15">
+          <div className={`${PagesStyle.buttomText} pb-4`}>
+            <p className="text text_type_main-small">
+              Вы — новый пользователь ?{' '}
+            </p>
+            <NavLink className="text text_type_main-small" to="/register">
+              Зарегистрироваться
+            </NavLink>
+          </div>
+          <div className={`${PagesStyle.buttomText}`}>
+            <p className="text text_type_main-small">Забыли пароль ? </p>
+            <NavLink className="text text_type_main-small" to="forgot-password">
+              {' '}
+              Восстановить пароль
+            </NavLink>
+          </div>
         </div>
       </div>
-    </div>
+    </form>
   );
 }

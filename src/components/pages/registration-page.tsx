@@ -22,8 +22,8 @@ export function RegistrationPage() {
     }
   };
   return (
-    <div className={`${PagesStyle.MainDiv} pb-6`}>
-      <form onSubmit={() => functinoOnClick(name, email, password)}>
+    <form onSubmit={() => functinoOnClick(name, email, password)}>
+      <div className={`${PagesStyle.MainDiv} pb-6`}>
         <p className="text text_type_main-medium pb-6">Регистрация</p>
         <Input
           type={'text'}
@@ -61,16 +61,17 @@ export function RegistrationPage() {
         <Button htmlType="submit" type="primary" size="medium">
           Зарегистрироваться
         </Button>
-      </form>
-      <div className="pt-15">
-        <div className={`${PagesStyle.buttomText}`}>
-          <p className="text text_type_main-small">Уже зарегистрированы? </p>
-          <Link className="text text_type_main-small" to="/login">
-            {' '}
-            Войти
-          </Link>
+
+        <div className="pt-15">
+          <div className={`${PagesStyle.buttomText}`}>
+            <p className="text text_type_main-small">Уже зарегистрированы? </p>
+            <Link className="text text_type_main-small" to="/login">
+              {' '}
+              Войти
+            </Link>
+          </div>
         </div>
       </div>
-    </div>
+    </form>
   );
 }

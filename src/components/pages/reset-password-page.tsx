@@ -14,10 +14,10 @@ export function ResetPasswordPage() {
   const history = useHistory();
   const dispatch = useAppDispatch();
   return (
-    <div className={`${PagesStyle.MainDiv} pb-6`}>
-      <form
-        onSubmit={() => dispatch(resetPasswordLogic(code, password, history))}
-      >
+    <form
+      onSubmit={() => dispatch(resetPasswordLogic(code, password, history))}
+    >
+      <div className={`${PagesStyle.MainDiv} pb-6`}>
         <p className="text text_type_main-medium pb-6">Восстановление пароля</p>
         <Input
           type={'password'}
@@ -42,15 +42,16 @@ export function ResetPasswordPage() {
         <Button htmlType="submit" type="primary" size="medium">
           Сохранить
         </Button>
-      </form>
-      <div className="pt-15">
-        <div className={`${PagesStyle.buttomText} pb-4`}>
-          <p className="text text_type_main-small">Вспомнили пароль? </p>
-          <NavLink className="text text_type_main-small" to="/login">
-            Войти
-          </NavLink>
+
+        <div className="pt-15">
+          <div className={`${PagesStyle.buttomText} pb-4`}>
+            <p className="text text_type_main-small">Вспомнили пароль? </p>
+            <NavLink className="text text_type_main-small" to="/login">
+              Войти
+            </NavLink>
+          </div>
         </div>
       </div>
-    </div>
+    </form>
   );
 }
