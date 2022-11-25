@@ -43,7 +43,7 @@ export const fetchLogin = (email, password, history) => (dispatch) => {
     }).then(checkResponce).then(data => {
 
         localStorage.setItem('refreshToken', data.refreshToken)
-        localStorage.setItem('accessToken', data.accessToken)
+        document.cookie = ("accessToken=" + data.accessToken + "; max-age=1200")
         dispatch({
             type: LOGIN_SUCCESS,
         });
@@ -74,7 +74,7 @@ export const updateToken = (setName, setEmail) => (dispatch) => {
         dispatch({
             type: TOKEN_SUCCESS,
         });
-        localStorage.setItem('accessToken', data.accessToken)
+        document.cookie = ("accessToken=" + data.accessToken + "; max-age=1200")
         dispatch(getUserData(data.accessToken, setName, setEmail))
     }).catch(err => {
         console.log(err)
@@ -101,7 +101,7 @@ export const registerFetch = (email, password, name, history) => (dispatch) => {
         body: JSON.stringify(dataForm)
     }).then(checkResponce).then(data => {
         localStorage.setItem('refreshToken', data.refreshToken)
-        localStorage.setItem('accessToken', data.accessToken)
+        document.cookie = ("accessToken=" + data.accessToken + "; max-age=1200")
         dispatch({
             type: REGISTER_SUCCESS,
         });
@@ -134,7 +134,7 @@ export const logOutFetch = (history) => (dispatch) => {
             type: LOGOUT_SUCCESS,
         });
         localStorage.removeItem('refreshToken');
-        localStorage.removeItem('accessToken');
+        document.cookie = ("accessToken= ; expires = Thu, 01 Jan 1970 00:00:00 GMT")
         history.push('/')
     }).catch(err => {
         console.log(err)

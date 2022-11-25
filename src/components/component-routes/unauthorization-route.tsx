@@ -15,7 +15,7 @@ export function UnauthorizationRoute({ children, ...rest }: Props) {
     <Route
       {...rest}
       render={() =>
-        !localStorage.getItem('accessToken') ? (
+        !document.cookie ? (
           location === '/reset-password' ? (
             data.auth.isPasswordReguest ? (
               children

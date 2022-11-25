@@ -8,8 +8,9 @@ export const UPDATE_DATA_REGUEST = 'UPDATE_DATA_REGUEST';
 export const UPDATE_DATA_ERROR = 'UPDATE_DATA_ERROR';
 export const UPDATE_DATA_SUCCESS = 'UPDATE_DATA_SUCCESS';
 export const getUserData = (setName, setEmail) => (dispatch) => {
-
-    localStorage.getItem('accessToken')
+    if (document.cookie === false) {
+        dispatch(updateToken(setName, setEmail))
+    }
     dispatch({
         type: USER_DATA_REGUEST
     })
@@ -17,7 +18,7 @@ export const getUserData = (setName, setEmail) => (dispatch) => {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": localStorage.getItem('accessToken')
+            "Authorization": document.cookie
         },
     }).then(checkResponce).then(data => {
         dispatch({
@@ -44,6 +45,9 @@ export const getUserData = (setName, setEmail) => (dispatch) => {
 }
 
 export const updateUserData = (email, name, setName, setEmail, history) => (dispatch) => {
+    if (document.cookie === false) {
+        dispatch(updateToken(setName, setEmail))
+    }
     dispatch({
         type: UPDATE_DATA_REGUEST
     })
@@ -52,7 +56,7 @@ export const updateUserData = (email, name, setName, setEmail, history) => (disp
         method: "PATCH",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": localStorage.getItem('accessToken')
+            "Authorization": document.cookie
         },
         body: JSON.stringify({
             "email": email,
@@ -67,16 +71,9 @@ export const updateUserData = (email, name, setName, setEmail, history) => (disp
         history.push('/')
     }).catch(err => {
         console.log(err)
-        if (err.message === 'jwt expired') {
 
-            dispatch(updateToken(setName, setEmail))
-
-        } else {
-            dispatch({
-                type: UPDATE_DATA_ERROR,
-            });
-        }
-
-
+        dispatch({
+            type: UPDATE_DATA_ERROR,
+        });
     })
 }

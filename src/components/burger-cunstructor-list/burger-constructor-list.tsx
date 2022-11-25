@@ -15,6 +15,7 @@ import { UPDATE_CONSTRUCTOR_LIST } from '../../services/actions/conductor';
 import { RootState } from '../../services/store';
 import { useAppDispatch } from '../../services/store';
 import { Iingredient } from '../../utils/types';
+import { useHistory } from 'react-router-dom';
 interface IingredientFromConstructor extends Iingredient {
   dragId: string;
   index: number;
@@ -25,7 +26,7 @@ export default function BurgerConstuctorList(props: {
   console.log(props);
   const dispatch = useAppDispatch();
   const data = useSelector((store: RootState) => store);
-
+  const history = useHistory<History>();
   const moveCard = useCallback(
     (dragIndex: number, hoverIndex: number) => {
       const dragCard = props.data[dragIndex];
@@ -103,13 +104,21 @@ export default function BurgerConstuctorList(props: {
         <p className="text text_type_digits-medium mr-2">{finalPrice}</p>
         <CurrencyIcon type={'secondary'} />
         <div className=" ml-10">
-          {bunAmount && localStorage.getItem('accessToken') && (
+          {bunAmount && (
             <Button
               htmlType="button"
               type="primary"
               size="large"
               onClick={() => {
-                dispatch(sendOrder(props.data));
+                if (
+                  !document.cookie.match(
+                    /^(.*;)?\s*accessToken\s*=\s*[^;]+(.*)?$/
+                  )
+                ) {
+                  history.push('/login');
+                } else {
+                  dispatch(sendOrder(props.data));
+                }
               }}
             >
               Оформить заказ

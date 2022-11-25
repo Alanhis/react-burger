@@ -12,7 +12,7 @@ export function ProtectedRoute({ children, ...rest }: Props) {
     <Route
       {...rest}
       render={() =>
-        localStorage.getItem('accessToken') ? (
+        document.cookie ? (
           children
         ) : (
           <Redirect to={{ pathname: '/login', state: { from: location } }} />
