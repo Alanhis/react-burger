@@ -23,6 +23,3 @@ export default function Ingredients({ ingredientType, data }: Props) {
     </div>
   );
 }
-Ingredients.propTypes = {
-  data: PropTypes.array.isRequired,
-};

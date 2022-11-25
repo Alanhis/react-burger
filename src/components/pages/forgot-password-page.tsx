@@ -7,7 +7,7 @@ import {
 import { NavLink, useHistory } from 'react-router-dom';
 import { forgotPasswordLogic } from '../../services/actions/auth';
 import { useAppDispatch } from '../../services/store';
-import { useDispatch } from 'react-redux';
+
 export function ForgotPasswordPage() {
   const [email, setEmail] = React.useState('');
   const history = useHistory();
@@ -15,26 +15,22 @@ export function ForgotPasswordPage() {
   return (
     <div className={`${PagesStyle.MainDiv} pb-6`}>
       <p className="text text_type_main-medium pb-6">Восстановление пароля</p>
-
-      <div className="pt-6 pb-6">
-        <Input
-          type={'email'}
-          placeholder={'Укажите e-mail'}
-          onChange={e => setEmail(e.target.value)}
-          value={email}
-          name={'name'}
-          error={false}
-          errorText={'Ошибка'}
-        />
-      </div>
-      <Button
-        htmlType="button"
-        type="primary"
-        size="medium"
-        onClick={() => dispatch(forgotPasswordLogic(history, email))}
-      >
-        Восстановить
-      </Button>
+      <form onSubmit={() => dispatch(forgotPasswordLogic(history, email))}>
+        <div className="pt-6 pb-6">
+          <Input
+            type={'email'}
+            placeholder={'Укажите e-mail'}
+            onChange={e => setEmail(e.target.value)}
+            value={email}
+            name={'name'}
+            error={false}
+            errorText={'Ошибка'}
+          />
+        </div>
+        <Button htmlType="submit" type="primary" size="medium">
+          Восстановить
+        </Button>
+      </form>
       <div className="pt-15">
         <div className={`${PagesStyle.buttomText} pb-4`}>
           <p className="text text_type_main-small">Вспомнили пароль? </p>

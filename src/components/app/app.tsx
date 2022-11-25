@@ -20,6 +20,7 @@ import IngredientDetails from '../ingredient-details/ingredient-details';
 import Modal from '../modal/modal';
 import PageStyle from '../pages/pages.module.css';
 export const url = 'https://norma.nomoreparties.space/api';
+
 export default function App() {
   const ModalSwitch = () => {
     const location = useLocation<{
@@ -27,9 +28,10 @@ export default function App() {
     }>();
     let background = location.state && location.state.background;
 
-    const history = useHistory();
+    const history = useHistory<History>();
+    console.log(history);
     const handleModalClose = () => {
-      window.history.back(); // для react-router 5
+      history.goBack(); // для react-router 5
     };
     return (
       <React.StrictMode>

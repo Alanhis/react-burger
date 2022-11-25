@@ -26,48 +26,45 @@ export function RegistrationPage() {
   };
   return (
     <div className={`${PagesStyle.MainDiv} pb-6`}>
-      <p className="text text_type_main-medium pb-6">Регистрация</p>
-      <Input
-        type={'text'}
-        placeholder={'Имя'}
-        value={name}
-        onChange={e => setName(e.target.value)}
-        name={'name'}
-        error={false}
-        errorText={'Ошибка'}
-      />
-      <div className="pt-6 pb-6">
+      <form onSubmit={() => functinoOnClick(name, email, password)}>
+        <p className="text text_type_main-medium pb-6">Регистрация</p>
         <Input
-          type={'email'}
-          placeholder={'E-mail'}
-          onChange={e => setEmail(e.target.value)}
-          value={email}
-          icon={'ShowIcon'}
+          type={'text'}
+          placeholder={'Имя'}
+          value={name}
+          onChange={e => setName(e.target.value)}
           name={'name'}
           error={false}
           errorText={'Ошибка'}
         />
-      </div>
-      <div className=" pb-6">
-        <Input
-          type={'password'}
-          placeholder={'Пароль'}
-          onChange={e => setPassword(e.target.value)}
-          value={password}
-          icon={'ShowIcon'}
-          name={'name'}
-          error={false}
-          errorText={'Ошибка'}
-        />
-      </div>
-      <Button
-        htmlType="button"
-        type="primary"
-        size="medium"
-        onClick={() => functinoOnClick(name, email, password)}
-      >
-        Зарегистрироваться
-      </Button>
+        <div className="pt-6 pb-6">
+          <Input
+            type={'email'}
+            placeholder={'E-mail'}
+            onChange={e => setEmail(e.target.value)}
+            value={email}
+            icon={'ShowIcon'}
+            name={'name'}
+            error={false}
+            errorText={'Ошибка'}
+          />
+        </div>
+        <div className=" pb-6">
+          <Input
+            type={'password'}
+            placeholder={'Пароль'}
+            onChange={e => setPassword(e.target.value)}
+            value={password}
+            icon={'ShowIcon'}
+            name={'name'}
+            error={false}
+            errorText={'Ошибка'}
+          />
+        </div>
+        <Button htmlType="submit" type="primary" size="medium">
+          Зарегистрироваться
+        </Button>
+      </form>
       <div className="pt-15">
         <div className={`${PagesStyle.buttomText}`}>
           <p className="text text_type_main-small">Уже зарегистрированы? </p>

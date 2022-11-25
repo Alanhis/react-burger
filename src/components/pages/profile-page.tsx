@@ -62,82 +62,75 @@ export function ProfilePage() {
         </p>
       </div>
       <div className={`${PagesStyle.ButtonDiv} ml-15`}>
-        <Input
-          type={'text'}
-          placeholder={'Имя'}
-          value={name}
-          onChange={e => setName(e.target.value)}
-          disabled={LoginChanges}
-          onIconClick={() => setLoginChanges(!LoginChanges)}
-          icon={'EditIcon'}
-          name={'name'}
-          error={false}
-          errorText={'Ошибка'}
-        />
-        <div className="pt-3 pb-3">
+        <form
+          onReset={() => {
+            setName(data.user.name);
+            setEmail(data.user.email);
+            setPassword('Password');
+          }}
+          onSubmit={() => {
+            dispatch(updateUserData(email, name, setName, setEmail, history));
+          }}
+        >
           <Input
-            type={'email'}
-            placeholder={'Логин'}
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-            disabled={EmailChanges}
-            onIconClick={() => setEmailChanges(!EmailChanges)}
+            type={'text'}
+            placeholder={'Имя'}
+            value={name}
+            onChange={e => setName(e.target.value)}
+            disabled={LoginChanges}
+            onIconClick={() => setLoginChanges(!LoginChanges)}
             icon={'EditIcon'}
             name={'name'}
             error={false}
             errorText={'Ошибка'}
           />
-        </div>
-        <Input
-          type={'password'}
-          placeholder={'Пароль'}
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-          disabled={PasswordChanges}
-          //   onIconClick={() => {
-          //     setPasswordChanges(!PasswordChanges);
-          //     if (passwordType === 'password') {
-          //       setPasswordType('text');
-          //     } else {
-          //       setPasswordType('password');
-          //     }
-          //   }}
-          icon={'EditIcon'}
-          name={'name'}
-          error={false}
-          errorText={'Ошибка'}
-        />
-
-        {(data.user.name !== name ||
-          data.user.email !== email ||
-          password !== 'Password') && (
-          <div className="mt-5">
-            <Button
-              htmlType="button"
-              type="secondary"
-              size="medium"
-              onClick={() => {
-                setName(data.user.name);
-                setEmail(data.user.email);
-                setPassword('Password');
-              }}
-            >
-              Отмена
-            </Button>
-            <Button
-              htmlType="button"
-              type="primary"
-              size="medium"
-              onClick={() => {
-                dispatch(
-                  updateUserData(email, name, setName, setEmail, history)
-                );
-              }}
-            >
-              Сохранить
-            </Button>
+          <div className="pt-3 pb-3">
+            <Input
+              type={'email'}
+              placeholder={'Логин'}
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              disabled={EmailChanges}
+              onIconClick={() => setEmailChanges(!EmailChanges)}
+              icon={'EditIcon'}
+              name={'name'}
+              error={false}
+              errorText={'Ошибка'}
+            />
           </div>
-        )}
+          <Input
+            type={'password'}
+            placeholder={'Пароль'}
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+            disabled={PasswordChanges}
+            //   onIconClick={() => {
+            //     setPasswordChanges(!PasswordChanges);
+            //     if (passwordType === 'password') {
+            //       setPasswordType('text');
+            //     } else {
+            //       setPasswordType('password');
+            //     }
+            //   }}
+            icon={'EditIcon'}
+            name={'name'}
+            error={false}
+            errorText={'Ошибка'}
+          />
+
+          {(data.user.name !== name ||
+            data.user.email !== email ||
+            password !== 'Password') && (
+            <div className="mt-5">
+              <Button htmlType="reset" type="secondary" size="medium">
+                Отмена
+              </Button>
+              <Button htmlType="submit" type="primary" size="medium">
+                Сохранить
+              </Button>
+            </div>
+          )}
+        </form>
       </div>
     </div>
   );
