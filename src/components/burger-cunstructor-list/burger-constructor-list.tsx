@@ -5,7 +5,7 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import BurgerConstuctorStyle from '../burger-constructor/burger-constructor.module.css';
 import Modal from '../modal/modal';
-import { useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import OrderDetails from '../order-details/order-details';
 import OrderedIngredient from '../ordered-ingredient/ordered-ingredient';
 import { useSelector } from 'react-redux';
@@ -25,6 +25,7 @@ export default function BurgerConstuctorList(props: {
 }) {
   console.log(props);
   const dispatch = useAppDispatch();
+  const [finalPrice, setFinalPrice] = useState<number>();
   const data = useSelector((store: RootState) => store);
   const history = useHistory<History>();
   const moveCard = useCallback(
@@ -43,7 +44,15 @@ export default function BurgerConstuctorList(props: {
     },
     [props.data, dispatch]
   );
-
+  useEffect(() => {
+    const finalPrice =
+      props.data.reduce(
+        (previousValue: number, currentValue: { price: number }) =>
+          previousValue + currentValue.price,
+        0
+      ) + props.data[0].price;
+    setFinalPrice(finalPrice);
+  }, [props]);
   const handleCloseModal = () => {
     dispatch({ type: MODAL_CLOSE });
   };
@@ -51,12 +60,6 @@ export default function BurgerConstuctorList(props: {
     data.conductor.orderDetails.filter(
       (item: { type: string }) => item.type === 'bun'
     ).length == 1;
-  const finalPrice =
-    props.data.reduce(
-      (previousValue: number, currentValue: { price: number }) =>
-        previousValue + currentValue.price,
-      0
-    ) + props.data[0].price;
 
   return (
     <>
