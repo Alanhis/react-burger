@@ -4,86 +4,28 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import IngredntCardStyle from './ingredient-card.module.css';
 import { RootState } from '../../services/store';
-import React from 'react';
-
-import { useDispatch, useSelector } from 'react-redux';
-
+import { useSelector } from 'react-redux';
 import { useDrag } from 'react-dnd';
-
 import { NavLink, useLocation } from 'react-router-dom';
-
+import { Iingredient } from '../../utils/types';
 export default function IngredientCard(props: {
-  data:
-    | {
-        calories: number;
-        carbohydrates: number;
-        fat: number;
-        image: string;
-        image_large: string;
-        image_mobile: string;
-        name: string;
-        price: number;
-        proteins: number;
-        type: string;
-        __v: number;
-        _id: string;
-      }[]
-    | any;
+  data: Iingredient[] | any;
   key: string;
 }) {
   let countIngredient = 0;
   const data = useSelector((store: RootState) => store);
   if (
     data.conductor.orderDetails.filter(
-      (item: {
-        calories: number;
-        carbohydrates: number;
-        fat: number;
-        image: string;
-        image_large: string;
-        image_mobile: string;
-        name: string;
-        price: number;
-        proteins: number;
-        type: string;
-        __v: number;
-        _id: string;
-      }) => item._id === props.data._id && item.type === 'bun'
+      (item: Iingredient) => item._id === props.data._id && item.type === 'bun'
     ).length > 0
   ) {
     countIngredient =
       data.conductor.orderDetails.filter(
-        (item: {
-          calories: number;
-          carbohydrates: number;
-          fat: number;
-          image: string;
-          image_large: string;
-          image_mobile: string;
-          name: string;
-          price: number;
-          proteins: number;
-          type: string;
-          __v: number;
-          _id: string;
-        }) => item._id === props.data._id
+        (item: Iingredient) => item._id === props.data._id
       ).length + 1;
   } else {
     countIngredient = data.conductor.orderDetails.filter(
-      (item: {
-        calories: number;
-        carbohydrates: number;
-        fat: number;
-        image: string;
-        image_large: string;
-        image_mobile: string;
-        name: string;
-        price: number;
-        proteins: number;
-        type: string;
-        __v: number;
-        _id: string;
-      }) => item._id === props.data._id
+      (item: Iingredient) => item._id === props.data._id
     ).length;
   }
 

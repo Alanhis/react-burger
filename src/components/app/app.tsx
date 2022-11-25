@@ -29,7 +29,7 @@ export default function App() {
 
     const history = useHistory();
     const handleModalClose = () => {
-      history.goBack(); // для react-router 5
+      window.history.back(); // для react-router 5
     };
     return (
       <React.StrictMode>

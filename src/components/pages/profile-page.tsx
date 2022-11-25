@@ -23,7 +23,7 @@ export function ProfilePage() {
   const [email, setEmail] = React.useState('');
   const [name, setName] = React.useState('');
   const [password, setPassword] = React.useState('Password');
-  const [passwordType, setPasswordType] = React.useState('password');
+  // оставить на неопределенный срок const [passwordType, setPasswordType] = React.useState('password');
   useEffect(() => {
     dispatch(getUserData(setName, setEmail));
   }, []);

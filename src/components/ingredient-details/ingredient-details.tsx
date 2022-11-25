@@ -5,6 +5,7 @@ import { useAppDispatch } from '../../services/store';
 import { RootState } from '../../services/store';
 import { fetchData } from '../../services/actions/ingredients';
 import { useEffect } from 'react';
+import { Iingredient } from '../../utils/types';
 export default function IngredientDetails() {
   const { ingredientId } = useParams<{ ingredientId?: string }>();
   const dispatch = useAppDispatch();
@@ -14,20 +15,7 @@ export default function IngredientDetails() {
   const data = useSelector(
     (data: RootState) => data
   ).ingredients.ingredient.filter(
-    (data: {
-      calories: number;
-      carbohydrates: number;
-      fat: number;
-      image: string;
-      image_large: string;
-      image_mobile: string;
-      name: string;
-      price: number;
-      proteins: number;
-      type: string;
-      __v: number;
-      _id: string;
-    }) => data._id === ingredientId
+    (data: Iingredient) => data._id === ingredientId
   );
 
   return (

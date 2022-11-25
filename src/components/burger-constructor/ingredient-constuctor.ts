@@ -1,43 +1,11 @@
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
+import { Iingredient } from '../../utils/types';
 // Подкорректировать и разобрать как оптимальнее все отобразить
-export const getIngredientsForConstructor = (props:{calories: number,
-    carbohydrates: number,
-    fat: number,
-    image:string,
-    image_large: string,
-    image_mobile:string,
-    name: string,
-    price: number,
-    proteins: number,
-    type: string,
-    __v: number,
-    _id: string}[]) => {
+export const getIngredientsForConstructor = (props:Iingredient[]) => {
 
-    const burgerBun:  {calories: number,
-        carbohydrates: number,
-        fat: number,
-        image:string,
-        image_large: string,
-        image_mobile:string,
-        name: string,
-        price: number,
-        proteins: number,
-        type: string,
-        __v: number,
-        _id: string}[] | any = []
-    const otherIngredint: {calories: number,
-        carbohydrates: number,
-        fat: number,
-        image:string,
-        image_large: string,
-        image_mobile:string,
-        name: string,
-        price: number,
-        proteins: number,
-        type: string,
-        __v: number,
-        _id: string}[] | any = []
+    const burgerBun:  Iingredient[] | any = []
+    const otherIngredint:Iingredient[] | any = []
 
 
     props.forEach(element => {

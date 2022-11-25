@@ -1,7 +1,7 @@
 import React from 'react';
 import ModalStyle from './modal.module.css';
 
-export default function ModalOverlay(props: { onClick: Function }) {
+export default function ModalOverlay(props: { onClick: () => void }) {
   React.useEffect(() => {
     const escFunction = (event: { key: string }) => {
       if (event.key === 'Escape') {
@@ -14,9 +14,6 @@ export default function ModalOverlay(props: { onClick: Function }) {
     };
   }, []);
   return (
-    <div
-      className={`${ModalStyle.Overlay}`}
-      onClick={() => props.onClick}
-    ></div>
+    <div className={`${ModalStyle.Overlay}`} onClick={props.onClick}></div>
   );
 }

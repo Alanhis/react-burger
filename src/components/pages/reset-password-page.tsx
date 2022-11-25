@@ -5,7 +5,6 @@ import {
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { NavLink, useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import { resetPasswordLogic } from '../../services/actions/auth';
 import { useAppDispatch } from '../../services/store';
 

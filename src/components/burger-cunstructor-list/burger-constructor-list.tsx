@@ -5,7 +5,7 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import BurgerConstuctorStyle from '../burger-constructor/burger-constructor.module.css';
 import Modal from '../modal/modal';
-import { Key, useCallback } from 'react';
+import { useCallback } from 'react';
 import OrderDetails from '../order-details/order-details';
 import OrderedIngredient from '../ordered-ingredient/ordered-ingredient';
 import { useSelector } from 'react-redux';
@@ -14,7 +14,12 @@ import { sendOrder } from '../../services/actions/order';
 import { UPDATE_CONSTRUCTOR_LIST } from '../../services/actions/conductor';
 import { RootState } from '../../services/store';
 import { useAppDispatch } from '../../services/store';
+import { Iingredient } from '../../utils/types';
 export default function BurgerConstuctorList(props: any) {
+  interface IingredientFromConstructor extends Iingredient {
+    dragId: string;
+    index: number;
+  }
   const dispatch = useAppDispatch();
   const data = useSelector((store: RootState) => store);
 
@@ -65,27 +70,8 @@ export default function BurgerConstuctorList(props: any) {
       )}
       <ul className={`${BurgerConstuctorStyle.AnotherScroller} custom-scroll`}>
         {props.data.map(
-          (
-            element: {
-              calories: number;
-              carbohydrates: number;
-              fat: number;
-              image: string;
-              image_large: string;
-              image_mobile: string;
-              name: string;
-              price: number;
-              proteins: number;
-              type: string;
-              __v: number;
-              _id: string;
-              dragId: string;
-              index: number;
-            },
-            index: number
-          ) => {
+          (element: IingredientFromConstructor, index: number) => {
             if (element.type !== 'bun') {
-              console.log(element.index);
               return (
                 <OrderedIngredient
                   key={element.dragId}

@@ -12,34 +12,21 @@ import {
   DragSourceMonitor,
 } from 'react-dnd';
 import { DELETE_COMPONENT } from '../../services/actions/conductor';
+import { Iingredient } from '../../utils/types';
 import { useDispatch } from 'react-redux';
+interface OrderedIngredient extends Iingredient {
+  dragId: string;
+  index: number | undefined;
+}
 export default function OrderedIngredient({
   item,
   index,
   moveCard,
 }: {
-  item: {
-    calories: number;
-    carbohydrates: number;
-    fat: number;
-    image: string;
-    image_large: string;
-    image_mobile: string;
-    name: string;
-    price: number;
-    proteins: number;
-    type: string;
-    __v: number;
-    _id: string;
-    dragId: string;
-    index: number | undefined;
-  };
+  item: OrderedIngredient;
   index: number;
   moveCard: Function;
 }) {
-  console.log(item.index);
-  // console.log(index)
-  // console.log(moveCard)
   const dispatch = useDispatch();
   const ref = useRef<HTMLElement>(null);
   const [{ handlerId }, drop] = useDrop({
