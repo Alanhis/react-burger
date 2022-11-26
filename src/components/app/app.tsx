@@ -12,22 +12,28 @@ import { RegistrationPage } from '../pages/registration-page';
 import { ForgotPasswordPage } from '../pages/forgot-password-page';
 import { ResetPasswordPage } from '../pages/reset-password-page';
 import { ProfilePage } from '../pages/profile-page';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ProtectedRoute } from '../component-routes/protected-route';
 import { UnauthorizationRoute } from '../component-routes/unauthorization-route';
 import { Location } from 'history';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import Modal from '../modal/modal';
 import PageStyle from '../pages/pages.module.css';
+import { useAppDispatch } from '../../services/store';
+import { fetchData } from '../../services/actions/ingredients';
 export const url = 'https://norma.nomoreparties.space/api';
+
 export default function App() {
   const ModalSwitch = () => {
     const location = useLocation<{
       background?: Location<{} | null | undefined>;
     }>();
     let background = location.state && location.state.background;
-
-    const history = useHistory();
+    const dispatch = useAppDispatch();
+    useEffect(() => {
+      dispatch(fetchData());
+    }, []);
+    const history = useHistory<History>();
     const handleModalClose = () => {
       history.goBack(); // для react-router 5
     };
@@ -67,7 +73,7 @@ export default function App() {
             <Route
               path="/ingredients/:ingredientId"
               children={
-                <Modal onClose={handleModalClose}>
+                <Modal title="Детали ингредиента" onClose={handleModalClose}>
                   <IngredientDetails />
                 </Modal>
               }

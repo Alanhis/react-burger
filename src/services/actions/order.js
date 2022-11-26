@@ -1,6 +1,5 @@
 import { checkResponce } from "../../utils/checkResponse";
 import { url } from "../../components/app/app"
-import { useDispatch, useSelector } from 'react-redux';
 export const ORDER_DATA_REQUEST = 'ORDER_DATA_REQUEST';
 export const ORDER_DATA_SUCCESS = 'ORDER_DATA_SUCCESS';
 export const ORDER_DATA_ERROR = 'ORDER_DATA__ERROR';

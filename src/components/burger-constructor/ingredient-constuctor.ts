@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
+import { Iingredient } from '../../utils/types';
+// Подкорректировать и разобрать как оптимальнее все отобразить
+export const getIngredientsForConstructor = (props:Iingredient[]) => {
 
-export const getIngredientsForConstructor = (props) => {
-
-    const burgerBun = []
-    const otherIngredint = []
+    const burgerBun:  Iingredient[] | any = []
+    const otherIngredint:Iingredient[] | any = []
 
 
     props.forEach(element => {
@@ -16,7 +17,7 @@ export const getIngredientsForConstructor = (props) => {
             otherIngredint.push(element)
         }
     })
-
+   
     return ([...burgerBun, ...otherIngredint])
 }
 getIngredientsForConstructor.propTypes = {
