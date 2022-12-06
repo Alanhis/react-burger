@@ -13,3 +13,8 @@ export interface Iingredient {
     __v: number,
     _id: string
 }
+
+export interface IUser{
+    email: string,
+    name: string
+}

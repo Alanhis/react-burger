@@ -21,6 +21,7 @@ import Modal from '../modal/modal';
 import PageStyle from '../pages/pages.module.css';
 import { useAppDispatch } from '../../services/store';
 import { fetchData } from '../../services/actions/ingredients';
+import { FeedPage } from '../pages/feed-page';
 export const url = 'https://norma.nomoreparties.space/api';
 
 export default function App() {
@@ -60,6 +61,9 @@ export default function App() {
             <ProtectedRoute path="/profile">
               <ProfilePage />
             </ProtectedRoute>
+            <UnauthorizationRoute path="/feed">
+              <FeedPage />
+            </UnauthorizationRoute>
             <Route path="/ingredients/:ingredientId" exact={true}>
               <div className={`${PageStyle.ModalPage}`}>
                 <p className="text text_type_main-medium pb-6">

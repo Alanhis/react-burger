@@ -16,7 +16,7 @@ import { RootState } from '../../services/store';
 import { useAppDispatch } from '../../services/store';
 import { Iingredient } from '../../utils/types';
 import { useHistory } from 'react-router-dom';
-interface IingredientFromConstructor extends Iingredient {
+export interface IingredientFromConstructor extends Iingredient {
   dragId: string;
   index: number;
 }

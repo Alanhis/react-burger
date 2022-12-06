@@ -4,15 +4,21 @@ import {
     LOGOUT_REGUEST, LOGOUT_SUCCESS, LOGOUT_ERROR,
     TOKEN_REGUEST, TOKEN_SUCCESS, TOKEN_ERROR,
     FORGOT_PASSWORD_REQUEST, FORGOT_PASSWORD_SUCCESS, FORGOT_PASSWORD_ERROR,
-    RESET_PASSWORD_REQUEST, RESET_PASSWORD_SUCCESS, RESET_PASSWORD_ERROR
+    RESET_PASSWORD_REQUEST, RESET_PASSWORD_SUCCESS, RESET_PASSWORD_ERROR,
+    TAuthActions
 } from "../actions/auth";
 
-const initialState = {
+type TAuthState = {
+   isRequired: boolean;
+   isRequiredError: boolean;
+   isPasswordReguest: boolean; 
+}
+const initialState: TAuthState = {
     isRequired: false,
     isRequiredError: false,
     isPasswordReguest: false
 }
-export const authReducer = (state = initialState, action) => {
+export const authReducer = (state = initialState, action: TAuthActions) => {
     switch (action.type) {
         case LOGIN_REGUEST: {
             return {
