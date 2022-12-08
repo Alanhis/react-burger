@@ -52,6 +52,12 @@
     height: 716px;
     overflow-x: hidden;
 }
+.scroller_profile{
+    overflow: scroll;
+    width: 800px;
+    height: 716px;
+    overflow-x: hidden;
+}
 .column{
     display: flex;
     color: var(--colors-interface-success)

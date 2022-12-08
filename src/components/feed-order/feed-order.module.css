@@ -2,7 +2,7 @@
     background-color: var(--background);
     display: flex;
     flex-direction: column;
-    width: 438px;
+    
     border-radius: 30px;
 }
 .feedElement_top{
@@ -110,4 +110,10 @@ margin-left: -16px;
     background-color:rgba(10, 10, 10, 0.514);
     justify-content: center;
     align-items: flex-end;
+}
+.status_doing{
+    color: var(--colors-interface-success)
+}
+.status_cancel{
+    color: var(--colors-interface-error)
 }

@@ -1,11 +1,12 @@
-import FeedOrderStyle from './feed-order.module.css';
+import FeedOrderStyle from '../../feed-order/feed-order.module.css';
 import {
   FormattedDate,
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../services/store';
-export default function FeedOrder(data: any) {
+import { RootState } from '../../../services/store';
+export function ProfileOrder(data: any) {
+  console.log(data);
   const getDate = <FormattedDate date={new Date(data.data.createdAt)} />;
   const info = useSelector((store: RootState) => store.ingredients.ingredient);
   const imageOrder: any[] = [];
@@ -22,13 +23,20 @@ export default function FeedOrder(data: any) {
   console.log(imageOrder.length);
   return (
     <div className={`${FeedOrderStyle.feedElement} pl-5 pr-5 mb-4`}>
-      <div className={`${FeedOrderStyle.feedElement_top} pb-3`}>
+      <div className={`${FeedOrderStyle.feedElement_top} pt-3 pb-3`}>
         <p className="text text_type_main-small">#{data.data.number}</p>
         <p className="text text_type_main-small text_color_inactive">
           {getDate} i-GTM+3
         </p>
       </div>
       <p className="text text_type_main-default">{data.data.name}</p>
+      {data.data.status === 'pending' ? (
+        <p className={`${FeedOrderStyle.status_doing}`}>Готовится</p>
+      ) : data.data.status === 'done' ? (
+        <p>Выполнен</p>
+      ) : (
+        <p className={`${FeedOrderStyle.status_cancel}`}>Отменен</p>
+      )}
       <div className={`${FeedOrderStyle.feedElement_top} pt-3 pb-4`}>
         <div className={`${FeedOrderStyle.feedElement_image_box}`}>
           {imageOrder.map((element, index) => {
