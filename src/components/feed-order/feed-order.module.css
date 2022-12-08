@@ -1,0 +1,113 @@
+.feedElement{
+    background-color: var(--background);
+    display: flex;
+    flex-direction: column;
+    width: 438px;
+    border-radius: 30px;
+}
+.feedElement_top{
+    display: flex;
+    justify-content: space-between;
+}
+.feedElement_image_box{
+    display: flex;
+}
+.feedElement_Price{
+    display: flex;
+    align-items: center;
+}
+.feedElement_image:nth-child(1){
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    background-color: var(--background);
+    border: double 3px transparent;
+    border-radius: 50px;
+    background-image: linear-gradient(var(--background), var(--background)), linear-gradient(to right, #801ab3, #4c4cff);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+z-index: 5;
+
+}
+.feedElement_image:nth-child(2){
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    background-color: var(--background);
+    border: double 3px transparent;
+    border-radius: 50px;
+    background-image: linear-gradient(var(--background), var(--background)), linear-gradient(to right, #801ab3, #4c4cff);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+z-index: 4;
+margin-left: -16px;
+
+}
+.feedElement_image:nth-child(3){
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    background-color: var(--background);
+    border: double 3px transparent;
+    border-radius: 50px;
+    background-image: linear-gradient(var(--background), var(--background)), linear-gradient(to right, #801ab3, #4c4cff);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+z-index: 3;
+margin-left: -16px;
+
+}
+.feedElement_image:nth-child(4){
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    background-color: var(--background);
+    border: double 3px transparent;
+    border-radius: 50px;
+    background-image: linear-gradient(var(--background), var(--background)), linear-gradient(to right, #801ab3, #4c4cff);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+z-index: 2;
+margin-left: -16px;
+
+}
+.feedElement_image:nth-child(5){
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    background-color: var(--background);
+    border: double 3px transparent;
+    border-radius: 50px;
+    background-image: linear-gradient(var(--background), var(--background)), linear-gradient(to right, #801ab3, #4c4cff);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+z-index: 1;
+margin-left: -16px;
+
+}
+.feedElement_image:nth-child(6){
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    background-color: var(--background);
+    border: double 3px transparent;
+    border-radius: 50px;
+    background-image: linear-gradient(var(--background), var(--background)), linear-gradient(to right, #801ab3, #4c4cff);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+z-index: 0;
+margin-left: -16px;
+
+}
+.feedElement_orderNumber_background{
+    display: flex;
+    width: 50px;
+    height: 50px;
+    position: relative;
+    top: 7%;
+    left: -17%;
+    border-radius: 50px;
+    background-color:rgba(10, 10, 10, 0.514);
+    justify-content: center;
+    align-items: flex-end;
+}

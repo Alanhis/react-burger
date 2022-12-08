@@ -61,9 +61,9 @@ export default function App() {
             <ProtectedRoute path="/profile">
               <ProfilePage />
             </ProtectedRoute>
-            <UnauthorizationRoute path="/feed">
+            <Route path="/feed">
               <FeedPage />
-            </UnauthorizationRoute>
+            </Route>
             <Route path="/ingredients/:ingredientId" exact={true}>
               <div className={`${PageStyle.ModalPage}`}>
                 <p className="text text_type_main-medium pb-6">
