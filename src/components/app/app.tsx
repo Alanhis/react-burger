@@ -59,7 +59,7 @@ export default function App() {
             <UnauthorizationRoute path="/reset-password" exact={true}>
               <ResetPasswordPage />
             </UnauthorizationRoute>
-            <ProtectedRoute path="/profile">
+            <ProtectedRoute path={['/profile/orders/', '/profile']} exact>
               <ProfilePage />
             </ProtectedRoute>
             <Route path="/feed" exact>
@@ -82,6 +82,15 @@ export default function App() {
                 </div>
               }
             />
+            <ProtectedRoute
+              path="/profile/orders/:id"
+              exact
+              children={
+                <div className={`${PageStyle.ModalPage}`}>
+                  <FeedElement />
+                </div>
+              }
+            />
           </Switch>
           {background && (
             <Route
@@ -96,6 +105,16 @@ export default function App() {
           {background && (
             <Route
               path="/feed/:id"
+              children={
+                <Modal title="" onClose={handleModalClose}>
+                  <FeedElement />
+                </Modal>
+              }
+            />
+          )}
+          {background && (
+            <ProtectedRoute
+              path="/profile/orders/:id"
               children={
                 <Modal title="" onClose={handleModalClose}>
                   <FeedElement />
