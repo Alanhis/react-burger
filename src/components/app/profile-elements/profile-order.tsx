@@ -6,7 +6,6 @@ import {
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../services/store';
 export function ProfileOrder(data: any) {
-  console.log(data);
   const getDate = <FormattedDate date={new Date(data.data.createdAt)} />;
   const info = useSelector((store: RootState) => store.ingredients.ingredient);
   const imageOrder: any[] = [];
@@ -20,7 +19,7 @@ export function ProfileOrder(data: any) {
       }
     });
   });
-  console.log(imageOrder.length);
+
   return (
     <div className={`${FeedOrderStyle.feedElement} pl-5 pr-5 mb-4`}>
       <div className={`${FeedOrderStyle.feedElement_top} pt-3 pb-3`}>

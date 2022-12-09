@@ -5,6 +5,10 @@
     
     border-radius: 30px;
 }
+.link{
+    color: inherit;
+    text-decoration: inherit;
+}
 .feedElement_top{
     display: flex;
     justify-content: space-between;

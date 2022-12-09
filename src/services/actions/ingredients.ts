@@ -20,12 +20,12 @@ export interface IGetDataFailedAction {
  
 export type TIngredientActions = | IGetDataReguestAction | IGetDataSuccessAction | IGetDataFailedAction;
 
-export const fetchData = () => (dispatch: Dispatch<TIngredientActions>) => { 
+export const fetchData = () => async (dispatch: Dispatch<TIngredientActions>) => { 
     const usedURL = url + '/ingredients'
     dispatch({
         type: GET_DATA_REQUEST
     });
-    fetch(usedURL).then(checkResponce)
+    await fetch(usedURL).then(checkResponce)
         .then(data => {
             
             dispatch({

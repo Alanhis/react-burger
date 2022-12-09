@@ -1,0 +1,27 @@
+.top{
+    margin-top: -20px;
+}
+.status_doing{
+    color: var(--colors-interface-success)
+}
+.status_cancel{
+    color: var(--colors-interface-error)
+}
+.image{
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    background-color: var(--background);
+    border: double 3px transparent;
+    border-radius: 50px;
+    background-image: linear-gradient(var(--background), var(--background)), linear-gradient(to right, #801ab3, #4c4cff);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+z-index: 5;
+}
+.elements{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}

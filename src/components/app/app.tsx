@@ -22,6 +22,7 @@ import PageStyle from '../pages/pages.module.css';
 import { useAppDispatch } from '../../services/store';
 import { fetchData } from '../../services/actions/ingredients';
 import { FeedPage } from '../pages/feed-page';
+import { FeedElement } from './feed-element/feed-element';
 export const url = 'https://norma.nomoreparties.space/api';
 
 export default function App() {
@@ -61,7 +62,7 @@ export default function App() {
             <ProtectedRoute path="/profile">
               <ProfilePage />
             </ProtectedRoute>
-            <Route path="/feed">
+            <Route path="/feed" exact>
               <FeedPage />
             </Route>
             <Route path="/ingredients/:ingredientId" exact={true}>
@@ -72,6 +73,15 @@ export default function App() {
                 <IngredientDetails />
               </div>
             </Route>
+            <Route
+              path="/feed/:id"
+              exact
+              children={
+                <div className={`${PageStyle.ModalPage}`}>
+                  <FeedElement />
+                </div>
+              }
+            />
           </Switch>
           {background && (
             <Route
@@ -79,6 +89,16 @@ export default function App() {
               children={
                 <Modal title="Детали ингредиента" onClose={handleModalClose}>
                   <IngredientDetails />
+                </Modal>
+              }
+            />
+          )}
+          {background && (
+            <Route
+              path="/feed/:id"
+              children={
+                <Modal title="" onClose={handleModalClose}>
+                  <FeedElement />
                 </Modal>
               }
             />
