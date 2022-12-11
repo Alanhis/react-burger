@@ -36,6 +36,7 @@ export const sendOrder = (ingredient: Iingredient[]) => (dispatch: Dispatch<TOrd
         method: "POST",
         headers: {
             "Content-Type": "application/json",
+            "Authorization": document.cookie
         },
         body: JSON.stringify(returnedData)
     }).then(checkResponce).then(data => {

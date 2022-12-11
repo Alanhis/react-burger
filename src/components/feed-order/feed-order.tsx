@@ -38,12 +38,16 @@ export default function FeedOrder(data: any) {
           </p>
         </div>
         <p className="text text_type_main-default">{data.data.name}</p>
-        <div className={`${FeedOrderStyle.feedElement_top} pt-3 pb-4`}>
+        <div
+          key={'0' + data.data.number}
+          className={`${FeedOrderStyle.feedElement_top} pt-3 pb-4`}
+        >
           <div className={`${FeedOrderStyle.feedElement_image_box}`}>
             {imageOrder.map((element, index) => {
               if (index < 5) {
                 return (
                   <img
+                    key={index}
                     src={element}
                     className={`${FeedOrderStyle.feedElement_image} `}
                   ></img>
