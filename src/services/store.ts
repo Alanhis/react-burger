@@ -7,13 +7,16 @@ import {WS_CONNECTION_START,
     WS_CONNECTION_SUCCESS,
     WS_CONNECTION_ERROR,
     WS_CONNECTION_CLOSED,
-    WS_GET_MESSAGE
+    WS_GET_MESSAGE,
+    WS_SEND_MESSAGE
   } from "../services/actions/wsAction"
+import { getCookie } from '../utils/getCookie';
 
   export const wsUrlFeed = 'wss://norma.nomoreparties.space/orders/all';
-  const wsUrlFeedProfile = 'wss://norma.nomoreparties.space/orders/' + document.cookie
+  export const wsUrlFeedProfile = 'wss://norma.nomoreparties.space/orders?token=' + getCookie('accessToken')
   export const wsActions = {
     wsInit: WS_CONNECTION_START,
+    wsSend: WS_SEND_MESSAGE,
     onOpen: WS_CONNECTION_SUCCESS,
     onClose: WS_CONNECTION_CLOSED,
     onError: WS_CONNECTION_ERROR,
@@ -22,7 +25,7 @@ import {WS_CONNECTION_START,
   
 export const store = configureStore({
     reducer: rootReducer,
-    middleware: (getDefaultMiddleware: () => any) => getDefaultMiddleware().concat(socketMiddleware(wsActions),socketMiddleware(wsActions)),
+    middleware: (getDefaultMiddleware: () => any) => getDefaultMiddleware().concat(socketMiddleware(wsActions)),
     devTools: true,
 });
 

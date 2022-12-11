@@ -1,8 +1,7 @@
-import { Dispatch, useEffect } from 'react';
-import { AppDispatch } from './store';
+import { getCookie } from '../utils/getCookie';
+import { wsUrlFeedProfile } from './store';
 
 export const socketMiddleware = (wsActions: any) => {
-  console.log(wsActions);
   return (store: { dispatch: any; getState: any }) => {
     let socket: WebSocket | null = null;
 
@@ -10,11 +9,13 @@ export const socketMiddleware = (wsActions: any) => {
       (action: { type: string; payload: any }) => {
         const { dispatch, getState } = store;
         const { type, payload } = action;
-        const { wsInit, onOpen, onClose, onError, onMessage } = wsActions;
+        const { wsInit, onOpen, onClose, onError, onMessage, wsSendMessage } =
+          wsActions;
 
         if (type === wsInit) {
           socket = new WebSocket(`${payload}`);
         }
+
         if (socket) {
           socket.onopen = () => {
             dispatch({ type: onOpen });
@@ -30,9 +31,15 @@ export const socketMiddleware = (wsActions: any) => {
             dispatch({ type: onMessage, payload: JSON.parse(data) });
           };
 
-          socket.onclose = (event: Event) => {
-            dispatch({ type: onClose, payload: event });
+          socket.onclose = (event: CloseEvent) => {
+            console.log(event);
+            dispatch({ type: onClose });
           };
+          if (type === wsSendMessage) {
+            const message = { ...payload };
+            const socketed = new WebSocket(wsUrlFeedProfile);
+            socketed.send(JSON.stringify(message));
+          }
         }
 
         next(action);

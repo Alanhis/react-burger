@@ -3,13 +3,19 @@ import {
   FormattedDate,
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
+import { v4 } from 'uuid';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../services/store';
 import { NavLink, useLocation } from 'react-router-dom';
 import { Iingredient, IOriginalFeed } from '../../../utils/types';
 export function ProfileOrder(data: { data: IOriginalFeed }) {
   const location = useLocation();
-  const getDate = <FormattedDate date={new Date(data.data.createdAt)} />;
+  const getDate = (
+    <FormattedDate
+      key={data.data.number}
+      date={new Date(data.data.createdAt)}
+    />
+  );
   const info = useSelector((store: RootState) => store.ingredients.ingredient);
   const imageOrder: any[] = [];
   let OrderPrice = 0;
@@ -25,13 +31,17 @@ export function ProfileOrder(data: { data: IOriginalFeed }) {
 
   return (
     <NavLink
+      key={data.data.number}
       className={`${FeedOrderStyle.link}`}
       to={{
         pathname: `/profile/orders/${data.data.number}`,
         state: { background: location },
       }}
     >
-      <div className={`${FeedOrderStyle.feedElement} pl-5 pr-5 mb-4`}>
+      <div
+        key={data.data.number}
+        className={`${FeedOrderStyle.feedElement} pl-5 pr-5 mb-4`}
+      >
         <div className={`${FeedOrderStyle.feedElement_top} pt-3 pb-3`}>
           <p className="text text_type_main-small">#{data.data.number}</p>
           <p className="text text_type_main-small text_color_inactive">
@@ -52,6 +62,7 @@ export function ProfileOrder(data: { data: IOriginalFeed }) {
               if (index < 5) {
                 return (
                   <img
+                    key={index}
                     src={element}
                     className={`${FeedOrderStyle.feedElement_image} `}
                   ></img>
@@ -60,6 +71,7 @@ export function ProfileOrder(data: { data: IOriginalFeed }) {
                 return (
                   <>
                     <img
+                      key={index}
                       src={element}
                       className={`${FeedOrderStyle.feedElement_image} `}
                     ></img>

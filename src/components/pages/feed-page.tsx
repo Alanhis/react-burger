@@ -16,10 +16,12 @@ export function FeedPage() {
       type: WS_CONNECTION_START,
       payload: 'wss://norma.nomoreparties.space/orders/all',
     });
+    return () => {};
   }, [dispatch]);
   useEffect(() => {
     setCurrData(RootData);
   });
+
   return (
     <>
       {currData.messages[0] && (
@@ -28,7 +30,7 @@ export function FeedPage() {
             <p className="text text_type_main-large"> Лента заказов</p>
             <div className={`${PagesStyle.scroller} custom-scroll`}>
               {currData.messages[0].orders.map((element: IOriginalFeed) => {
-                return <FeedOrder data={element} />;
+                return <FeedOrder key={element._id} data={element} />;
               })}
             </div>
           </div>

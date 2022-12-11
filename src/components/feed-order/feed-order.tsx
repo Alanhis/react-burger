@@ -7,9 +7,12 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../services/store';
 import { NavLink, useLocation } from 'react-router-dom';
 import { Iingredient, IOriginalFeed } from '../../utils/types';
+import { v4 } from 'uuid';
 export default function FeedOrder(data: { data: IOriginalFeed }) {
   const location = useLocation();
-  const getDate = <FormattedDate date={new Date(data.data.createdAt)} />;
+  const getDate = (
+    <FormattedDate key={v4()} date={new Date(data.data.createdAt)} />
+  );
   const info = useSelector((store: RootState) => store.ingredients.ingredient);
   const imageOrder: any[] = [];
   let OrderPrice = 0;
@@ -26,6 +29,7 @@ export default function FeedOrder(data: { data: IOriginalFeed }) {
   return (
     <div className={`${FeedOrderStyle.feedElement} pl-5 pr-5 mb-4`}>
       <NavLink
+        key={data.data.number}
         className={`${FeedOrderStyle.link}`}
         to={{
           pathname: `/feed/${data.data.number}`,
@@ -39,8 +43,8 @@ export default function FeedOrder(data: { data: IOriginalFeed }) {
           </p>
         </div>
         <p className="text text_type_main-default">{data.data.name}</p>
-        <div
-          key={'0' + data.data.number}
+        <div // eslint-disable-next-line no-debugger
+          key={data.data._id}
           className={`${FeedOrderStyle.feedElement_top} pt-3 pb-4`}
         >
           <div className={`${FeedOrderStyle.feedElement_image_box}`}>
@@ -57,6 +61,7 @@ export default function FeedOrder(data: { data: IOriginalFeed }) {
                 return (
                   <>
                     <img
+                      key={index}
                       src={element}
                       className={`${FeedOrderStyle.feedElement_image} `}
                     ></img>
@@ -72,7 +77,7 @@ export default function FeedOrder(data: { data: IOriginalFeed }) {
           </div>
           <div className={`${FeedOrderStyle.feedElement_Price} `}>
             <p className="text text_type_digits-default pr-3">{OrderPrice}</p>{' '}
-            <CurrencyIcon type="primary" />
+            <CurrencyIcon key={v4()} type="primary" />
           </div>
         </div>
       </NavLink>

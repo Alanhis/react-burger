@@ -5,7 +5,7 @@ import { ProfilePageMainElement } from '../app/profile-elements/profile-page-mai
 import { ProfileOrderPage } from './profile-order-page';
 import { logOutFetch } from '../../services/actions/auth';
 import { useHistory } from 'react-router-dom';
-
+import { v4 } from 'uuid';
 import { useAppDispatch } from '../../services/store';
 
 export function ProfilePage() {
@@ -53,7 +53,7 @@ export function ProfilePage() {
         <ProfilePageMainElement />
       </Route>
       <Route path="/profile/orders" exact>
-        <ProfileOrderPage />
+        <ProfileOrderPage key={v4()} />
       </Route>
     </div>
   );

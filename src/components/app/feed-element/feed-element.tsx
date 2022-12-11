@@ -1,5 +1,5 @@
-import { useParams } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
+
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../services/store';
 import FeedStype from './/feed-element.module.css';
@@ -9,28 +9,34 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { IingredientCount, IWSState } from '../../../utils/types';
 import { useAppDispatch } from '../../../services/store';
-import { WS_CONNECTION_START } from '../../../services/actions/wsAction';
+import {
+  WS_CONNECTION_START,
+  WS_CONNECTION_CLOSED,
+} from '../../../services/actions/wsAction';
 import { getCookie } from '../../../utils/getCookie';
 import { Iingredient } from '../../../utils/types';
+import { useEffect } from 'react';
 export function FeedElement() {
   const RootData = useSelector((data: RootState) => data);
   const dispatch = useAppDispatch();
   const location = useLocation();
-  if (RootData.feed.messages[0] === undefined) {
-    if (location.pathname.includes('/profile/orders')) {
-      dispatch({
-        type: WS_CONNECTION_START,
-        payload:
-          'wss://norma.nomoreparties.space/orders?token=' +
-          getCookie('accessToken')?.split(' ')[1],
-      });
-    } else if (location.pathname.includes('/feed')) {
-      dispatch({
-        type: WS_CONNECTION_START,
-        payload: 'wss://norma.nomoreparties.space/orders/all',
-      });
+  useEffect(() => {
+    if (RootData.feed.messages[0] === undefined) {
+      if (location.pathname.includes('/profile/orders')) {
+        dispatch({
+          type: WS_CONNECTION_START,
+          payload:
+            'wss://norma.nomoreparties.space/orders?token=' +
+            getCookie('accessToken'),
+        });
+      } else if (location.pathname.includes('/feed')) {
+        dispatch({
+          type: WS_CONNECTION_START,
+          payload: 'wss://norma.nomoreparties.space/orders/all',
+        });
+      }
     }
-  }
+  });
 
   const testData = RootData.feed.messages[0];
   const { id } = useParams<{ id?: string }>();
