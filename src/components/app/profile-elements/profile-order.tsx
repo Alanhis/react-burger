@@ -6,16 +6,17 @@ import {
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../services/store';
 import { NavLink, useLocation } from 'react-router-dom';
-export function ProfileOrder(data: any) {
+import { Iingredient, IOriginalFeed } from '../../../utils/types';
+export function ProfileOrder(data: { data: IOriginalFeed }) {
   const location = useLocation();
   const getDate = <FormattedDate date={new Date(data.data.createdAt)} />;
   const info = useSelector((store: RootState) => store.ingredients.ingredient);
   const imageOrder: any[] = [];
   let OrderPrice = 0;
 
-  data.data.ingredients.map((data: any) => {
-    info.forEach((element: any) => {
-      if (element._id === data) {
+  data.data.ingredients.map((value: string) => {
+    info.forEach((element: Iingredient) => {
+      if (element._id === value) {
         imageOrder.push(element.image_mobile);
         OrderPrice += element.price;
       }

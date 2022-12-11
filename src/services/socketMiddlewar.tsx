@@ -1,11 +1,13 @@
-import { useEffect } from 'react';
+import { Dispatch, useEffect } from 'react';
+import { AppDispatch } from './store';
 
-export const socketMiddleware = (wsUrl: string, wsActions: any) => {
+export const socketMiddleware = (wsActions: any) => {
+  console.log(wsActions);
   return (store: { dispatch: any; getState: any }) => {
     let socket: WebSocket | null = null;
 
     return (next: (arg0: any) => void) =>
-      (action: { type: any; payload: any }) => {
+      (action: { type: string; payload: any }) => {
         const { dispatch, getState } = store;
         const { type, payload } = action;
         const { wsInit, onOpen, onClose, onError, onMessage } = wsActions;
@@ -18,17 +20,17 @@ export const socketMiddleware = (wsUrl: string, wsActions: any) => {
             dispatch({ type: onOpen });
           };
 
-          socket.onerror = (event: any) => {
+          socket.onerror = (event: Event) => {
             dispatch({ type: onError, payload: event });
           };
 
-          socket.onmessage = (event: { data: any }) => {
+          socket.onmessage = (event: { data: string }) => {
             const { data } = event;
 
             dispatch({ type: onMessage, payload: JSON.parse(data) });
           };
 
-          socket.onclose = (event: any) => {
+          socket.onclose = (event: Event) => {
             dispatch({ type: onClose, payload: event });
           };
         }

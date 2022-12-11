@@ -4,19 +4,7 @@ import {
     WS_CONNECTION_CLOSED,
     WS_GET_MESSAGE
   } from "../actions/wsAction"
-  type TWSState = {
-    wsConnected:boolean,
-    messages: [({
-      success: boolean,
-      order: {_id: string,
-      ingredients: string[],
-    status: string,
-  name: string,
-createdAT: string,
-updatedAT: string,
-number: number }[]
-    } | null)] 
-}
+  
   const initialState: any = {
     wsConnected: false,
     messages: []

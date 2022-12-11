@@ -7,10 +7,11 @@ import {
   CurrencyIcon,
   FormattedDate,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-
+import { IingredientCount, IWSState } from '../../../utils/types';
 import { useAppDispatch } from '../../../services/store';
 import { WS_CONNECTION_START } from '../../../services/actions/wsAction';
 import { getCookie } from '../../../utils/getCookie';
+import { Iingredient } from '../../../utils/types';
 export function FeedElement() {
   const RootData = useSelector((data: RootState) => data);
   const dispatch = useAppDispatch();
@@ -40,20 +41,21 @@ export function FeedElement() {
   let counts;
   if (testData) {
     counts = testData.orders
-      .filter((data: any) => data.number == id)[0]
-      .ingredients.reduce((counts: any, name: any) => {
+      .filter((data: IWSState) => data.number == id)[0]
+      .ingredients.reduce((counts: any, name: string) => {
         counts[name] = (counts[name] || 0) + 1;
         return counts;
       }, {});
     for (const [key, value] of Object.entries(counts)) {
-      objectData = ingredient.filter((data: any) => data._id === key);
-      let test = objectData.map((elements: any) => {
+      objectData = ingredient.filter((data: IWSState) => data._id === key);
+      let usedData = objectData.map((elements: Iingredient) => {
         return {
           ...elements,
           counts: value,
         };
       });
-      finalData.push(test[0]);
+      finalPrice += usedData[0].price * usedData[0].counts;
+      finalData.push(usedData[0]);
     }
   }
   return (
@@ -64,16 +66,22 @@ export function FeedElement() {
             className={`${FeedStype.top} pl-4 text text_type_main-default pb-10`}
           >
             #
-            {testData.orders.filter((data: any) => data.number == id)[0].number}
+            {
+              testData.orders.filter((data: IWSState) => data.number == id)[0]
+                .number
+            }
           </p>
           <div className={`${FeedStype.top} pl-4`}>
             <p className="text text_type_main-default">
-              {testData.orders.filter((data: any) => data.number == id)[0].name}
+              {
+                testData.orders.filter((data: IWSState) => data.number == id)[0]
+                  .name
+              }
             </p>
-            {testData.orders.filter((data: any) => data.number == id)[0]
+            {testData.orders.filter((data: IWSState) => data.number == id)[0]
               .status === 'pending' ? (
               <p className={`${FeedStype.status_doing}`}>Готовится</p>
-            ) : testData.orders.filter((data: any) => data.number == id)[0]
+            ) : testData.orders.filter((data: IWSState) => data.number == id)[0]
                 .status === 'done' ? (
               <p>Выполнен</p>
             ) : (
@@ -81,7 +89,7 @@ export function FeedElement() {
             )}
             <p className="text text_type_main-default pb-4">Состав:</p>
 
-            {finalData.map((element: any) => {
+            {finalData.map((element: IingredientCount) => {
               return (
                 <div
                   key={element._id}
@@ -112,7 +120,7 @@ export function FeedElement() {
                     date={
                       new Date(
                         testData.orders.filter(
-                          (data: any) => data.number == id
+                          (data: IWSState) => data.number == id
                         )[0].createdAt
                       )
                     }

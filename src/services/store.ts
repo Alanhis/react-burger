@@ -12,7 +12,7 @@ import {WS_CONNECTION_START,
 
   export const wsUrlFeed = 'wss://norma.nomoreparties.space/orders/all';
   const wsUrlFeedProfile = 'wss://norma.nomoreparties.space/orders/' + document.cookie
-  const wsActions = {
+  export const wsActions = {
     wsInit: WS_CONNECTION_START,
     onOpen: WS_CONNECTION_SUCCESS,
     onClose: WS_CONNECTION_CLOSED,
@@ -22,7 +22,7 @@ import {WS_CONNECTION_START,
   
 export const store = configureStore({
     reducer: rootReducer,
-    middleware: (getDefaultMiddleware: () => any) => getDefaultMiddleware().concat(socketMiddleware(wsUrlFeed,wsActions),socketMiddleware(wsUrlFeedProfile,wsActions)),
+    middleware: (getDefaultMiddleware: () => any) => getDefaultMiddleware().concat(socketMiddleware(wsActions),socketMiddleware(wsActions)),
     devTools: true,
 });
 

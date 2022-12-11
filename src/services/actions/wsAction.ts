@@ -30,17 +30,3 @@ export const wsConnectionSuccess = () => {
       payload: message
     };
   };
-  
-  export const wsSendMessage = (message: any) => {
-    return {
-      type: WS_SEND_MESSAGE,
-      payload: message
-    };
-  };
-  
-  export const wsUserNameUpdate = (userName: any) => {
-    return {
-      type: WS_USER_NAME_UPDATE,
-      payload: userName
-    };
-  };

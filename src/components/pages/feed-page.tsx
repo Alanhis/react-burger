@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { WS_CONNECTION_START } from '../../services/actions/wsAction';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../services/store';
+import { IOriginalFeed } from '../../utils/types';
 export function FeedPage() {
   const dispatch = useAppDispatch();
   const RootData = useSelector((data: RootState) => data.feed);
@@ -19,8 +20,6 @@ export function FeedPage() {
   useEffect(() => {
     setCurrData(RootData);
   });
-
-  const testData = currData.messages[0];
   return (
     <>
       {currData.messages[0] && (
@@ -28,7 +27,7 @@ export function FeedPage() {
           <div>
             <p className="text text_type_main-large"> Лента заказов</p>
             <div className={`${PagesStyle.scroller} custom-scroll`}>
-              {currData.messages[0].orders.map((element: any) => {
+              {currData.messages[0].orders.map((element: IOriginalFeed) => {
                 return <FeedOrder data={element} />;
               })}
             </div>
@@ -39,11 +38,11 @@ export function FeedPage() {
                 <div className="pr-10">
                   <p>Готовы:</p>
                   {currData.messages[0].orders.filter(
-                    (element: any) => element.status == 'done'
+                    (element: IOriginalFeed) => element.status == 'done'
                   ).length ? (
                     <div>
                       {currData.messages[0].orders.map(
-                        (element: any, index: number) => {
+                        (element: IOriginalFeed, index: number) => {
                           if (element.status == 'done') {
                             if (index > 10) {
                               return;
@@ -79,12 +78,15 @@ export function FeedPage() {
                 <div>
                   <p>В работе:</p>
                   {currData.messages[0].orders.filter(
-                    (element: any) => element.status == 'pending'
+                    (element: IOriginalFeed) => element.status == 'pending'
                   ).length ? (
                     <div>
                       {currData.messages[0].orders
-                        .filter((element: any) => element.status == 'pending')
-                        .map((element: any, index: number) => {
+                        .filter(
+                          (element: IOriginalFeed) =>
+                            element.status == 'pending'
+                        )
+                        .map((element: IOriginalFeed, index: number) => {
                           if (element.status == 'pending') {
                             if (index > 10) {
                               return;
