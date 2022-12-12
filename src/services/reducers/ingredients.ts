@@ -1,4 +1,4 @@
-import { GET_DATA_REQUEST, GET_DATA_SUCCESS, GET_DATA_FAILED, } from "../actions/ingredients";
+import { GET_DATA_REQUEST, GET_DATA_SUCCESS, GET_DATA_FAILED, TIngredientActions} from "../actions/ingredients";
 
 const initialState = {
     ingredient: [],
@@ -7,7 +7,7 @@ const initialState = {
 }
 
 
-export const ingredientsReducer = (state = initialState, action) => {
+export const ingredientsReducer = (state = initialState, action: any | TIngredientActions) => {
     switch (action.type) {
         case GET_DATA_REQUEST: {
             return {
@@ -16,9 +16,10 @@ export const ingredientsReducer = (state = initialState, action) => {
             }
         }
         case GET_DATA_SUCCESS: {
+            
             return {
                 ...state,
-                ingredient: action.data.data,
+                ingredient: action.data,
                 isRequired: false,
                 isRequiredError: false
             }

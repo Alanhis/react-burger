@@ -28,6 +28,9 @@ function AppHeader() {
           type="primary"
           size="small"
           className={`${HeaderinkStyles.button} pb-4 pt-4`}
+          onClick={() => {
+            history.push('/feed');
+          }}
           htmlType="button"
         >
           <ListIcon type="primary" />{' '}

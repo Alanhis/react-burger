@@ -1,11 +1,17 @@
-import { USER_DATA_REGUEST, USER_DATA_ERROR, USER_DATA_SUCCESS, UPDATE_DATA_ERROR, UPDATE_DATA_REGUEST, UPDATE_DATA_SUCCESS } from "../actions/user"
-const initialState = {
+import { USER_DATA_REGUEST, USER_DATA_ERROR, USER_DATA_SUCCESS, UPDATE_DATA_ERROR, UPDATE_DATA_REGUEST, UPDATE_DATA_SUCCESS, TUserAction } from "../actions/user"
+type TUserState = {
+    email: string | null;
+    name: string | null;
+    isRequired: boolean;
+    isRequiredError: boolean;
+}
+const initialState: TUserState = {
     email: null,
     name: null,
     isRequired: false,
     isRequiredError: false
 }
-export const userReducer = (state = initialState, action) => {
+export const userReducer = (state = initialState, action: TUserAction) => {
     switch (action.type) {
         case USER_DATA_REGUEST: {
 

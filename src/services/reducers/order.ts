@@ -1,13 +1,19 @@
-import { ORDER_DATA_REQUEST, ORDER_DATA_SUCCESS, ORDER_DATA_ERROR, MODAL_CLOSE } from "../actions/order";
+import { ORDER_DATA_REQUEST, ORDER_DATA_SUCCESS, ORDER_DATA_ERROR, MODAL_CLOSE, TOrderActions } from "../actions/order";
 
-const initialState = {
+type TOrderState = {
+    isRequired: boolean;
+    isRequiredError: boolean;
+    orderNumber: number;
+    isOpenModal: boolean;
+}
+const initialState: TOrderState = {
     isRequired: false,
     isRequiredError: false,
     orderNumber: 0,
     isOpenModal: false,
 }
 
-export const orderReducer = (state = initialState, action) => {
+export const orderReducer = (state = initialState, action: TOrderActions) => {
     switch (action.type) {
         case ORDER_DATA_REQUEST: {
             return {

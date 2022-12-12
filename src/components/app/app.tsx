@@ -21,6 +21,8 @@ import Modal from '../modal/modal';
 import PageStyle from '../pages/pages.module.css';
 import { useAppDispatch } from '../../services/store';
 import { fetchData } from '../../services/actions/ingredients';
+import { FeedPage } from '../pages/feed-page';
+import { FeedElement } from './feed-element/feed-element';
 export const url = 'https://norma.nomoreparties.space/api';
 
 export default function App() {
@@ -57,9 +59,12 @@ export default function App() {
             <UnauthorizationRoute path="/reset-password" exact={true}>
               <ResetPasswordPage />
             </UnauthorizationRoute>
-            <ProtectedRoute path="/profile">
+            <ProtectedRoute path={['/profile/orders/', '/profile']} exact>
               <ProfilePage />
             </ProtectedRoute>
+            <Route path="/feed" exact>
+              <FeedPage />
+            </Route>
             <Route path="/ingredients/:ingredientId" exact={true}>
               <div className={`${PageStyle.ModalPage}`}>
                 <p className="text text_type_main-medium pb-6">
@@ -68,6 +73,24 @@ export default function App() {
                 <IngredientDetails />
               </div>
             </Route>
+            <Route
+              path="/feed/:id"
+              exact
+              children={
+                <div className={`${PageStyle.ModalPage}`}>
+                  <FeedElement />
+                </div>
+              }
+            />
+            <ProtectedRoute
+              path="/profile/orders/:id"
+              exact
+              children={
+                <div className={`${PageStyle.ModalPage}`}>
+                  <FeedElement />
+                </div>
+              }
+            />
           </Switch>
           {background && (
             <Route
@@ -75,6 +98,26 @@ export default function App() {
               children={
                 <Modal title="Детали ингредиента" onClose={handleModalClose}>
                   <IngredientDetails />
+                </Modal>
+              }
+            />
+          )}
+          {background && (
+            <Route
+              path="/feed/:id"
+              children={
+                <Modal title="" onClose={handleModalClose}>
+                  <FeedElement />
+                </Modal>
+              }
+            />
+          )}
+          {background && (
+            <ProtectedRoute
+              path="/profile/orders/:id"
+              children={
+                <Modal title="" onClose={handleModalClose}>
+                  <FeedElement />
                 </Modal>
               }
             />
