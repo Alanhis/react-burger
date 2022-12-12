@@ -9,14 +9,26 @@ export const socketMiddleware = (wsActions: any) => {
       (action: { type: string; payload: any }) => {
         const { dispatch, getState } = store;
         const { type, payload } = action;
-        const { wsInit, onOpen, onClose, onError, onMessage, wsSendMessage } =
-          wsActions;
+        const {
+          wsInit,
+          onOpen,
+          onClose,
+          onError,
+          onMessage,
+          wsSendMessage,
+          wsDisconnect,
+        } = wsActions;
 
         if (type === wsInit) {
           socket = new WebSocket(`${payload}`);
         }
 
         if (socket) {
+          if (type === wsDisconnect) {
+            if (socket.readyState === 1) {
+              socket.close();
+            }
+          }
           socket.onopen = () => {
             dispatch({ type: onOpen });
           };
@@ -32,7 +44,6 @@ export const socketMiddleware = (wsActions: any) => {
           };
 
           socket.onclose = (event: CloseEvent) => {
-            console.log(event);
             dispatch({ type: onClose });
           };
           if (type === wsSendMessage) {

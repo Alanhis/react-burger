@@ -3,7 +3,7 @@ import {
   FormattedDate,
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { v4 } from 'uuid';
+
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../services/store';
 import { NavLink, useLocation } from 'react-router-dom';

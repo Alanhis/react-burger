@@ -1,4 +1,4 @@
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, useLocation, Prompt } from 'react-router-dom';
 
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../services/store';
@@ -12,14 +12,17 @@ import { useAppDispatch } from '../../../services/store';
 import {
   WS_CONNECTION_START,
   WS_CONNECTION_CLOSED,
+  wsDisconnect,
 } from '../../../services/actions/wsAction';
 import { getCookie } from '../../../utils/getCookie';
 import { Iingredient } from '../../../utils/types';
 import { useEffect } from 'react';
 export function FeedElement() {
   const RootData = useSelector((data: RootState) => data);
+
   const dispatch = useAppDispatch();
   const location = useLocation();
+
   useEffect(() => {
     if (RootData.feed.messages[0] === undefined) {
       if (location.pathname.includes('/profile/orders')) {
@@ -36,7 +39,12 @@ export function FeedElement() {
         });
       }
     }
-  });
+    return () => {
+      if (RootData.feed.messages[0]) {
+        dispatch(wsDisconnect());
+      }
+    };
+  }, [RootData.feed.messages[0], dispatch]);
 
   const testData = RootData.feed.messages[0];
   const { id } = useParams<{ id?: string }>();
@@ -66,6 +74,7 @@ export function FeedElement() {
   }
   return (
     <>
+      {' '}
       {ingredient.length > 0 && testData && (
         <>
           <p
