@@ -31,6 +31,7 @@ import {
         };
   
       case WS_GET_MESSAGE:
+        console.log(action)
         return {
           ...state,
           messages: [{ ...action.payload}]
