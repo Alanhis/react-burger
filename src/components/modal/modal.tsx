@@ -16,7 +16,9 @@ export default function Modal(props: {
       <div className={`${ModalStyle.modal}`}>
         <div className={`${ModalStyle.ModalTitle} mt-10 ml-10 mr-10`}>
           <p className="text text_type_main-medium ">{props.title}</p>
-          <CloseIcon type="primary" onClick={props.onClose} />
+          <div className="closeButton">
+            <CloseIcon type="primary" onClick={props.onClose} />
+          </div>
         </div>
 
         {props.children}

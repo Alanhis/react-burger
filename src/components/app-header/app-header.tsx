@@ -22,7 +22,9 @@ function AppHeader() {
           htmlType="button"
         >
           <BurgerIcon type="primary" />{' '}
-          <p className={`text text_type_main-default pr-5 pl-2`}>Констуктор</p>
+          <p className={`text text_type_main-default pr-5 pl-2 constructor`}>
+            Констуктор
+          </p>
         </Button>
         <Button
           type="primary"
@@ -51,7 +53,9 @@ function AppHeader() {
         }}
       >
         <ProfileIcon type="primary" />{' '}
-        <p className={`text text_type_main-default pr-5 p-1`}>Личный кабинет</p>
+        <p className={`text text_type_main-default pr-5 p-1 profile`}>
+          Личный кабинет
+        </p>
       </Button>
     </header>
   );

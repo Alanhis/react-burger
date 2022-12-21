@@ -105,7 +105,7 @@ export default function BurgerConstuctorList(props: {
       <div className={`${BurgerConstuctorStyle.finalIngeredientdiv}  mt-10`}>
         <p className="text text_type_digits-medium mr-2">{finalPrice}</p>
         <CurrencyIcon type={'secondary'} />
-        <div className=" ml-10">
+        <div className=" submit_order ml-10">
           {bunAmount && (
             <Button
               htmlType="button"
