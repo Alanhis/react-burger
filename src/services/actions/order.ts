@@ -4,7 +4,7 @@ import { Iingredient } from "../../utils/types";
 import { Dispatch } from "react";
 export const ORDER_DATA_REQUEST: 'ORDER_DATA_REQUEST' = 'ORDER_DATA_REQUEST';
 export const ORDER_DATA_SUCCESS: 'ORDER_DATA_SUCCESS' = 'ORDER_DATA_SUCCESS';
-export const ORDER_DATA_ERROR: 'ORDER_DATA__ERROR' = 'ORDER_DATA__ERROR';
+export const ORDER_DATA_ERROR: 'ORDER_DATA_ERROR' = 'ORDER_DATA_ERROR';
 export const MODAL_CLOSE: 'MODAL_CLOSE' = 'MODAL_CLOSE';
 
 export interface IOrderDataReguestAction{

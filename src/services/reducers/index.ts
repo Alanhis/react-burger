@@ -6,10 +6,10 @@ import { wsReducer } from './wsReduces';
 import { authReducer } from './auth';
 import { userReducer } from './user';
 export const rootReducer = combineReducers({
-    ingredients: ingredientsReducer,
-    conductor: conductorReducer,
-    order: orderReducer,
-    feed:wsReducer,
-    auth: authReducer,
-    user: userReducer
+    ingredients: ingredientsReducer || (() => null),
+    conductor: conductorReducer || (() => null),
+    order: orderReducer || (() => null),
+    feed:wsReducer || (() => null),
+    auth: authReducer || (() => null),
+    user: userReducer || (() => null)
 });
